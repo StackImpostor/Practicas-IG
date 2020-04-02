@@ -4,15 +4,23 @@
 #include <GL/glut.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <iostream>
 const int W_WIDTH = 500; // Tama�o incial de la ventana
 const int W_HEIGHT = 500;
 GLfloat fAngulo; // Variable que indica el �ngulo de rotaci�n de los ejes. 
+
+void myResize(int width, int height) {
+	glScalef(1,1,1);
+	//glViewport(-width / 2, -height / 2, width, height);
+}
 
 // Funci�n que visualiza la escena OpenGL
 void Display(void)
 {
 	// Borramos la escena
 	glClear(GL_COLOR_BUFFER_BIT);
+
+	glutReshapeFunc(myResize);
 
 	glPushMatrix();
 	// Rotamos las proximas primitivas
@@ -46,7 +54,7 @@ void Display(void)
 	glEnd();
 	glPopMatrix();
 
-	glFlush();
+	glutSwapBuffers();
 }
 
 // Funci�n que se ejecuta cuando el sistema no esta ocupado
@@ -66,11 +74,11 @@ int main(int argc, char** argv)
 {
 	// Inicializamos la librer�a GLUT
 	glutInit(&argc, argv);
-
+	
 	// Indicamos como ha de ser la nueva ventana
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(W_WIDTH, W_HEIGHT);
-	glutInitDisplayMode(GLUT_RGBA | GLUT_SINGLE);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 
 	// Creamos la nueva ventana
 	glutCreateWindow("Mi primera Ventana");
