@@ -10,17 +10,22 @@ const int W_HEIGHT = 700;
 GLfloat fAngulo; // Variable que indica el �ngulo de rotaci�n de los ejes. 
 GLfloat fTraslacionX;
 GLfloat fEscala = 1;
+GLfloat fCizalla = 0;
 float incTraslacion = -0.01f;
 float incEscalado = 0.01f;
+float incCizalla = 0.01f;
 
 void myResize(int width, int height) {
 	glScalef(1, 1, 1);
 }
 
-void cizallamientoX(float c) {
-	GLfloat m[16]{	1, 0, 0, 0,
-					c, 1, 0, 0,
-					0, 0, 1, 0};
+void cizallamientoX(GLfloat c) {
+	GLfloat m[16] = {
+	1.0f, 0.0f, 0.0f, 0.0f,
+	c, 1.0f, 0.0f, 0.0f,
+	0.0f, 0.0f, 1.0f, 0.0f,
+	0.0f, 0.0f, 0.0f, 1.0f
+	};
 	glMultMatrixf(m);
 }
 
@@ -89,10 +94,12 @@ void Display(void)
 
 	//Cuadrante abajo derecha
 	glPushMatrix();
+	
+	glTranslatef(0.2f, -0.2f, 0.0f);
+	cizallamientoX(fCizalla);
+	glTranslatef(-0.2f, 0.2f, 0.0f);
+
 	glBegin(GL_QUADS);
-	//cizallamientoX(1s);
-
-
 	glColor3f(0.0f, 0.0f, 0.0f);
 	glVertex3f(0.2f, -0.2f, 0.0f);
 	glVertex3f(0.4f, -0.2f, 0.0f);
@@ -121,6 +128,11 @@ void Idle(void)
 		incEscalado *= -1;
 	}
 	fEscala += incEscalado;
+
+	if (fCizalla > 0.0f || fCizalla < -1.0f) {
+		incCizalla *= -1;
+	}
+	fCizalla += incCizalla;
 
 	// Indicamos que es necesario repintar la pantalla
 	glutPostRedisplay();
