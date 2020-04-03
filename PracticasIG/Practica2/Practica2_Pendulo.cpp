@@ -9,6 +9,7 @@ const int W_WIDTH = 700; // Tamaño incial de la ventana
 const int W_HEIGHT = 700;
 GLfloat fAngulo1; // Variable que indica el �ngulo de rotaci�n de los ejes. 
 GLfloat fAngulo2;
+GLfloat incA1 = 0.6f, incA2=1.2f;
 
 void myResize(int width, int height) {
 	glScalef(1, 1, 1);
@@ -27,23 +28,23 @@ void Display(void)
 	glColor3f(0,0,0);
 	glVertex2f(-0.005f, 0.0f);
 	glVertex2f(0.005f , 0.0f);
-	glVertex2f(0.005f, 0.5f);
-	glVertex2f(-0.005f , 0.5f);
+	glVertex2f(0.005f, -0.5f);
+	glVertex2f(-0.005f , -0.5f);
 	glVertex2f(1, 1);
 	glEnd();
 
 	glPushMatrix();
 
-	glTranslatef(0, 0.5, 0);
-	glRotatef(fAngulo2, 0, 0, 1);
 	glTranslatef(0, -0.5, 0);
+	glRotatef(fAngulo2, 0, 0, 1);
+	glTranslatef(0, 0.5, 0);
 
 	glBegin(GL_QUADS);
 	glColor3f(0, 1, 0);
-	glVertex2f(-0.005f, 0.5f);
-	glVertex2f(0.005f, 0.5f);
-	glVertex2f(0.005f, 1.0f);
-	glVertex2f(-0.005f, 1.0f);
+	glVertex2f(-0.005f, -0.5f);
+	glVertex2f(0.005f, -0.5f);
+	glVertex2f(0.005f, -1.0f);
+	glVertex2f(-0.005f, -1.0f);
 	glVertex2f(1, 1);
 	glEnd();
 
@@ -58,11 +59,14 @@ void Display(void)
 void Idle(void)
 {
 	// Incrementamos el ángulo
-	fAngulo1 += 0.6f;
+	fAngulo1 += incA1;
 	if (fAngulo1 > 360)
 		fAngulo1 -= 360;
 
-	fAngulo2 += 1.2f;
+	if (fAngulo1 > 70 || fAngulo1 < -70)
+		incA1 *= -1;
+
+	fAngulo2 += incA2;
 	if (fAngulo2 > 360)
 		fAngulo2 -= 360;
 

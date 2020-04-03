@@ -10,13 +10,13 @@ const int W_HEIGHT = 500;
 GLfloat fAngulo; // Variable que indica el �ngulo de rotaci�n de los ejes. 
 int p_width=500, p_height=500;
 void myResize(int width, int height) {
-	/*glViewport(0, 0, width, height);
-	glScalef(1, 1, 1);
-	GLfloat tx = ((width - p_width) / (float)width);
-	GLfloat ty = ((height - p_height) / (float)height);
-	glTranslatef(tx,ty,0);
-	p_width = width;
-	p_height = height;*/
+	if (width < height) {
+		glViewport(0, (height - width) / 2, width, width);
+	}
+	else {
+		glViewport((width - height) / 2, 0, height, height);
+	}
+	
 }
 
 // Funci�n que visualiza la escena OpenGL
@@ -26,17 +26,6 @@ void Display(void)
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glPushMatrix();
-
-	// Dibujamos los ejes
-	glBegin(GL_LINES);
-	glColor3f(0.0f, 0.0f, 1.0f);
-	//Eje Y
-	glVertex3i(0, 1, 0);
-	glVertex3i(0, -1, 0);
-	//Eje X
-	glVertex3i(-1, 0, 0);
-	glVertex3i(1, 0, 0);
-	glEnd();
 
 	// Rotamos las proximas primitivas
 	glRotatef(fAngulo, 0.0f, 0.0f, 1.0f);
