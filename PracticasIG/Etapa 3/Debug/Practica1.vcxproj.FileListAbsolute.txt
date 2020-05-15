@@ -1,0 +1,8 @@
+C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Practica2\Debug\Practica2.exe
+C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Practica2\Debug\Practica2.pdb
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Practica2\Debug\Practica2.exe
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Practica2\Debug\Practica2.pdb
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Practica2 - còpia\Debug\Practica2.exe
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Practica2 - còpia\Debug\Practica2.pdb
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\Debug\Etapa 3.exe
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\Debug\Etapa 3.pdb

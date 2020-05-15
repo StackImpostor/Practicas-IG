@@ -1,5 +1,8 @@
 // Etapa2.cpp
 // Fichero principal 
+//Bartomeu Ramis
+//David Cantero
+//Joan Jorquera
 ////////////////////////////////////////////////////
 #include <GL/glut.h>
 #include <GL/gl.h>
@@ -8,15 +11,19 @@
 const int W_WIDTH = 500; // Tama�o incial de la ventana
 const int W_HEIGHT = 500;
 GLfloat fAngulo; // Variable que indica el �ngulo de rotaci�n de los ejes. 
-int p_width=500, p_height=500;
+float p_width=500, p_height=500;
+
 void myResize(int width, int height) {
-	if (width < height) {
-		glViewport(0, (height - width) / 2, width, width);
-	}
-	else {
-		glViewport((width - height) / 2, 0, height, height);
-	}
+
+	glViewport(0, 0, width, height);
+
+	float nr_w = width / p_width;
+	float nr_h = height / p_height;
 	
+	glOrtho(-nr_w, nr_w, -nr_h, nr_h, -1, 1);
+
+	p_width = width;
+	p_height = height;
 }
 
 // Funci�n que visualiza la escena OpenGL
