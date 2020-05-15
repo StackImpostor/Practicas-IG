@@ -15,14 +15,12 @@ float p_width = W_WIDTH, p_height = W_HEIGHT;
 
 void myResize(int width, int height) {
 
-	glViewport(0, 0, width, height);
+	//glViewport(0, 0, width, height);
 
 	float nr_w = width / p_width;
 	float nr_h = height / p_height;
-
 	//glOrtho(-nr_w, nr_w, -nr_h, nr_h, 1, -1);
-	//glFrustum(-nr_w, nr_w, -nr_h, nr_h, 1, 1);
-	gluPerspective(30, width / height, 0.1, 100);
+	//glFrustum(nr_w, nr_w, nr_h, nr_h, 1, 1);
 	p_width = width;
 	p_height = height;
 }
@@ -30,6 +28,7 @@ void myResize(int width, int height) {
 // Funci�n que visualiza la escena OpenGL
 void Display(void)
 {
+
 	// Borramos la escena
 	glClear(GL_COLOR_BUFFER_BIT);
 
@@ -208,10 +207,10 @@ int main(int argc, char** argv)
 	//glOrtho(-1.0, 1.0f, -1.0, 1.0f, -100.0, 100.0f);
 	
 	
-	//glMatrixMode(GL_PROJECTION);
+	
 	//gluLookAt(0.5, 0.5, 0, 0, 0, 0, 0, 1, 0);
-	gluPerspective(30, p_width/p_height, 0.1, 100);
-	//glFrustum(-0.05, 0.05, -0.05, 0.05, 0.2, 100);
+	//gluPerspective(30, p_width/p_height, 0.1, 100);
+	glFrustum(-0.05, 0.05, -0.05, 0.05, 0.2, 100);
 	gluLookAt(3, 3, 3, 0, 0, 0, 0, 1, 0);
 	//glMatrixMode(GL_MODELVIEW);
 
