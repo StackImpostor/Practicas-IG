@@ -8,10 +8,10 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <iostream>
-const int W_WIDTH = 1700; // Tama�o incial de la ventana
-const int W_HEIGHT = 800;
+const int W_WIDTH = 700; // Tama�o incial de la ventana
+const int W_HEIGHT = 700;
 GLfloat fAngulo; // Variable que indica el �ngulo de rotaci�n de los ejes. 
-float p_width = 500, p_height = 500;
+float p_width = W_WIDTH, p_height = W_HEIGHT;
 
 void myResize(int width, int height) {
 
@@ -20,8 +20,9 @@ void myResize(int width, int height) {
 	float nr_w = width / p_width;
 	float nr_h = height / p_height;
 
-	glOrtho(-nr_w, nr_w, -nr_h, nr_h, 1, -1);
-
+	//glOrtho(-nr_w, nr_w, -nr_h, nr_h, 1, -1);
+	//glFrustum(-nr_w, nr_w, -nr_h, nr_h, 1, 1);
+	//gluPerspective(30, width / height, 0.1, 100);
 	p_width = width;
 	p_height = height;
 }
@@ -38,6 +39,8 @@ void Display(void)
 	glEnable(GL_DEPTH_TEST);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	
+
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 
@@ -51,8 +54,8 @@ void Display(void)
 	glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 1);*/
 
 	// Rotamos las proximas primitivas
-	glRotatef(45, 1.0f, 0.0f, 0.0f);
-	glRotatef(fAngulo, 0.0f, 1.0f, 0.0f);
+	//glRotatef(-45, 1.0f, 0.0f, 0.0f);
+	//glRotatef(fAngulo, 0.0f, 1.0f, 0.0f);
 	//glRotatef(45, 0.0f, 1.0f, 0.0f);
 
 	//Ejes de cordenadas
@@ -93,9 +96,17 @@ void Display(void)
 
 	//Objetos
 
+	
+	
 	//Teapod
 	glPushMatrix();
-	glTranslatef(-0.7, 0.25, -0.7);
+
+	glTranslatef(1, 0.7, 1);
+
+
+	glRotatef(fAngulo * 5, 0.0f, 1.0f, 0.0f);
+	glTranslatef(-0.40, 0.7, 0);
+	glRotatef(30, 0.0f, 0.0f, 1.0f);
 
 	glColor3f(0.5, 0.5, 0.5);
 	glutSolidTeapot(0.4);
@@ -114,6 +125,7 @@ void Display(void)
 	glColor3f(0, 0, 0);
 	glutWireCube(0.5);
 
+	//glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
 
 	//Torus
@@ -155,6 +167,8 @@ void Display(void)
 	glVertex3f(-20, 0, 20);
 	glEnd();
 
+	
+
 	glPopMatrix();
 
 	glutSwapBuffers();
@@ -183,8 +197,10 @@ int main(int argc, char** argv)
 	glutInitWindowSize(W_WIDTH, W_HEIGHT);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 
+	
+
 	// Creamos la nueva ventana
-	glutCreateWindow("Mi primera Ventana");
+	glutCreateWindow("Mis cosas 3D");
 
 	// Indicamos cuales son las funciones de redibujado e idle
 	glutDisplayFunc(Display);
@@ -193,8 +209,15 @@ int main(int argc, char** argv)
 
 	// El color de fondo ser� el negro (RGBA, RGB + Alpha channel)
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-	glOrtho(-1.0, 1.0f, -1.0, 1.0f, -10.0, 10.0f);
+	//glOrtho(-1.0, 1.0f, -1.0, 1.0f, -100.0, 100.0f);
 	
+	
+	//glMatrixMode(GL_PROJECTION);
+	//gluLookAt(0.5, 0.5, 0, 0, 0, 0, 0, 1, 0);
+	//gluPerspective(30, p_width/p_height, 0.1, 100);
+	glFrustum(-0.05, 0.05, -0.05, 0.05, 0.2, 100);
+	gluLookAt(3, 3, 3, 0, 0, 0, 0, 1, 0);
+	//glMatrixMode(GL_MODELVIEW);
 
 	// Comienza la ejecuci�n del core de GLUT
 	glutMainLoop();
