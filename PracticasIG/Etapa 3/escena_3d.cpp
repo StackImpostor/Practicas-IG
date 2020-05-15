@@ -22,7 +22,7 @@ void myResize(int width, int height) {
 
 	//glOrtho(-nr_w, nr_w, -nr_h, nr_h, 1, -1);
 	//glFrustum(-nr_w, nr_w, -nr_h, nr_h, 1, 1);
-	gluPerspective(30, width / height, 0.1, 100);
+	//gluPerspective(30, width / height, 0.1, 100);
 	p_width = width;
 	p_height = height;
 }
@@ -100,7 +100,13 @@ void Display(void)
 	
 	//Teapod
 	glPushMatrix();
-	glTranslatef(-0.7, 0.25, -0.7);
+
+	glTranslatef(1, 0.7, 1);
+
+
+	glRotatef(fAngulo * 5, 0.0f, 1.0f, 0.0f);
+	glTranslatef(-0.40, 0.7, 0);
+	glRotatef(30, 0.0f, 0.0f, 1.0f);
 
 	glColor3f(0.5, 0.5, 0.5);
 	glutSolidTeapot(0.4);
@@ -112,8 +118,6 @@ void Display(void)
 	//theCube
 	glPushMatrix();
 	glTranslatef(-0.5, 0.25, 0.5);
-
-	
 
 	glColor3f(0.5, 0.5, 0.5);
 	glutSolidCube(0.5);
@@ -210,8 +214,8 @@ int main(int argc, char** argv)
 	
 	//glMatrixMode(GL_PROJECTION);
 	//gluLookAt(0.5, 0.5, 0, 0, 0, 0, 0, 1, 0);
-	gluPerspective(30, p_width/p_height, 0.1, 100);
-	//glFrustum(-0.05, 0.05, -0.05, 0.05, 0.2, 100);
+	//gluPerspective(30, p_width/p_height, 0.1, 100);
+	glFrustum(-0.05, 0.05, -0.05, 0.05, 0.2, 100);
 	gluLookAt(3, 3, 3, 0, 0, 0, 0, 1, 0);
 	//glMatrixMode(GL_MODELVIEW);
 
