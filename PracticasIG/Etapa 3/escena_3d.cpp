@@ -17,6 +17,7 @@ float fcount = 0;
 
 //Light position
 GLfloat light_position[] = { 0.0, 1.0, 0.0, 1.0 };
+bool shadeFlat = false;
 
 //Variables para los controles de la camara
 const int ALZADO = 1;
@@ -285,6 +286,16 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 		light_position[2] += -0.25;
 		std::cout << light_position[2] << "\n";
 		break;
+	case 32: //spacebar
+		if (!shadeFlat) {
+			glShadeModel(GL_FLAT);
+			shadeFlat = true;
+		}
+		else {
+			glShadeModel(GL_SMOOTH);
+			shadeFlat = false;
+		}
+		break;
 	}
 }
 
@@ -384,7 +395,7 @@ void Display(void)
 
 	//glClearColor(0.0, 0.0, 0.0, 0.0);
 
-	glShadeModel(GL_SMOOTH);
+	
 
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, MatAmbient);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MatDiffuse);
@@ -459,8 +470,8 @@ void Display(void)
 
 	//Dibujamos el "suelo" que es trans
 	glBegin(GL_POLYGON);
-	//glColor4f(0.5f, 0.5f, 1.0f, 0.5f);
-	glColor3f(0.5f, 0.5f, 1.0f);
+	glColor4f(0.4f, 0.4f, 1.0f, 0.5f);
+	//glColor3f(0.5f, 0.5f, 1.0f);
 	glVertex3f(-20, -0.01, -20);
 	glVertex3f(20, -0.01, -20);
 	glVertex3f(20, -0.01, 20);
@@ -497,7 +508,7 @@ int main(int argc, char** argv)
 	// Inicializamos la librer�a GLUT
 	glutInit(&argc, argv);
 
-	
+	glShadeModel(GL_SMOOTH);
 	
 	// Indicamos como ha de ser la nueva ventana
 	glutInitWindowPosition(100, 100);
