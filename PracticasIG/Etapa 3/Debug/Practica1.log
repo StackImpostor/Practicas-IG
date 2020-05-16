@@ -1,7 +1,36 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(452,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Practica1.vcxproj, Practica2.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   escena_3d.cpp
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(25,12): warning C4244:  '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(26,13): warning C4244:  '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(103,31): warning C4305:  'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(130,30): warning C4305:  'argumento': truncamiento de 'double' a 'GLfloat'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(28,22): warning C4305:  'inicializando': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(29,22): warning C4305:  'inicializando': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(65,26): warning C4244:  'argumento': conversión de 'GLfloat' a 'GLsizei'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(65,19): warning C4244:  'argumento': conversión de 'GLfloat' a 'GLsizei'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(123,21): warning C4244:  'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(124,12): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(130,15): warning C4305:  '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(136,16): warning C4305:  '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(146,17): warning C4305:  '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(152,17): warning C4305:  '-=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(170,20): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(170,13): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(175,27): warning C4305:  'inicializando': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(181,13): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(182,13): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(192,13): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(193,13): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(203,13): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(204,13): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(214,13): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(215,13): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(231,21): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(231,14): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(256,20): warning C4305:  '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(259,21): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(259,14): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(270,21): warning C4305:  '-=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(273,21): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(273,14): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(307,47): warning C4305:  'inicializando': truncamiento de 'double' a 'GLfloat'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(385,30): warning C4305:  'argumento': truncamiento de 'double' a 'GLfloat'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(389,28): warning C4305:  'argumento': truncamiento de 'double' a 'GLfloat'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(419,30): warning C4305:  'argumento': truncamiento de 'double' a 'GLfloat'
   Practica1.vcxproj -> C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa 3\Debug\Etapa 3.exe
