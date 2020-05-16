@@ -17,8 +17,12 @@ float fcount = 0;
 bool muestraReferencias = true;
 
 //Light position
-GLfloat light_position[] = { 0.0, 1.0, 0.0, 1.0 };
+GLfloat light0_position[] = { 0.0, 1.0, 0.0, 1.0 };
 bool shadeFlat = false;
+bool light0 = true;
+bool light1 = false;
+bool light2 = false;
+bool light3 = false;
 
 //Variables para los controles de la camara
 const int ALZADO = 1;
@@ -290,28 +294,28 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 		muestraReferencias = !muestraReferencias;
 		break;
 	case 97: //A +x
-		light_position[0] += 0.25;
-		std::cout << light_position[0] << "\n";
+		light0_position[0] += 0.25;
+		std::cout << light0_position[0] << "\n";
 		break;
 	case 122: //Z -x
-		light_position[0] += - 0.25;
-		std::cout << light_position[0] << "\n";
+		light0_position[0] += - 0.25;
+		std::cout << light0_position[0] << "\n";
 		break;
 	case 115: //S +y
-		light_position[1] += 0.25;
-		std::cout << light_position[1] << "\n";
+		light0_position[1] += 0.25;
+		std::cout << light0_position[1] << "\n";
 		break;
 	case 120: //X -y
-		light_position[1] += -0.25;
-		std::cout << light_position[1] << "\n";
+		light0_position[1] += -0.25;
+		std::cout << light0_position[1] << "\n";
 		break;
 	case 100: //D +z
-		light_position[2] += 0.25;
-		std::cout << light_position[2] << "\n";
+		light0_position[2] += 0.25;
+		std::cout << light0_position[2] << "\n";
 		break;
 	case 99: //C -z
-		light_position[2] += -0.25;
-		std::cout << light_position[2] << "\n";
+		light0_position[2] += -0.25;
+		std::cout << light0_position[2] << "\n";
 		break;
 	case 32: //spacebar
 		if (!shadeFlat) {
@@ -323,6 +327,42 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 			shadeFlat = false;
 		}
 		break;
+	case 48:
+		light0 = !light0;
+		if (!light0) {
+			glDisable(GL_LIGHT0);
+		}
+		else {
+			glEnable(GL_LIGHT0);
+		}
+		break;
+	case 49:
+		light1 = !light1;
+		if (!light1) {
+			glDisable(GL_LIGHT1);
+		}
+		else {
+			glEnable(GL_LIGHT1);
+		}
+		break;
+	case 50:
+		light2 = !light2;
+		if (!light2) {
+			glDisable(GL_LIGHT2);
+		}
+		else {
+			glEnable(GL_LIGHT2);
+		}
+		break;
+
+	case 51: 
+		light3 = !light3;
+		if (!light3) {
+			glDisable(GL_LIGHT3);
+		}
+		else {
+			glEnable(GL_LIGHT3);
+		}
 	}
 }
 
@@ -350,19 +390,58 @@ void Display(void)
 	/*He intentado hacer cosas con las luces*/
 	glEnable(GL_LIGHTING);
 
-	
-	GLfloat light_direction[] = {3.0, 3 ,3 };
+	//Light 0
+	//GLfloat light_direction[] = {3.0, 3 ,3 };
 	GLfloat ambient[] = { 0.5, 0.5, 0.5, 1.00};
 	GLfloat light_specular[] = { 10, 10, 10, 1.0 };
-	GLfloat light_diffuse[] = { 2, 1.9, 1.9, 1.0 };
-
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, light_direction);
+	GLfloat light_diffuse[] = { 1.9, 1.9, 1.9, 1.0 };
+	GLfloat light_atenuation[] = { 1, 1, 1 };
+	glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
+	//glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, light_direction);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_LINEAR_ATTENUATION, light_atenuation);
 
-	glEnable(GL_LIGHT0);
+	//Light 1
+	GLfloat light_position1[] = { 3, 3, 3, 1 };
+	GLfloat light_specular1[] = { 1.5, 1, 1, 1.0 };
+	GLfloat light_diffuse1[] = { 10, 1, 1, 1.0 };
+	GLfloat light_atenuation1[] = { 0.5, 0.5, 0.5 };
+	glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular1);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse1);
+	glLightfv(GL_LIGHT1, GL_LINEAR_ATTENUATION, light_atenuation1);
+
+	//Light 2
+	GLfloat light_position2[] = { 0, 0.5, 1, 1 };
+	GLfloat ambient2[] = { 0.0, 0.05, 0.0, 1.00 };
+	GLfloat light_specular2[] = { 0.1, 0.5, 0.1, 1.0 };
+	GLfloat light_diffuse2[] = { 0.1, 0.1, 0.1, 1.0 };
+	GLfloat light_atenuation2[] = { 1, 1, 1 };
+	glLightfv(GL_LIGHT2, GL_POSITION, light_position2);
+	glLightfv(GL_LIGHT2, GL_AMBIENT, ambient2);
+	glLightfv(GL_LIGHT2, GL_SPECULAR, light_specular2);
+	glLightfv(GL_LIGHT2, GL_DIFFUSE, light_diffuse2);
+	glLightfv(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, light_atenuation2);
+
+	//Light 3
+	GLfloat light_position3[] = { -3, 0.5, 0, 1 };
+	GLfloat ambient3[] = { 0.0, 0.0, 0.0, 1.00 };
+	GLfloat light_specular3[] = { 0.5, 0.5, 1.5, 1.0 };
+	GLfloat light_diffuse3[] = { 0.1, 0.1, 0.5, 1.0 };
+	GLfloat light_atenuation3[] = { 1, 1, 1 };
+	glLightfv(GL_LIGHT3, GL_POSITION, light_position3);
+	glLightfv(GL_LIGHT3, GL_AMBIENT, ambient3);
+	glLightfv(GL_LIGHT3, GL_SPECULAR, light_specular3);
+	glLightfv(GL_LIGHT3, GL_DIFFUSE, light_diffuse3);
+	glLightfv(GL_LIGHT3, GL_CONSTANT_ATTENUATION, light_atenuation3);
+
+	if (light0) {
+		glEnable(GL_LIGHT0);
+	}
+	/*glEnable(GL_LIGHT1);
+	glEnable(GL_LIGHT2);*/
 	
 	
 	
@@ -507,6 +586,7 @@ void Display(void)
 		glVertex3f(20, -0.01, -20);
 		glVertex3f(20, -0.01, 20);
 		glVertex3f(-20, -0.01, 20);
+		glNormal3d(0, 1, 0);
 		glEnd();
 	}
 	glPopMatrix();
