@@ -1,8 +1,15 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(467,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Practica1.vcxproj, Practica2.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   escena_3d.cpp
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(26,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(27,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(104,24): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(108,28): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(134,30): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(29,15): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(35,16): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(40,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(47,15): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(53,16): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(63,17): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(69,17): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(94,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(95,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(192,30): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(195,28): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(225,30): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
   Practica1.vcxproj -> C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\Debug\Etapa 3.exe
