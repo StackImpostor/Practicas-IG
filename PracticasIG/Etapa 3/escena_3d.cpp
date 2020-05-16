@@ -16,6 +16,9 @@ float p_width = W_WIDTH, p_height = W_HEIGHT;
 float fcount = 0;
 bool muestraReferencias = true;
 
+//Light position
+GLfloat light_position[] = { 0.0, 1.0, 0.0, 1.0 };
+
 //Variables para los controles de la camara
 const int ALZADO = 1;
 const int PLANTA = 2;
@@ -164,7 +167,7 @@ void myResize(int width, int height) {
 }
 
 void ControlesEspeciales(int key, int x, int y) {
-	
+	std::cout << key << "\n";
 	float incAngulo = pi / 60;
 	int width, height;
 
@@ -270,7 +273,9 @@ void ControlesEspeciales(int key, int x, int y) {
 }
 
 void ControlesTeclado(unsigned char key, int x, int y) {
-	int width, height;
+	std::cout << (int)key << "\n";
+	int width;
+	int height;
 	switch (key) {
 	case 127:
 		if(zoomFactor > 0.35)
@@ -282,6 +287,30 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 		break;
 	case 27:
 		muestraReferencias = !muestraReferencias;
+		break;
+	case 97: //A +x
+		light_position[0] += 0.25;
+		std::cout << light_position[0] << "\n";
+		break;
+	case 122: //Z -x
+		light_position[0] += - 0.25;
+		std::cout << light_position[0] << "\n";
+		break;
+	case 115: //S +y
+		light_position[1] += 0.25;
+		std::cout << light_position[1] << "\n";
+		break;
+	case 120: //X -y
+		light_position[1] += -0.25;
+		std::cout << light_position[1] << "\n";
+		break;
+	case 100: //D +z
+		light_position[2] += 0.25;
+		std::cout << light_position[2] << "\n";
+		break;
+	case 99: //C -z
+		light_position[2] += -0.25;
+		std::cout << light_position[2] << "\n";
 		break;
 	}
 }
@@ -298,47 +327,34 @@ void Display(void)
 	glEnable(GL_DEPTH_TEST);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	
-
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 
-	//Colores sobras y cosas divertidas
-	/*He intentado hacer cosas con las luces*/
-	glEnable(GL_LIGHTING);
-	
-	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-	glEnable(GL_COLOR_MATERIAL);
-
-	GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat mat_shininess[] = { 5.0 };
-	GLfloat light_position[] = { 2.0, 0.0, 0.0, 1.0 };
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-
-	glShadeModel(GL_SMOOTH);
-
-	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);
-	
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	
-	GLfloat ambient[] = { 0.5, 0.5, 0.5, 1.00};
-	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-	//GLfloat direction[] = { 0, 0, 1 };
-	//glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, direction);
-	GLfloat light_specular[] = { 10, 10, 10, 1.0 };
-	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
-	GLfloat light_diffuse[] = { 1, 1, 1, 1.0 };
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-
-
-	glEnable(GL_LIGHT0);
-	
 	// Rotamos las proximas primitivas
 	//glRotatef(-45, 1.0f, 0.0f, 0.0f);
 	//glRotatef(fAngulo, 0.0f, 1.0f, 0.0f);
 	//glRotatef(45, 0.0f, 1.0f, 0.0f);
 
+	//Colores soras y cosas divertidas
+	/*He intentado hacer cosas con las luces*/
+	glEnable(GL_LIGHTING);
+
+	
+	GLfloat light_direction[] = {3.0, 3 ,3 };
+	GLfloat ambient[] = { 0.5, 0.5, 0.5, 1.00};
+	GLfloat light_specular[] = { 10, 10, 10, 1.0 };
+	GLfloat light_diffuse[] = { 2, 1.9, 1.9, 1.0 };
+
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, light_direction);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+
+	glEnable(GL_LIGHT0);
+	
+	
+	
 	//Ejes de cordenadas
 	if (muestraReferencias) {
 		glLineWidth(3);
@@ -362,27 +378,50 @@ void Display(void)
 		glEnd();
 
 		for (float i = -20; i <= 20; i += 0.25) {
-			if (i - (int)i == 0) {
-				glLineWidth(2);
+			if(i != 0){
+				if (i - (int)i == 0) {
+					glLineWidth(2);
+				} else {
+					glLineWidth(1);
+				}
+			
+				glBegin(GL_LINES);
+				glColor3f(0, 0, 0);
+				glVertex3f(i, 0.0, -20);
+				glVertex3f(i, 0.0, 20);
+				glEnd();
+				glBegin(GL_LINES);
+				glColor3f(0, 0, 0);
+				glVertex3f(-20, 0.0, i);
+				glVertex3f(20, 0.0, i);
+				glEnd();
 			}
-			else {
-				glLineWidth(1);
-			}
-
-			glBegin(GL_LINES);
-			glColor3f(0, 0, 0);
-			glVertex3f(i, 0, -20);
-			glVertex3f(i, 0, 20);
-			glEnd();
-			glBegin(GL_LINES);
-			glColor3f(0, 0, 0);
-			glVertex3f(-20, 0, i);
-			glVertex3f(20, 0, i);
-			glEnd();
 		}
 	}
+	
 	glLineWidth(1);
 	//Objetos
+	
+	//Materiales
+	glEnable(GL_COLOR_MATERIAL);
+	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+	
+
+	float MatAmbient[] = { 2.1f, 2.1f, 2.1f, 1.0f };
+	float MatDiffuse[] = { 5.0f, 5.0f, 5.0f, 1.0f };
+	GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+	GLfloat mat_shininess[] = { 125.0 };
+
+	//glClearColor(0.0, 0.0, 0.0, 0.0);
+
+	glShadeModel(GL_SMOOTH);
+
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, MatAmbient);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MatDiffuse);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);
+
+
 	
 	//Teapod
 	glPushMatrix();
@@ -447,19 +486,18 @@ void Display(void)
 
 	glPopMatrix();
 
-	if (muestraReferencias) {
-		//Dibujamos el "suelo" que es trans
+
+	//Dibujamos el "suelo" que es trans
+	if(muestraReferencias){
 		glBegin(GL_POLYGON);
 		//glColor4f(0.5f, 0.5f, 1.0f, 0.5f);
 		glColor3f(0.5f, 0.5f, 1.0f);
-		glVertex3f(-20, 0, -20);
-		glVertex3f(20, 0, -20);
-		glVertex3f(20, 0, 20);
-		glVertex3f(-20, 0, 20);
+		glVertex3f(-20, -0.01, -20);
+		glVertex3f(20, -0.01, -20);
+		glVertex3f(20, -0.01, 20);
+		glVertex3f(-20, -0.01, 20);
 		glEnd();
 	}
-	
-
 	glPopMatrix();
 
 	glutSwapBuffers();
@@ -536,6 +574,7 @@ int main(int argc, char** argv)
 	glMatrixMode(GL_MODELVIEW);*/
 	InitWindow(W_WIDTH, W_HEIGHT);
 	preparaCamara();
+
 	// Comienza la ejecuci�n del core de GLUT
 	glutMainLoop();
 	return 0;
