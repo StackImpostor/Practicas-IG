@@ -15,6 +15,9 @@ GLfloat fAngulo; // Variable que indica el �ngulo de rotaci�n de los ejes.
 float p_width = W_WIDTH, p_height = W_HEIGHT;
 float fcount = 0;
 
+//Light position
+GLfloat light_position[] = { 0.0, 1.0, 0.0, 1.0 };
+
 //Variables para los controles de la camara
 const int ALZADO = 1;
 const int PLANTA = 2;
@@ -153,7 +156,7 @@ void myResize(int width, int height) {
 }
 
 void ControlesEspeciales(int key, int x, int y) {
-	
+	std::cout << key << "\n";
 	float incAngulo = pi / 60;
 	int width, height;
 
@@ -246,14 +249,41 @@ void ControlesEspeciales(int key, int x, int y) {
 }
 
 void ControlesTeclado(unsigned char key, int x, int y) {
+	std::cout << (int)key << "\n";
+	int width;
+	int height;
 	switch (key) {
 	case 127:
 		if(zoomFactor > 0.35)
 			zoomFactor -= 0.1;
-		int width = glutGet(GLUT_WINDOW_WIDTH);
-		int height = glutGet(GLUT_WINDOW_HEIGHT);
+		width = glutGet(GLUT_WINDOW_WIDTH);
+		height = glutGet(GLUT_WINDOW_HEIGHT);
 		InitWindow(width, height);
 		std::cout << zoomFactor << "\n";
+		break;
+	case 97: //A +x
+		light_position[0] += 0.25;
+		std::cout << light_position[0] << "\n";
+		break;
+	case 122: //Z -x
+		light_position[0] += - 0.25;
+		std::cout << light_position[0] << "\n";
+		break;
+	case 115: //S +y
+		light_position[1] += 0.25;
+		std::cout << light_position[1] << "\n";
+		break;
+	case 120: //X -y
+		light_position[1] += -0.25;
+		std::cout << light_position[1] << "\n";
+		break;
+	case 100: //D +z
+		light_position[2] += 0.25;
+		std::cout << light_position[2] << "\n";
+		break;
+	case 99: //C -z
+		light_position[2] += -0.25;
+		std::cout << light_position[2] << "\n";
 		break;
 	}
 }
@@ -261,7 +291,6 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 // Funci�n que visualiza la escena OpenGL
 void Display(void)
 {
-	//glRotatef(fAngulo, 0.0f, 1.0f, 0.0f); //Esto esta muy guay
 	// Borramos la escena
 	glClear(GL_COLOR_BUFFER_BIT);
 
@@ -283,7 +312,7 @@ void Display(void)
 	/*He intentado hacer cosas con las luces*/
 	glEnable(GL_LIGHTING);
 
-	GLfloat light_position[] = { 0.0, 1.0, 0.0, 1.0 };
+	
 	GLfloat light_direction[] = {3.0, 3 ,3 };
 	GLfloat ambient[] = { 0.5, 0.5, 0.5, 1.00};
 	GLfloat light_specular[] = { 10, 10, 10, 1.0 };
@@ -321,22 +350,24 @@ void Display(void)
 	glEnd();
 
 	for (float i = -20; i <= 20; i += 0.25) {
-		if (i - (int)i == 0) {
-			glLineWidth(2);
-		} else {
-			glLineWidth(1);
-		}
+		if(i != 0){
+			if (i - (int)i == 0) {
+				glLineWidth(2);
+			} else {
+				glLineWidth(1);
+			}
 		
-		glBegin(GL_LINES);
-		glColor3f(0, 0, 0);
-		glVertex3f(i, 0, -20);
-		glVertex3f(i, 0, 20);
-		glEnd();
-		glBegin(GL_LINES);
-		glColor3f(0, 0, 0);
-		glVertex3f(-20, 0, i);
-		glVertex3f(20, 0, i);
-		glEnd();
+			glBegin(GL_LINES);
+			glColor3f(0, 0, 0);
+			glVertex3f(i, 0.0, -20);
+			glVertex3f(i, 0.0, 20);
+			glEnd();
+			glBegin(GL_LINES);
+			glColor3f(0, 0, 0);
+			glVertex3f(-20, 0.0, i);
+			glVertex3f(20, 0.0, i);
+			glEnd();
+		}
 	}
 	glLineWidth(1);
 	//Objetos
@@ -430,10 +461,10 @@ void Display(void)
 	glBegin(GL_POLYGON);
 	//glColor4f(0.5f, 0.5f, 1.0f, 0.5f);
 	glColor3f(0.5f, 0.5f, 1.0f);
-	glVertex3f(-20, 0, -20);
-	glVertex3f(20, 0, -20);
-	glVertex3f(20, 0, 20);
-	glVertex3f(-20, 0, 20);
+	glVertex3f(-20, -0.01, -20);
+	glVertex3f(20, -0.01, -20);
+	glVertex3f(20, -0.01, 20);
+	glVertex3f(-20, -0.01, 20);
 	glEnd();
 	
 	glPopMatrix();
