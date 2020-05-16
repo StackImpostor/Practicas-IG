@@ -14,6 +14,11 @@ const double pi = 3.1415926535897;
 GLfloat fAngulo; // Variable que indica el �ngulo de rotaci�n de los ejes. 
 float p_width = W_WIDTH, p_height = W_HEIGHT;
 float fcount = 0;
+bool muestraReferencias = true;
+
+//Light position
+GLfloat light_position[] = { 0.0, 1.0, 0.0, 1.0 };
+bool shadeFlat = false;
 
 //Variables para los controles de la camara
 const int ALZADO = 1;
@@ -21,12 +26,16 @@ const int PLANTA = 2;
 const int PERFIL = 3;
 const int CIRCULO = 4;
 const int LIBRE = 5;
+const int ESFERICO = 6;
 
 const float radius = 10.0f;
+const float radio2 = 5.0f;
 int modo = LIBRE;
 float zoomFactor = 1;
 float anguloX = -pi/2;
 float anguloY = -pi/4;
+float anguloX2 = 0;
+float anguloY2 = 0;
 float camX = 4;
 float camZ = 0;
 float camY = 3;
@@ -36,7 +45,6 @@ float posZ = 0;
 
 void preparaCamara() {
 	glLoadIdentity();
-	//gluLookAt(camX, camY, camZ, posX, posY, posZ, 0, 1, 0);
 	switch (modo) {
 	case LIBRE:
 		posX = camX + sin(anguloX) * cos(anguloY);
@@ -58,6 +66,12 @@ void preparaCamara() {
 		gluLookAt(sin(fcount) * radius, 3, cos(fcount) * radius, 0, 0, 0, 0, 1, 0);
 		fcount += 0.005f;
 		break;
+	case ESFERICO:
+		float x = radio2 * sin(anguloX2) * cos(anguloY2);
+		float y = radio2 * sin(anguloY2);
+		float z = radio2 * -cos(anguloX2) * cos(anguloY2);
+		gluLookAt(x, y, z, 0, 0, 0, 0, 1, 0);
+		break;
 	}
 }
 
@@ -68,6 +82,7 @@ void InitWindow(GLfloat Width, GLfloat Height) {
 	switch (modo) {
 	case 4:
 	case LIBRE:
+	case 6:
 		gluPerspective(45.0 / zoomFactor, Width / Height, 0.1, 100.0);
 		break;
 	case 1:
@@ -171,7 +186,7 @@ void myResize(int width, int height) {
 }
 
 void ControlesEspeciales(int key, int x, int y) {
-	
+	std::cout << key << "\n";
 	float incAngulo = pi / 60;
 	int width, height;
 
@@ -186,6 +201,9 @@ void ControlesEspeciales(int key, int x, int y) {
 			camX += cX;
 			posX += cX;
 		}
+		if (modo == ESFERICO) {
+			anguloX2 += incAngulo;
+		}
 		break;
 	case GLUT_KEY_RIGHT:
 		if (modo == LIBRE) {
@@ -196,6 +214,9 @@ void ControlesEspeciales(int key, int x, int y) {
 			posZ += cZ;
 			camX += cX;
 			posX += cX;
+		}
+		if (modo == ESFERICO) {
+			anguloX2 -= incAngulo;
 		}
 		break;
 	case GLUT_KEY_UP:
@@ -208,6 +229,9 @@ void ControlesEspeciales(int key, int x, int y) {
 			camX += cX;
 			posX += cX;
 		}
+		if (modo == ESFERICO && anguloY2 < pi/2 - incAngulo) {
+			anguloY2 += incAngulo;
+		}
 		break;
 	case GLUT_KEY_DOWN:
 		if (modo == LIBRE) {
@@ -219,12 +243,16 @@ void ControlesEspeciales(int key, int x, int y) {
 			camX += cX;
 			posX += cX;
 		}
+		if (modo == ESFERICO && anguloY2 > -pi / 2 + incAngulo) {
+			anguloY2 -= incAngulo;
+		}
 		break;
 	case GLUT_KEY_F1:
 	case GLUT_KEY_F2:
 	case GLUT_KEY_F3:
 	case GLUT_KEY_F4:
 	case GLUT_KEY_F5:
+	case GLUT_KEY_F6:
 		modo = key;
 		width = glutGet(GLUT_WINDOW_WIDTH);
 		height = glutGet(GLUT_WINDOW_HEIGHT);
@@ -264,14 +292,54 @@ void ControlesEspeciales(int key, int x, int y) {
 }
 
 void ControlesTeclado(unsigned char key, int x, int y) {
+	std::cout << (int)key << "\n";
+	int width;
+	int height;
 	switch (key) {
 	case 127:
 		if(zoomFactor > 0.35)
 			zoomFactor -= 0.1;
-		int width = glutGet(GLUT_WINDOW_WIDTH);
-		int height = glutGet(GLUT_WINDOW_HEIGHT);
+		width = glutGet(GLUT_WINDOW_WIDTH);
+		height = glutGet(GLUT_WINDOW_HEIGHT);
 		InitWindow(width, height);
 		std::cout << zoomFactor << "\n";
+		break;
+	case 27:
+		muestraReferencias = !muestraReferencias;
+		break;
+	case 97: //A +x
+		light_position[0] += 0.25;
+		std::cout << light_position[0] << "\n";
+		break;
+	case 122: //Z -x
+		light_position[0] += - 0.25;
+		std::cout << light_position[0] << "\n";
+		break;
+	case 115: //S +y
+		light_position[1] += 0.25;
+		std::cout << light_position[1] << "\n";
+		break;
+	case 120: //X -y
+		light_position[1] += -0.25;
+		std::cout << light_position[1] << "\n";
+		break;
+	case 100: //D +z
+		light_position[2] += 0.25;
+		std::cout << light_position[2] << "\n";
+		break;
+	case 99: //C -z
+		light_position[2] += -0.25;
+		std::cout << light_position[2] << "\n";
+		break;
+	case 32: //spacebar
+		if (!shadeFlat) {
+			glShadeModel(GL_FLAT);
+			shadeFlat = true;
+		}
+		else {
+			glShadeModel(GL_SMOOTH);
+			shadeFlat = false;
+		}
 		break;
 	}
 }
@@ -300,7 +368,7 @@ void Display(void)
 	/*He intentado hacer cosas con las luces*/
 	glEnable(GL_LIGHTING);
 
-	GLfloat light_position[] = { 0.0, 1.0, 0.0, 1.0 };
+	
 	GLfloat light_direction[] = {3.0, 3 ,3 };
 	GLfloat ambient[] = { 0.5, 0.5, 0.5, 1.00};
 	GLfloat light_specular[] = { 10, 10, 10, 1.0 };
@@ -317,44 +385,49 @@ void Display(void)
 	
 	
 	//Ejes de cordenadas
-	glLineWidth(3);
+	if (muestraReferencias) {
+		glLineWidth(3);
 
-	glBegin(GL_LINES);
-	glColor3f(1.0f, 0, 0);
-	glVertex3f(-20, 0, 0);
-	glVertex3f(20, 0, 0);
-	glEnd();
+		glBegin(GL_LINES);
+		glColor3f(1.0f, 0, 0);
+		glVertex3f(-20, 0, 0);
+		glVertex3f(20, 0, 0);
+		glEnd();
 
-	glBegin(GL_LINES);
-	glColor3f(0, 1.0f, 0);
-	glVertex3f(0, -20, 0);
-	glVertex3f(0, 20, 0);
-	glEnd();
+		glBegin(GL_LINES);
+		glColor3f(0, 1.0f, 0);
+		glVertex3f(0, -20, 0);
+		glVertex3f(0, 20, 0);
+		glEnd();
 
-	glBegin(GL_LINES);
-	glColor3f(0, 0, 1.0f);
-	glVertex3f(0, 0, -20);
-	glVertex3f(0, 0, 20);
-	glEnd();
+		glBegin(GL_LINES);
+		glColor3f(0, 0, 1.0f);
+		glVertex3f(0, 0, -20);
+		glVertex3f(0, 0, 20);
+		glEnd();
 
-	for (float i = -20; i <= 20; i += 0.25) {
-		if (i - (int)i == 0) {
-			glLineWidth(2);
-		} else {
-			glLineWidth(1);
+		for (float i = -20; i <= 20; i += 0.25) {
+			if(i != 0){
+				if (i - (int)i == 0) {
+					glLineWidth(2);
+				} else {
+					glLineWidth(1);
+				}
+			
+				glBegin(GL_LINES);
+				glColor3f(0, 0, 0);
+				glVertex3f(i, 0.0, -20);
+				glVertex3f(i, 0.0, 20);
+				glEnd();
+				glBegin(GL_LINES);
+				glColor3f(0, 0, 0);
+				glVertex3f(-20, 0.0, i);
+				glVertex3f(20, 0.0, i);
+				glEnd();
+			}
 		}
-		
-		glBegin(GL_LINES);
-		glColor3f(0, 0, 0);
-		glVertex3f(i, 0, -20);
-		glVertex3f(i, 0, 20);
-		glEnd();
-		glBegin(GL_LINES);
-		glColor3f(0, 0, 0);
-		glVertex3f(-20, 0, i);
-		glVertex3f(20, 0, i);
-		glEnd();
 	}
+	
 	glLineWidth(1);
 	//Objetos
 	
@@ -370,7 +443,7 @@ void Display(void)
 
 	//glClearColor(0.0, 0.0, 0.0, 0.0);
 
-	glShadeModel(GL_SMOOTH);
+	
 
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, MatAmbient);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MatDiffuse);
@@ -446,15 +519,16 @@ void Display(void)
 	
 
 	//Dibujamos el "suelo" que es trans
-	glBegin(GL_POLYGON);
-	//glColor4f(0.5f, 0.5f, 1.0f, 0.5f);
-	glColor3f(0.5f, 0.5f, 1.0f);
-	glVertex3f(-20, 0, -20);
-	glVertex3f(20, 0, -20);
-	glVertex3f(20, 0, 20);
-	glVertex3f(-20, 0, 20);
-	glEnd();
-	
+	if(muestraReferencias){
+		glBegin(GL_POLYGON);
+		//glColor4f(0.5f, 0.5f, 1.0f, 0.5f);
+		glColor3f(0.5f, 0.5f, 1.0f);
+		glVertex3f(-20, -0.01, -20);
+		glVertex3f(20, -0.01, -20);
+		glVertex3f(20, -0.01, 20);
+		glVertex3f(-20, -0.01, 20);
+		glEnd();
+	}
 	glPopMatrix();
 
 	glutSwapBuffers();
@@ -485,7 +559,7 @@ int main(int argc, char** argv)
 	// Inicializamos la librer�a GLUT
 	glutInit(&argc, argv);
 
-	
+	glShadeModel(GL_SMOOTH);
 	
 	// Indicamos como ha de ser la nueva ventana
 	glutInitWindowPosition(100, 100);
