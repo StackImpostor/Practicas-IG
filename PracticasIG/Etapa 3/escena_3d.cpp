@@ -24,6 +24,8 @@ bool light1 = false;
 bool light2 = false;
 bool light3 = false;
 
+bool normal = false;
+
 //Variables para los controles de la camara
 const int ALZADO = 1;
 const int PLANTA = 2;
@@ -33,7 +35,7 @@ const int LIBRE = 5;
 const int ESFERICO = 6;
 
 const float radius = 10.0f;
-const float radio2 = 5.0f;
+float radio2 = 5.0f;
 int modo = LIBRE;
 float zoomFactor = 1;
 float anguloX = -pi/2;
@@ -107,6 +109,8 @@ bool loong = true;
 
 float torus = 0;
 bool trans = true;
+float distancia = 0.7;
+bool gusanete = true;
 
 //Transformaciones de los objetos
 void rotacionCubo() {
@@ -163,22 +167,40 @@ void looongCone() {
 void destruirDonut() {
 	if (trans) {
 		torus += 0.008;
-		if (torus >= 0.75) {
+		if (torus >= 0.0) {
 			trans = false;
 		}
+		if (gusanete) {
+			distancia += 0.005;
+			if (distancia >= 2.9) {
+				gusanete = false;
+			}
+		}
+		else {
+			distancia -= 0.005;
+			if (distancia <= 0.7) {
+				gusanete = true;
+			}
+		}
+		
 	}
 	else {
 		torus -= 0.008;
-		if (torus <= -0.5) {
+		if (torus <= -0.75) {
 			trans = true;
 		}
 	}
+	
+	glTranslatef(distancia , 0.15,  -distancia);
+	glRotatef(90, 1.0f, 0, 0);
 	float shear[] = {
    1, torus, 0, 0,
    torus, 1, 0, 0,
 	0, 0, 1, 0,
 	0, 0, 0, 1 };
 	glMultMatrixf(shear);
+
+	
 }
 
 
@@ -276,11 +298,17 @@ void ControlesEspeciales(int key, int x, int y) {
 			if (anguloY + incAngulo <= pi / 2) 
 				anguloY += incAngulo;
 		}
+		if (modo == ESFERICO && radio2 > 0) {
+			radio2 -= 0.3;
+		}
 		break;
 	case GLUT_KEY_END:
 		if (modo == LIBRE) {
 			if (anguloY - incAngulo >= -pi / 2)
 				anguloY -= incAngulo;
+		}
+		if (modo == ESFERICO) {
+			radio2 += 0.3;
 		}
 		break;
 	case GLUT_KEY_PAGE_DOWN:
@@ -379,6 +407,7 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 		else {
 			glEnable(GL_LIGHT3);
 		}
+		//normal = !normal;
 	}
 }
 
@@ -485,6 +514,7 @@ void Display(void)
 	/*glEnable(GL_LIGHT1);
 	glEnable(GL_LIGHT2);*/
 
+
 	//Ejes de cordenadas
 	if (muestraReferencias) {
 		glLineWidth(3);
@@ -576,6 +606,7 @@ void Display(void)
 	rotacionCubo();
 
 	glColor3f(0.5, 0.5, 0.5);
+
 	glutSolidCube(0.5);
 
 	//glColor3f(0, 0, 0);
@@ -585,11 +616,11 @@ void Display(void)
 	
 	//Torus
 	glPushMatrix();
-
-	glTranslatef(0.7, 0.15, -0.7);
-	glRotatef(90, 1.0f, 0, 0);
-
+	
 	destruirDonut();
+	
+	//glTranslatef(0.7, 0.15, -0.7);
+	
 
 	glColor3f(0.5, 0.5, 0.5);
 	glutSolidTorus(0.15, 0.3, 50, 50);
@@ -613,24 +644,45 @@ void Display(void)
 	//glutWireCone(0.2, 1, 50, 50);
 
 	glPopMatrix();
-	
+	/*
+	glBegin(GL_POLYGON);
+	glColor3f(0.5f, 0.5f, 1.0f);
+	if (normal) {
+		glNormal3f(0, 1, 0);
+	}
+	glVertex3f(-2, 1.01, -2);
+	if (normal) {
+		glNormal3f(0, 1, 0);
+	}
+	glVertex3f(2, 1.01, -2);
+	if (normal) {
+		glNormal3f(0, 1, 0);
+	}
+	glVertex3f(2, 1.01, 2);
+	if (normal) {
+		glNormal3f(0, 1, 0);
+		std::cout << "normal: "<< normal <<"\n";
+	}
+	glVertex3f(-2, 1.01, 2);
+	glEnd();*/
 
 	//Dibujamos el "suelo" que es trans
 	if(muestraReferencias){
-		glPushMatrix();
+		/*glPushMatrix();
 		glTranslatef(0, -5, 0);
 		//glRectf();
 		glColor4f(0.5f, 0.5f, 1.0f, 0.5f);
-		glutSolidCube(1);
-		/*glBegin(GL_POLYGON);
-		//glColor4f(0.5f, 0.5f, 1.0f, 0.5f);
-		glColor3f(0.5f, 0.5f, 1.0f);
+		glutSolidCube(1);*/
+		glBegin(GL_POLYGON);
+		glColor4f(0.5f, 0.5f, 2.0f, 0.5f);
+		//glColor3f(0.5f, 0.5f, 1.0f);
+		
 		glVertex3f(-20, -0.01, -20);
 		glVertex3f(20, -0.01, -20);
 		glVertex3f(20, -0.01, 20);
 		glVertex3f(-20, -0.01, 20);
 		glNormal3d(0, 1, 0);
-		glEnd();*/
+		glEnd();
 	}
 	glPopMatrix();
 
