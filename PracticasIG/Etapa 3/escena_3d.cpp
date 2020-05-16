@@ -33,7 +33,7 @@ const int LIBRE = 5;
 const int ESFERICO = 6;
 
 const float radius = 10.0f;
-const float radio2 = 5.0f;
+float radio2 = 5.0f;
 int modo = LIBRE;
 float zoomFactor = 1;
 float anguloX = -pi/2;
@@ -277,11 +277,17 @@ void ControlesEspeciales(int key, int x, int y) {
 			if (anguloY + incAngulo <= pi / 2) 
 				anguloY += incAngulo;
 		}
+		if (modo == ESFERICO && radio2 > 0) {
+			radio2 -= 0.1;
+		}
 		break;
 	case GLUT_KEY_END:
 		if (modo == LIBRE) {
 			if (anguloY - incAngulo >= -pi / 2)
 				anguloY -= incAngulo;
+		}
+		if (modo == ESFERICO) {
+			radio2 += 0.1;
 		}
 		break;
 	case GLUT_KEY_PAGE_DOWN:
