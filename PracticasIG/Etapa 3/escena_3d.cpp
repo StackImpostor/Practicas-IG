@@ -190,7 +190,6 @@ void myResize(int width, int height) {
 }
 
 void ControlesEspeciales(int key, int x, int y) {
-	std::cout << key << "\n";
 	float incAngulo = pi / 60;
 	int width, height;
 
@@ -296,7 +295,6 @@ void ControlesEspeciales(int key, int x, int y) {
 }
 
 void ControlesTeclado(unsigned char key, int x, int y) {
-	std::cout << (int)key << "\n";
 	int width;
 	int height;
 	switch (key) {
@@ -313,27 +311,27 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 		break;
 	case 97: //A +x
 		light0_position[0] += 0.25;
-		std::cout << light0_position[0] << "\n";
+		std::cout << "Posicion de la luz blanca: "<<light0_position[0] <<", "<< light0_position[1]<<", "<< light0_position[2] << "\n";
 		break;
 	case 122: //Z -x
 		light0_position[0] += - 0.25;
-		std::cout << light0_position[0] << "\n";
+		std::cout << "Posicion de la luz blanca: " << light0_position[0] << ", " << light0_position[1] << ", " << light0_position[2] << "\n";
 		break;
 	case 115: //S +y
 		light0_position[1] += 0.25;
-		std::cout << light0_position[1] << "\n";
+		std::cout << "Posicion de la luz blanca: " << light0_position[0] << ", " << light0_position[1] << ", " << light0_position[2] << "\n";
 		break;
 	case 120: //X -y
 		light0_position[1] += -0.25;
-		std::cout << light0_position[1] << "\n";
+		std::cout << "Posicion de la luz blanca: " << light0_position[0] << ", " << light0_position[1] << ", " << light0_position[2] << "\n";
 		break;
 	case 100: //D +z
 		light0_position[2] += 0.25;
-		std::cout << light0_position[2] << "\n";
+		std::cout << "Posicion de la luz blanca: " << light0_position[0] << ", " << light0_position[1] << ", " << light0_position[2] << "\n";
 		break;
 	case 99: //C -z
 		light0_position[2] += -0.25;
-		std::cout << light0_position[2] << "\n";
+		std::cout << "Posicion de la luz blanca: " << light0_position[0] << ", " << light0_position[1] << ", " << light0_position[2] << "\n";
 		break;
 	case 32: //spacebar
 		if (!shadeFlat) {
@@ -433,7 +431,7 @@ void Display(void)
 
 	//Light 2
 	GLfloat light_position2[] = { 0, 0.5, 1, 1 };
-	GLfloat ambient2[] = { 0.0, 0.05, 0.0, 1.00 };
+	GLfloat ambient2[] = { 0.0, 1, 0.0, 1.00 };
 	GLfloat light_specular2[] = { 0.1, 0.5, 0.1, 1.0 };
 	GLfloat light_diffuse2[] = { 0.1, 0.1, 0.1, 1.0 };
 	GLfloat light_atenuation2[] = { 1, 1, 1 };
@@ -457,12 +455,36 @@ void Display(void)
 
 	if (light0) {
 		glEnable(GL_LIGHT0);
+		glPushMatrix();
+		glTranslatef(light0_position[0], light0_position[1], light0_position[2]);
+		glColor3f(1, 1, 1.0f);
+		glutWireSphere(0.05, 10, 10);
+		glPopMatrix();
+	}
+	if (light1) {
+		glPushMatrix();
+		glTranslatef(light_position1[0], light_position1[1], light_position1[2]);
+		glColor3f(1, 0, 0);
+		glutWireSphere(0.05, 10, 10);
+		glPopMatrix();
+	}
+	if (light2) {
+		glPushMatrix();
+		glTranslatef(light_position2[0], light_position2[1], light_position2[2]);
+		glColor3f(0, 1, 0);
+		glutWireSphere(0.05, 10, 10);
+		glPopMatrix();
+	}
+	if (light3) {
+		glPushMatrix();
+		glTranslatef(light_position3[0], light_position3[1], light_position3[2]);
+		glColor3f(0, 0, 1);
+		glutWireSphere(0.05, 10, 10);
+		glPopMatrix();
 	}
 	/*glEnable(GL_LIGHT1);
 	glEnable(GL_LIGHT2);*/
-	
-	
-	
+
 	//Ejes de cordenadas
 	if (muestraReferencias) {
 		glLineWidth(3);
@@ -518,11 +540,9 @@ void Display(void)
 	float MatAmbient[] = { 2.1f, 2.1f, 2.1f, 1.0f };
 	float MatDiffuse[] = { 5.0f, 5.0f, 5.0f, 1.0f };
 	GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat mat_shininess[] = { 125.0 };
+	GLfloat mat_shininess[] = { 128.0 };
 
 	//glClearColor(0.0, 0.0, 0.0, 0.0);
-
-	
 
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, MatAmbient);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MatDiffuse);
@@ -552,8 +572,6 @@ void Display(void)
 	
 	//theCube
 	glPushMatrix();
-
-	
 
 	rotacionCubo();
 
@@ -599,7 +617,12 @@ void Display(void)
 
 	//Dibujamos el "suelo" que es trans
 	if(muestraReferencias){
-		glBegin(GL_POLYGON);
+		glPushMatrix();
+		glTranslatef(0, -5, 0);
+		//glRectf();
+		glColor4f(0.5f, 0.5f, 1.0f, 0.5f);
+		glutSolidCube(1);
+		/*glBegin(GL_POLYGON);
 		//glColor4f(0.5f, 0.5f, 1.0f, 0.5f);
 		glColor3f(0.5f, 0.5f, 1.0f);
 		glVertex3f(-20, -0.01, -20);
@@ -607,7 +630,7 @@ void Display(void)
 		glVertex3f(20, -0.01, 20);
 		glVertex3f(-20, -0.01, 20);
 		glNormal3d(0, 1, 0);
-		glEnd();
+		glEnd();*/
 	}
 	glPopMatrix();
 
