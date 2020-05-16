@@ -12,19 +12,47 @@ const int W_WIDTH = 700; // Tama�o incial de la ventana
 const int W_HEIGHT = 700;
 GLfloat fAngulo; // Variable que indica el �ngulo de rotaci�n de los ejes. 
 float p_width = W_WIDTH, p_height = W_HEIGHT;
+float fcount = 0;
+
+//Variables para los controles de la camara
+const int LIBRE = 0;
+const int ALZADO = 1;
+const int PLANTA = 2;
+const int PERFIL = 3;
+const int CIRCULO = 4;
+const float radius = 10.0f;
+float camX = sin(fcount) * radius;
+float camZ = cos(fcount) * radius;
+float camY = 3;
+float posX = 0;
+float posY = 0;
+float posZ = 0;
+
+void InitWindow(GLfloat Width, GLfloat Height) {
+	glViewport(0, 0, Width, Height);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(45.0, Width / Height, 0.1, 100.0);
+	glMatrixMode(GL_MODELVIEW);
+}
 
 void myResize(int width, int height) {
+	if (height == 0) height = 1; //Para no dividir por 0
+	if (width == 0) width = 1;
+	InitWindow(width, height);
+}
 
-	glViewport(0, 0, width, height);
-
-	float nr_w = width / p_width;
-	float nr_h = height / p_height;
-
-	//glOrtho(-nr_w, nr_w, -nr_h, nr_h, 1, -1);
-	//glFrustum(-nr_w, nr_w, -nr_h, nr_h, 1, 1);
-	//gluPerspective(30, width / height, 0.1, 100);
-	p_width = width;
-	p_height = height;
+void ControlesEspeciales(int key, int x, int y) {
+	switch (key) {
+	case GLUT_KEY_LEFT:
+		break;
+	case GLUT_KEY_RIGHT:
+		break;
+	case GLUT_KEY_UP:
+		break;
+	case GLUT_KEY_DOWN:
+		break;
+	}
 }
 
 // Funci�n que visualiza la escena OpenGL
@@ -79,9 +107,13 @@ void Display(void)
 	glVertex3f(0, 0, 20);
 	glEnd();
 
-	glLineWidth(1);
-
 	for (float i = -20; i <= 20; i += 0.25) {
+		if (i - (int)i == 0) {
+			glLineWidth(2);
+		} else {
+			glLineWidth(1);
+		}
+		
 		glBegin(GL_LINES);
 		glColor3f(0, 0, 0);
 		glVertex3f(i, 0, -20);
@@ -93,7 +125,7 @@ void Display(void)
 		glVertex3f(20, 0, i);
 		glEnd();
 	}
-
+	glLineWidth(1);
 	//Objetos
 
 	
@@ -125,7 +157,6 @@ void Display(void)
 	glColor3f(0, 0, 0);
 	glutWireCube(0.5);
 
-	//glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
 
 	//Torus
@@ -182,6 +213,15 @@ void Idle(void)
 	// Si es mayor que dos pi la decrementamos
 	if (fAngulo > 360)
 		fAngulo -= 360;
+
+	camX = sin(fcount) * radius;
+	camY = 3 * sin(3 * fcount);
+	camZ = cos(fcount) * radius;
+	
+	glLoadIdentity();
+	gluLookAt(camX, camY, camZ, posX, posY, posZ, 0, 1, 0);
+	//std::cout << camX << ", " << camZ << "\n";
+	fcount += 0.005f;
 	// Indicamos que es necesario repintar la pantalla
 	glutPostRedisplay();
 }
@@ -197,8 +237,6 @@ int main(int argc, char** argv)
 	glutInitWindowSize(W_WIDTH, W_HEIGHT);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 
-	
-
 	// Creamos la nueva ventana
 	glutCreateWindow("Mis cosas 3D");
 
@@ -206,19 +244,23 @@ int main(int argc, char** argv)
 	glutDisplayFunc(Display);
 	glutIdleFunc(Idle);
 	glutReshapeFunc(myResize);
+	glutSpecialFunc(ControlesEspeciales);
 
 	// El color de fondo ser� el negro (RGBA, RGB + Alpha channel)
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	//glOrtho(-1.0, 1.0f, -1.0, 1.0f, -100.0, 100.0f);
 	
 	
-	//glMatrixMode(GL_PROJECTION);
+	/*glMatrixMode(GL_PROJECTION);
 	//gluLookAt(0.5, 0.5, 0, 0, 0, 0, 0, 1, 0);
-	//gluPerspective(30, p_width/p_height, 0.1, 100);
-	glFrustum(-0.05, 0.05, -0.05, 0.05, 0.2, 100);
+	glLoadIdentity();
+	gluPerspective(30, p_width/p_height, 0.1, 100);
+	//glFrustum(-0.05, 0.05, -0.05, 0.05, 0.2, 100);
+	
+	glMatrixMode(GL_MODELVIEW);*/
+	InitWindow(W_WIDTH, W_HEIGHT);
+	glLoadIdentity();
 	gluLookAt(3, 3, 3, 0, 0, 0, 0, 1, 0);
-	//glMatrixMode(GL_MODELVIEW);
-
 	// Comienza la ejecuci�n del core de GLUT
 	glutMainLoop();
 	return 0;

@@ -1,8 +1,10 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(467,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Practica1.vcxproj, Practica2.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(467,5): warning MSB8028: El directorio intermedio (Debug\) contiene archivos compartidos de otro proyecto (Practica1.vcxproj, Practica2.vcxproj). Esto puede dar lugar a un comportamiento incorrecto de limpieza y recompilación.
   escena_3d.cpp
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(26,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(27,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(104,24): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(108,28): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(134,30): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-  Practica1.vcxproj -> C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\Debug\Etapa 3.exe
+C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(32,26): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLsizei'; posible pérdida de datos
+C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(32,19): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLsizei'; posible pérdida de datos
+C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(42,20): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(42,13): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(136,24): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(140,28): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(165,30): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+  Practica1.vcxproj -> C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa 3\Debug\Etapa 3.exe
