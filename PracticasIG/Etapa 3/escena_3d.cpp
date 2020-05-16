@@ -98,8 +98,9 @@ void InitWindow(GLfloat Width, GLfloat Height) {
 }
 
 //Movimiento objetos
-float cubo = 1;
-bool incremento = false;
+int cubo = 1;
+bool incremento = true;
+int i = 1;
 
 float cone = 1;
 bool loong = true;
@@ -109,21 +110,38 @@ bool trans = true;
 
 //Transformaciones de los objetos
 void rotacionCubo() {
+	
 	if (incremento) {
-		cubo += 0.02;
-		if (cubo >= 0.2) {
-			incremento = false;
+		if (cubo == 90) {
+			if (i == 5) {
+				incremento = false;
+			}
+			else {
+				i++;
+				cubo = 0;
+			}
+		}
+		else {
+			cubo += 1;
 		}
 	}
 	else {
-		cubo += -0.02;
-		if (cubo <= -1.9) {
-			incremento = true;
+		if (cubo  == 0) {
+			if (i == 1) {
+				incremento = true;
+			}
+			else {
+				i--;
+				cubo = 90;
+			}
+		}
+		else {
+			cubo += -1;
 		}
 	}
-	glTranslatef(0.5 * cubo, 0, 0);
-	glRotatef(90, 0, 1, 0);
-	glRotatef(100 * cubo, 1, 0, 0);
+	glTranslatef(-0.25 - (i * 0.5), 0, 0.5);
+	glRotatef(cubo, 0, 0, 1);
+	glTranslatef(0.25, 0.25, 0);
 }
 
 void looongCone() {
@@ -511,14 +529,15 @@ void Display(void)
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);
 
-
 	
-	//Teapod
+	
+	//Teapot
 	glPushMatrix();
 
 	glTranslatef(-0.5, 0.0, -0.8);
 
 	glRotatef(fAngulo * 5, 0.0f, 1.0f, 0.0f);
+
 	glTranslatef(-0.40, 0.7, 0);
 	glRotatef(30, 0.0f, 0.0f, 1.0f);
 	//glTranslatef(1, 0, 1);
@@ -530,10 +549,11 @@ void Display(void)
 
 	
 	glPopMatrix();
-
+	
 	//theCube
 	glPushMatrix();
-	glTranslatef(-0.5, 0.25, 0.5);
+
+	
 
 	rotacionCubo();
 
@@ -544,7 +564,7 @@ void Display(void)
 	//glutWireCube(0.5);
 
 	glPopMatrix();
-
+	
 	//Torus
 	glPushMatrix();
 
@@ -575,7 +595,7 @@ void Display(void)
 	//glutWireCone(0.2, 1, 50, 50);
 
 	glPopMatrix();
-
+	
 
 	//Dibujamos el "suelo" que es trans
 	if(muestraReferencias){
@@ -655,7 +675,7 @@ int main(int argc, char** argv)
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	//glOrtho(-1.0, 1.0f, -1.0, 1.0f, -100.0, 100.0f);
 	
-	
+
 	/*glMatrixMode(GL_PROJECTION);
 	//gluLookAt(0.5, 0.5, 0, 0, 0, 0, 0, 1, 0);
 	glLoadIdentity();
