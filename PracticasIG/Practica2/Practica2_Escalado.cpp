@@ -34,7 +34,6 @@ void Display(void)
 
 	glPushMatrix();
 
-
 	// Rotamos las proximas primitivas
 	glRotatef(fAngulo, 0.0f, 0.0f, 1.0f);
 	// Creamos a continuaci�n dibujamos los tres poligonos

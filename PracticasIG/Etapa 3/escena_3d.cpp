@@ -10,8 +10,73 @@
 #include <iostream>
 const int W_WIDTH = 700; // Tama�o incial de la ventana
 const int W_HEIGHT = 700;
+const double pi = 3.1415926535897;
 GLfloat fAngulo; // Variable que indica el �ngulo de rotaci�n de los ejes. 
 float p_width = W_WIDTH, p_height = W_HEIGHT;
+float fcount = 0;
+
+//Variables para los controles de la camara
+const int ALZADO = 1;
+const int PLANTA = 2;
+const int PERFIL = 3;
+const int CIRCULO = 4;
+const int LIBRE = 5;
+
+const float radius = 10.0f;
+int modo = LIBRE;
+float zoomFactor = 1;
+float anguloX = -pi/2;
+float anguloY = -pi/4;
+float camX = 4;
+float camZ = 0;
+float camY = 3;
+float posX = 0;
+float posY = 0;
+float posZ = 0;
+
+void preparaCamara() {
+	glLoadIdentity();
+	//gluLookAt(camX, camY, camZ, posX, posY, posZ, 0, 1, 0);
+	switch (modo) {
+	case LIBRE:
+		posX = camX + sin(anguloX) * cos(anguloY);
+		posY = camY + sin(anguloY);
+		posZ = camZ + -cos(anguloX) * cos(anguloY);
+
+		gluLookAt(camX, camY, camZ, posX, posY, posZ, 0, 1, 0);
+		break;
+	case ALZADO:
+		gluLookAt(0, 0, -4, 0, 0, 0, 0, 1, 0);
+		break;
+	case PLANTA:
+		gluLookAt(0, 4, 0, 0, 0, 0, 1, 0, 0);
+		break;
+	case PERFIL:
+		gluLookAt(-4, 0, 0, 0, 0, 0, 0, 1, 0);
+		break;
+	case CIRCULO:
+		gluLookAt(sin(fcount) * radius, 3, cos(fcount) * radius, 0, 0, 0, 0, 1, 0);
+		fcount += 0.005f;
+		break;
+	}
+}
+
+void InitWindow(GLfloat Width, GLfloat Height) {
+	glViewport(0, 0, Width, Height);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	switch (modo) {
+	case 4:
+	case LIBRE:
+		gluPerspective(45.0 / zoomFactor, Width / Height, 0.1, 100.0);
+		break;
+	case 1:
+	case 2:
+	case 3:
+		glOrtho(-5, 5, -5, 5, -5, 5);
+	}
+	glMatrixMode(GL_MODELVIEW);
+}
 
 //Movimiento objetos
 float cubo = 1;
@@ -82,17 +147,115 @@ void destruirDonut() {
 
 
 void myResize(int width, int height) {
+	if (height == 0) height = 1; //Para no dividir por 0
+	if (width == 0) width = 1;
+	InitWindow(width, height);
+}
 
-	glViewport(0, 0, width, height);
+void ControlesEspeciales(int key, int x, int y) {
+	
+	float incAngulo = pi / 60;
+	int width, height;
 
-	float nr_w = width / p_width;
-	float nr_h = height / p_height;
+	switch (key) {
+	case GLUT_KEY_LEFT:
+		if (modo == LIBRE) {
+			float cZ = 0.1 * -cos(anguloX - pi/2);
+			float cX = 0.1 * sin(anguloX - pi/2);
 
-	//glOrtho(-nr_w, nr_w, -nr_h, nr_h, 1, -1);
-	//glFrustum(-nr_w, nr_w, -nr_h, nr_h, 1, 1);
-	//gluPerspective(30, width / height, 0.1, 100);
-	p_width = width;
-	p_height = height;
+			camZ += cZ;
+			posZ += cZ;
+			camX += cX;
+			posX += cX;
+		}
+		break;
+	case GLUT_KEY_RIGHT:
+		if (modo == LIBRE) {
+			float cZ = -0.1 * -cos(anguloX - pi/2);
+			float cX = -0.1 * sin(anguloX - pi/2);
+
+			camZ += cZ;
+			posZ += cZ;
+			camX += cX;
+			posX += cX;
+		}
+		break;
+	case GLUT_KEY_UP:
+		if (modo == LIBRE) {
+			float cZ = 0.1 * -cos(anguloX);
+			float cX = 0.1 * sin(anguloX);
+
+			camZ += cZ;
+			posZ += cZ;
+			camX += cX;
+			posX += cX;
+		}
+		break;
+	case GLUT_KEY_DOWN:
+		if (modo == LIBRE) {
+			float cZ = -0.1 * -cos(anguloX);
+			float cX = -0.1 * sin(anguloX);
+
+			camZ += cZ;
+			posZ += cZ;
+			camX += cX;
+			posX += cX;
+		}
+		break;
+	case GLUT_KEY_F1:
+	case GLUT_KEY_F2:
+	case GLUT_KEY_F3:
+	case GLUT_KEY_F4:
+	case GLUT_KEY_F5:
+		modo = key;
+		width = glutGet(GLUT_WINDOW_WIDTH);
+		height = glutGet(GLUT_WINDOW_HEIGHT);
+		InitWindow(width, height);
+		break;
+	case GLUT_KEY_INSERT:
+		if (modo == LIBRE) {
+			anguloX += -incAngulo;
+		}
+		break;
+	case GLUT_KEY_PAGE_UP:
+		if (modo == LIBRE) {
+			anguloX += incAngulo;
+		}
+		break;
+	case GLUT_KEY_HOME:
+		if (modo == LIBRE) {
+			if (anguloY + incAngulo <= pi / 2) 
+				anguloY += incAngulo;
+		}
+		break;
+	case GLUT_KEY_END:
+		if (modo == LIBRE) {
+			if (anguloY - incAngulo >= -pi / 2)
+				anguloY -= incAngulo;
+		}
+		break;
+	case GLUT_KEY_PAGE_DOWN:
+		zoomFactor += 0.1;
+		width = glutGet(GLUT_WINDOW_WIDTH);
+		height = glutGet(GLUT_WINDOW_HEIGHT);
+		InitWindow(width, height);
+		std::cout << zoomFactor << "\n";
+		break;
+	}
+
+}
+
+void ControlesTeclado(unsigned char key, int x, int y) {
+	switch (key) {
+	case 127:
+		if(zoomFactor > 0.35)
+			zoomFactor -= 0.1;
+		int width = glutGet(GLUT_WINDOW_WIDTH);
+		int height = glutGet(GLUT_WINDOW_HEIGHT);
+		InitWindow(width, height);
+		std::cout << zoomFactor << "\n";
+		break;
+	}
 }
 
 // Funci�n que visualiza la escena OpenGL
@@ -104,7 +267,7 @@ void Display(void)
 
 	glPushMatrix();
 
-	//Activamos buffer de PROFUNDIAD (modo sexo: on)
+	//Activamos buffer de PROFUNDIAD
 	glEnable(GL_DEPTH_TEST);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -113,7 +276,7 @@ void Display(void)
 
 	// Rotamos las proximas primitivas
 	//glRotatef(-45, 1.0f, 0.0f, 0.0f);
-	glRotatef(fAngulo, 0.0f, 1.0f, 0.0f);
+	//glRotatef(fAngulo, 0.0f, 1.0f, 0.0f);
 	//glRotatef(45, 0.0f, 1.0f, 0.0f);
 
 	//Colores soras y cosas divertidas
@@ -157,9 +320,13 @@ void Display(void)
 	glVertex3f(0, 0, 20);
 	glEnd();
 
-	glLineWidth(1);
-
 	for (float i = -20; i <= 20; i += 0.25) {
+		if (i - (int)i == 0) {
+			glLineWidth(2);
+		} else {
+			glLineWidth(1);
+		}
+		
 		glBegin(GL_LINES);
 		glColor3f(0, 0, 0);
 		glVertex3f(i, 0, -20);
@@ -171,7 +338,7 @@ void Display(void)
 		glVertex3f(20, 0, i);
 		glEnd();
 	}
-
+	glLineWidth(1);
 	//Objetos
 	
 	//Materiales
@@ -225,7 +392,6 @@ void Display(void)
 	//glColor3f(0, 0, 0);
 	//glutWireCube(0.5);
 
-	//glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
 
 	//Torus
@@ -283,6 +449,13 @@ void Idle(void)
 	// Si es mayor que dos pi la decrementamos
 	if (fAngulo > 360)
 		fAngulo -= 360;
+
+	//camX = sin(fcount) * radius;
+	//camY = 3 * sin(3 * fcount);
+	//camZ = cos(fcount) * radius;
+	
+	preparaCamara();
+
 	// Indicamos que es necesario repintar la pantalla
 	glutPostRedisplay();
 }
@@ -322,18 +495,23 @@ int main(int argc, char** argv)
 	glutDisplayFunc(Display);
 	glutIdleFunc(Idle);
 	glutReshapeFunc(myResize);
+	glutSpecialFunc(ControlesEspeciales);
+	glutKeyboardFunc(ControlesTeclado);
 
 	// El color de fondo ser� el negro (RGBA, RGB + Alpha channel)
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	//glOrtho(-1.0, 1.0f, -1.0, 1.0f, -100.0, 100.0f);
 	
 	
-	//glMatrixMode(GL_PROJECTION);
+	/*glMatrixMode(GL_PROJECTION);
 	//gluLookAt(0.5, 0.5, 0, 0, 0, 0, 0, 1, 0);
-	//gluPerspective(30, p_width/p_height, 0.1, 100);
-	glFrustum(-0.05, 0.05, -0.05, 0.05, 0.1, 100);
-	gluLookAt(3, 3, 3, 0, 0, 0, 0, 1, 0);
-	//glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluPerspective(30, p_width/p_height, 0.1, 100);
+	//glFrustum(-0.05, 0.05, -0.05, 0.05, 0.2, 100);
+	
+	glMatrixMode(GL_MODELVIEW);*/
+	InitWindow(W_WIDTH, W_HEIGHT);
+	preparaCamara();
 
 	// Comienza la ejecuci�n del core de GLUT
 	glutMainLoop();
