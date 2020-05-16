@@ -98,6 +98,7 @@ void myResize(int width, int height) {
 // Funci�n que visualiza la escena OpenGL
 void Display(void)
 {
+	//glRotatef(fAngulo, 0.0f, 1.0f, 0.0f); //Esto esta muy guay
 	// Borramos la escena
 	glClear(GL_COLOR_BUFFER_BIT);
 
@@ -107,47 +108,34 @@ void Display(void)
 	glEnable(GL_DEPTH_TEST);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	
-
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 
-	//Colores sobras y cosas divertidas
+	// Rotamos las proximas primitivas
+	//glRotatef(-45, 1.0f, 0.0f, 0.0f);
+	glRotatef(fAngulo, 0.0f, 1.0f, 0.0f);
+	//glRotatef(45, 0.0f, 1.0f, 0.0f);
+
+	//Colores soras y cosas divertidas
 	/*He intentado hacer cosas con las luces*/
 	glEnable(GL_LIGHTING);
-	
-	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-	glEnable(GL_COLOR_MATERIAL);
 
-	GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat mat_shininess[] = { 5.0 };
-	GLfloat light_position[] = { 2.0, 0.0, 0.0, 1.0 };
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-
-	glShadeModel(GL_SMOOTH);
-
-	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);
-	
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	
+	GLfloat light_position[] = { 0.0, 1.0, 0.0, 1.0 };
+	GLfloat light_direction[] = {3.0, 3 ,3 };
 	GLfloat ambient[] = { 0.5, 0.5, 0.5, 1.00};
-	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-	//GLfloat direction[] = { 0, 0, 1 };
-	//glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, direction);
 	GLfloat light_specular[] = { 10, 10, 10, 1.0 };
-	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
-	GLfloat light_diffuse[] = { 1, 1, 1, 1.0 };
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	GLfloat light_diffuse[] = { 2, 1.9, 1.9, 1.0 };
 
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, light_direction);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
 
 	glEnable(GL_LIGHT0);
 	
-	// Rotamos las proximas primitivas
-	//glRotatef(-45, 1.0f, 0.0f, 0.0f);
-	//glRotatef(fAngulo, 0.0f, 1.0f, 0.0f);
-	//glRotatef(45, 0.0f, 1.0f, 0.0f);
-
+	
+	
 	//Ejes de cordenadas
 	glLineWidth(3);
 
@@ -185,6 +173,27 @@ void Display(void)
 	}
 
 	//Objetos
+	
+	//Materiales
+	glEnable(GL_COLOR_MATERIAL);
+	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+	
+
+	float MatAmbient[] = { 2.1f, 2.1f, 2.1f, 1.0f };
+	float MatDiffuse[] = { 5.0f, 5.0f, 5.0f, 1.0f };
+	GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+	GLfloat mat_shininess[] = { 125.0 };
+
+	//glClearColor(0.0, 0.0, 0.0, 0.0);
+
+	glShadeModel(GL_SMOOTH);
+
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, MatAmbient);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MatDiffuse);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);
+
+
 	
 	//Teapod
 	glPushMatrix();
@@ -260,9 +269,7 @@ void Display(void)
 	glVertex3f(20, 0, 20);
 	glVertex3f(-20, 0, 20);
 	glEnd();
-
 	
-
 	glPopMatrix();
 
 	glutSwapBuffers();
@@ -324,7 +331,7 @@ int main(int argc, char** argv)
 	//glMatrixMode(GL_PROJECTION);
 	//gluLookAt(0.5, 0.5, 0, 0, 0, 0, 0, 1, 0);
 	//gluPerspective(30, p_width/p_height, 0.1, 100);
-	glFrustum(-0.05, 0.05, -0.05, 0.05, 0.2, 100);
+	glFrustum(-0.05, 0.05, -0.05, 0.05, 0.1, 100);
 	gluLookAt(3, 3, 3, 0, 0, 0, 0, 1, 0);
 	//glMatrixMode(GL_MODELVIEW);
 
