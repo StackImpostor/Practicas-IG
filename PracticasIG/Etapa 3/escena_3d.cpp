@@ -49,6 +49,59 @@ float posX = 0;
 float posY = 0;
 float posZ = 0;
 
+//Carcar modelos
+GLuint elephant;
+float elephantrot;
+char ch = '1';
+
+void loadObj(char* fname)
+{
+	FILE* fp;
+	int read;
+	GLfloat x, y, z;
+	char ch;
+	elephant = glGenLists(1);
+	fp = fopen(fname, "r");
+	if (!fp)
+	{
+		printf("can't open file %s\n", fname);
+		exit(1);
+	}
+	glPointSize(2.0);
+	glNewList(elephant, GL_COMPILE);
+	{
+		glPushMatrix();
+		glBegin(GL_POINTS);
+		while (!(feof(fp)))
+		{
+			read = fscanf(fp, "%c %f %f %f", &ch, &x, &y, &z);
+			if (read == 4 && ch == 'v')
+			{
+				glVertex3f(0.1*x, 0.1*y, 0.1*z);
+			}
+		}
+		glEnd();
+	}
+	
+	glPopMatrix();
+	glEndList();
+	fclose(fp);
+}
+
+void drawModelo()
+{
+	glPushMatrix();
+	glTranslatef(0, 0.00, 0);
+	glRotatef(-90, 1, 0, 0);
+	glColor3f(1.0, 0.23, 0.27);
+	glScalef(0.1, 0.1, 0.1);
+	glRotatef(elephantrot, 0, 1, 0);
+	glCallList(elephant);
+	glPopMatrix();
+}
+
+//END of cargar modelos
+
 void preparaCamara() {
 	glLoadIdentity();
 	switch (modo) {
@@ -676,7 +729,6 @@ void Display(void)
 		glBegin(GL_POLYGON);
 		glColor4f(0.5f, 0.5f, 2.0f, 0.5f);
 		//glColor3f(0.5f, 0.5f, 1.0f);
-		
 		glVertex3f(-20, -0.01, -20);
 		glVertex3f(20, -0.01, -20);
 		glVertex3f(20, -0.01, 20);
@@ -684,6 +736,9 @@ void Display(void)
 		glNormal3d(0, 1, 0);
 		glEnd();
 	}
+	//dibuja el modelo cargado
+	drawModelo();
+
 	glPopMatrix();
 
 	glutSwapBuffers();
@@ -760,6 +815,9 @@ int main(int argc, char** argv)
 	glMatrixMode(GL_MODELVIEW);*/
 	InitWindow(W_WIDTH, W_HEIGHT);
 	preparaCamara();
+	
+	//SUBSTITUIR EL FICHERO PARA CARGAR DIFERENTES MODELOS
+	loadObj((char*)"modelos/pato.obj");
 
 	// Comienza la ejecuci�n del core de GLUT
 	glutMainLoop();
