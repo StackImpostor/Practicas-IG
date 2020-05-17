@@ -62,7 +62,9 @@ void loadObj(char* fname)
 	FILE* fp;
 	int read;
 	GLfloat x, y, z;
-	char ch;
+	char ch[80];
+	float vertices[40000][3];
+	float normal[40000][3];
 
 	elephant = glGenLists(1);
 	fp = fopen(fname, "r");
@@ -75,18 +77,54 @@ void loadObj(char* fname)
 	glNewList(elephant, GL_COMPILE);
 	{
 		glPushMatrix();
-		glBegin(GL_POINTS);
+		//glBegin(GL_POINTS);
+		int vcount = 0;
+		int ncount = 0;
 		while (!(feof(fp)))
 		{
-			read = fscanf(fp, "%c %f %f %f", &ch, &x, &y, &z);
+			//read = fscanf(fp, "%c %f %f %f", &ch, &x, &y, &z);
+			read = fscanf(fp, "%s ", &ch);
 			
-			if (read == 4 && ch == 'v')
-			{
-				glVertex3f( x,  y,  z);
+			if (ch[0] == 'v') {
+				read = fscanf(fp, "%f %f %f", &x, &y, &z);
+				switch (ch[1]) {
+				case '\0':
+					vertices[vcount][0] = x;
+					vertices[vcount][1] = y;
+					vertices[vcount][2] = z;
+					vcount++;
+					break;
+				case 'n':
+					normal[ncount][0] = x;
+					normal[ncount][1] = y;
+					normal[ncount][2] = z;
+					ncount++;
+					break;
+				}
+			}
+			else if (ch[0] == 'f') {
+				int v, vt, vn;
+				glBegin(GL_POLYGON);
+				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+				glNormal3f(normal[vn-1][0], normal[vn-1][1], normal[vn-1][2]);
+				glVertex3f(vertices[v-1][0], vertices[v-1][1], vertices[v-1][2]);
+
+				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+
+				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+
+				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				glEnd();
 			}
 		
 		}
-		glEnd();
+		//glEnd();
 	}
 	
 	glPopMatrix();
