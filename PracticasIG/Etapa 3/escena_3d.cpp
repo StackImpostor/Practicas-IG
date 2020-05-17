@@ -56,13 +56,16 @@ int mod = 1;
 GLuint elephant;
 float elephantrot;
 char ch = '1';
+bool modelo_normal = false;
 
 void loadObj(char* fname)
 {
 	FILE* fp;
 	int read;
 	GLfloat x, y, z;
-	char ch;
+	char ch[80];
+	float vertices[40000][3];
+	float normal[40000][3];
 
 	elephant = glGenLists(1);
 	fp = fopen(fname, "r");
@@ -75,18 +78,54 @@ void loadObj(char* fname)
 	glNewList(elephant, GL_COMPILE);
 	{
 		glPushMatrix();
-		glBegin(GL_POINTS);
+		//glBegin(GL_POINTS);
+		int vcount = 0;
+		int ncount = 0;
 		while (!(feof(fp)))
 		{
-			read = fscanf(fp, "%c %f %f %f", &ch, &x, &y, &z);
+			//read = fscanf(fp, "%c %f %f %f", &ch, &x, &y, &z);
+			read = fscanf(fp, "%s ", &ch);
 			
-			if (read == 4 && ch == 'v')
-			{
-				glVertex3f( x,  y,  z);
+			if (ch[0] == 'v') {
+				read = fscanf(fp, "%f %f %f", &x, &y, &z);
+				switch (ch[1]) {
+				case '\0':
+					vertices[vcount][0] = x;
+					vertices[vcount][1] = y;
+					vertices[vcount][2] = z;
+					vcount++;
+					break;
+				case 'n':
+					normal[ncount][0] = x;
+					normal[ncount][1] = y;
+					normal[ncount][2] = z;
+					ncount++;
+					break;
+				}
+			}
+			else if (ch[0] == 'f') {
+				int v, vt, vn;
+				glBegin(GL_POLYGON);
+				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+				glNormal3f(normal[vn-1][0], normal[vn-1][1], normal[vn-1][2]);
+				glVertex3f(vertices[v-1][0], vertices[v-1][1], vertices[v-1][2]);
+
+				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+
+				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+
+				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				glEnd();
 			}
 		
 		}
-		glEnd();
+		//glEnd();
 	}
 	
 	glPopMatrix();
@@ -97,19 +136,31 @@ void loadObj(char* fname)
 void drawModelo()
 {
 	glPushMatrix();
-	glTranslatef(0, 0.00, 0);
+	glTranslated(25, 0, 0);
 	if (mod != 3) {
+		if (modelo_normal) {
+			glTranslated(-20, 0, 0);
+			glScalef(0.05, 0.05, 0.05);
+		}
+		else {
+			glScalef(0.5, 0.5, 0.5);
+		}
+		
 		glRotatef(-90, 1, 0, 0);
-		glScalef(0.01, 0.01, 0.01);
+		glRotatef(-90, 0, 0, 1);
 	}
 	else {
-		glRotatef(90, 0, 1, 0);
-		glScalef(0.1, 0.1, 0.1);
+		if (modelo_normal) {
+			glTranslated(-20, 0, 0);
+		}
+		glRotatef(-90, 0, 1, 0);
+		//glScalef(0.1, 0.1, 0.1);
 	}
 	glColor3f(1.0, 0.23, 0.27);
 	
-	glRotatef(elephantrot, 0, 1, 0);
+	
 	glCallList(elephant);
+	
 	glPopMatrix();
 }
 
@@ -478,6 +529,9 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 	case 109: //m
 		modelos = !modelos;
 		break;
+	case 110: //n
+		modelo_normal = !modelo_normal;
+		break;
 	case 13: //enter
 		mod += 1;
 		if (mod > 3) {
@@ -775,6 +829,15 @@ void Display(void)
 	}
 
 	if (modelos) {
+		float MatAmbient[] = { 1.1f, 1.1f, 1.1f, 0.0f };
+		float MatDiffuse[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+		GLfloat mat_specular[] = { 0.0, 0.0, 0.0, 0.0 };
+		GLfloat mat_shininess[] = { 1.0 };
+
+		glMaterialfv(GL_FRONT, GL_AMBIENT, MatAmbient);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, MatDiffuse);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+		glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
 		//dibuja el modelo cargado
 		drawModelo();
 	}
