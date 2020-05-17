@@ -98,12 +98,12 @@ void drawModelo()
 {
 	glPushMatrix();
 	glTranslatef(0, 0.00, 0);
-	if ( mod != 4 && mod != 3) {
+	if (mod != 3) {
 		glRotatef(-90, 1, 0, 0);
 		glScalef(0.01, 0.01, 0.01);
 	}
-	if (mod == 3) {
-		//glRotatef(90, 1, 0, 0);
+	else {
+		glRotatef(90, 0, 1, 0);
 		glScalef(0.1, 0.1, 0.1);
 	}
 	glColor3f(1.0, 0.23, 0.27);
@@ -480,6 +480,9 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 		break;
 	case 13: //enter
 		mod += 1;
+		if (mod > 3) {
+			mod = 1;
+		}
 		switch (mod) {
 		case 1:
 			loadObj((char*)"modelos/pato.obj");
@@ -489,12 +492,6 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 			break;
 		case 3:
 			loadObj((char*)"modelos/honk.obj");
-			break;
-		case 4:
-			loadObj((char*)"modelos/bugatti.obj");
-			break;
-		case 5:
-			mod = 1;
 			break;
 		}
 		break;
