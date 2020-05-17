@@ -50,6 +50,9 @@ float posY = 0;
 float posZ = 0;
 
 //Carcar modelos
+bool modelos = false;
+int mod = 1;
+
 GLuint elephant;
 float elephantrot;
 char ch = '1';
@@ -60,6 +63,7 @@ void loadObj(char* fname)
 	int read;
 	GLfloat x, y, z;
 	char ch;
+
 	elephant = glGenLists(1);
 	fp = fopen(fname, "r");
 	if (!fp)
@@ -75,10 +79,12 @@ void loadObj(char* fname)
 		while (!(feof(fp)))
 		{
 			read = fscanf(fp, "%c %f %f %f", &ch, &x, &y, &z);
+			
 			if (read == 4 && ch == 'v')
 			{
-				glVertex3f(0.1*x, 0.1*y, 0.1*z);
+				glVertex3f( x,  y,  z);
 			}
+		
 		}
 		glEnd();
 	}
@@ -92,9 +98,16 @@ void drawModelo()
 {
 	glPushMatrix();
 	glTranslatef(0, 0.00, 0);
-	glRotatef(-90, 1, 0, 0);
+	if ( mod != 4 && mod != 3) {
+		glRotatef(-90, 1, 0, 0);
+		glScalef(0.01, 0.01, 0.01);
+	}
+	if (mod == 3) {
+		//glRotatef(90, 1, 0, 0);
+		glScalef(0.1, 0.1, 0.1);
+	}
 	glColor3f(1.0, 0.23, 0.27);
-	glScalef(0.1, 0.1, 0.1);
+	
 	glRotatef(elephantrot, 0, 1, 0);
 	glCallList(elephant);
 	glPopMatrix();
@@ -461,7 +474,34 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 			glEnable(GL_LIGHT3);
 		}
 		//normal = !normal;
+		break;
+	case 109: //m
+		modelos = !modelos;
+		break;
+	case 13: //enter
+		mod += 1;
+		switch (mod) {
+		case 1:
+			loadObj((char*)"modelos/pato.obj");
+			break;
+		case 2:
+			loadObj((char*)"modelos/cat.obj");
+			break;
+		case 3:
+			loadObj((char*)"modelos/honk.obj");
+			break;
+		case 4:
+			loadObj((char*)"modelos/bugatti.obj");
+			break;
+		case 5:
+			mod = 1;
+			break;
+		}
+		break;
 	}
+	
+
+	std::cout << "key: " << (int)key<<"\n";
 }
 
 // Funci�n que visualiza la escena OpenGL
@@ -736,8 +776,12 @@ void Display(void)
 		glNormal3d(0, 1, 0);
 		glEnd();
 	}
-	//dibuja el modelo cargado
-	drawModelo();
+
+	if (modelos) {
+		//dibuja el modelo cargado
+		drawModelo();
+	}
+	
 
 	glPopMatrix();
 

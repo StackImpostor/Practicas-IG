@@ -2,52 +2,50 @@
   escena_3d.cpp
 C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(41,22): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(42,22): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(80,33): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(80,26): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(80,19): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(96,27): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(97,24): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(143,26): warning C4244: 'argument': conversion from 'GLfloat' to 'GLsizei', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(143,19): warning C4244: 'argument': conversion from 'GLfloat' to 'GLsizei', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(170,22): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(204,21): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(205,12): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(211,15): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(217,16): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(227,17): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(232,22): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(238,22): warning C4305: '-=': truncation from 'double' to 'float'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(246,17): warning C4305: '-=': truncation from 'double' to 'float'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(252,44): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(269,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(269,13): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(273,27): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(279,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(280,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(293,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(294,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(307,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(308,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(321,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(322,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(342,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(342,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(360,17): warning C4305: '-=': truncation from 'double' to 'float'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(369,17): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(373,20): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(376,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(376,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(389,21): warning C4305: '-=': truncation from 'double' to 'float'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(392,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(392,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(500,49): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(522,51): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(523,50): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(535,50): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(645,30): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(649,28): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(737,29): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(738,28): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(739,27): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(740,28): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(103,28): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(107,25): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(109,27): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(151,26): warning C4244: 'argument': conversion from 'GLfloat' to 'GLsizei', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(151,19): warning C4244: 'argument': conversion from 'GLfloat' to 'GLsizei', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(178,22): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(212,21): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(213,12): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(219,15): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(225,16): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(235,17): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(240,22): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(246,22): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(254,17): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(260,44): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(277,20): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(277,13): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(281,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(287,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(288,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(301,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(302,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(315,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(316,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(329,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(330,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(350,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(350,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(368,17): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(377,17): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(381,20): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(384,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(384,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(397,21): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(400,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(400,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(535,49): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(557,51): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(558,50): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(570,50): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(680,30): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(684,28): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(772,29): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(773,28): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(774,27): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(775,28): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
   Practica1.vcxproj -> C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\Debug\Etapa 3.exe
