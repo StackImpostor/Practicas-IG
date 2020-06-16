@@ -9,7 +9,11 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <iostream>
+<<<<<<< HEAD
 #include "Simple OpenGL Image Library/src/SOIL.h"
+=======
+#include "SOIL2/SOIL2.h"
+>>>>>>> b929df0fab7a06f332561374a2a08edbad515cb4
 const int W_WIDTH = 700; // Tama�o incial de la ventana
 const int W_HEIGHT = 700;
 const double pi = 3.1415926535897;
@@ -260,10 +264,11 @@ void preparaCamara() {
 
 void mueveCamara() {
 	float incAngulo = pi / 60;
+	float speed = 0.2;
 	if (teclas[0]) {
 		if (modo == LIBRE) {
-			float cZ = 0.1 * -cos(anguloX);
-			float cX = 0.1 * sin(anguloX);
+			float cZ = speed * -cos(anguloX);
+			float cX = speed * sin(anguloX);
 
 			camZ += cZ;
 			posZ += cZ;
@@ -276,8 +281,8 @@ void mueveCamara() {
 	}
 	if (teclas[1]) {
 		if (modo == LIBRE) {
-			float cZ = 0.1 * -cos(anguloX - pi / 2);
-			float cX = 0.1 * sin(anguloX - pi / 2);
+			float cZ = speed * -cos(anguloX - pi / 2);
+			float cX = speed * sin(anguloX - pi / 2);
 
 			camZ += cZ;
 			posZ += cZ;
@@ -290,8 +295,8 @@ void mueveCamara() {
 	}
 	if (teclas[2]) {
 		if (modo == LIBRE) {
-			float cZ = -0.1 * -cos(anguloX);
-			float cX = -0.1 * sin(anguloX);
+			float cZ = -speed * -cos(anguloX);
+			float cX = -speed * sin(anguloX);
 
 			camZ += cZ;
 			posZ += cZ;
@@ -304,8 +309,8 @@ void mueveCamara() {
 	}
 	if (teclas[3]) {
 		if (modo == LIBRE) {
-			float cZ = -0.1 * -cos(anguloX - pi / 2);
-			float cX = -0.1 * sin(anguloX - pi / 2);
+			float cZ = -speed * -cos(anguloX - pi / 2);
+			float cX = -speed * sin(anguloX - pi / 2);
 
 			camZ += cZ;
 			posZ += cZ;
@@ -318,7 +323,7 @@ void mueveCamara() {
 	}
 	if (teclas[4]) {
 		if (modo == LIBRE) {
-			float cY = -0.1;
+			float cY = -speed;
 
 			camY += cY;
 			posY += cY;
@@ -326,7 +331,7 @@ void mueveCamara() {
 	}
 	if (teclas[5]) {
 		if (modo == LIBRE) {
-			float cY = 0.1;
+			float cY = speed;
 			camY += cY;
 			posY += cY;
 		}
