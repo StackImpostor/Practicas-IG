@@ -8,6 +8,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <iostream>
+#include <vector>
 const int W_WIDTH = 700; // Tama�o incial de la ventana
 const int W_HEIGHT = 700;
 const double pi = 3.1415926535897;
@@ -60,20 +61,44 @@ float elephantrot;
 char ch = '1';
 bool modelo_normal = false;
 
-void loadObj(char* fname)
+class Poligono {
+public:
+	float puntos[4][3];
+	void setPunto(int p, float x, float y, float z) {
+		puntos[p][0] = x;
+		puntos[p][1] = y;
+		puntos[p][2] = z;
+	}
+};
+class Modelo {
+public:
+	int numVert = 0;
+	char* fname;
+	std::vector< Poligono > vertexIndices, vtIndices, normalIndices;
+	Modelo(char* filename) {
+		fname = filename;
+	}
+	/*float vertPol[1][4][3];
+	float normalPol[1][4][3];
+	float texturePol[1][4][3];*/
+};
+
+Modelo honk((char*)"modelos/honk.obj");
+
+void loadObj(Modelo modelo)
 {
 	FILE* fp;
 	int read;
 	GLfloat x, y, z;
-	char ch[80];
+	char ch[1000];
 	float vertices[40000][3];
 	float normal[40000][3];
 
 	elephant = glGenLists(1);
-	fp = fopen(fname, "r");
+	fp = fopen(modelo.fname, "r");
 	if (!fp)
 	{
-		printf("can't open file %s\n", fname);
+		printf("can't open file %s\n", modelo.fname);
 		exit(1);
 	}
 	glPointSize(2.0);
@@ -83,6 +108,8 @@ void loadObj(char* fname)
 		//glBegin(GL_POINTS);
 		int vcount = 0;
 		int ncount = 0;
+
+		int numVert = 0;
 		while (!(feof(fp)))
 		{
 			//read = fscanf(fp, "%c %f %f %f", &ch, &x, &y, &z);
@@ -107,63 +134,100 @@ void loadObj(char* fname)
 			}
 			else if (ch[0] == 'f') {
 				int v, vt, vn;
-				glBegin(GL_POLYGON);
+				//glBegin(GL_POLYGON);
+				Poligono pVert;
+				Poligono pNorm;
 				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				/*modelo.vertPol[numVert][0][0] = vertices[v - 1][0];
+				modelo.vertPol[numVert][0][1] = vertices[v - 1][1];
+				modelo.vertPol[numVert][0][2] = vertices[v - 1][2];
+				
+			
+				modelo.normalPol[numVert][0][0] = normal[vn - 1][0];
+				modelo.normalPol[numVert][0][1] = normal[vn - 1][1];
+				modelo.normalPol[numVert][0][2] = normal[vn - 1][2];*/	
+				pVert.setPunto(0, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				pNorm.setPunto(0, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				//glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				//glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
 
 				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				/*modelo.vertPol[numVert][1][0] = vertices[v - 1][0];
+				modelo.vertPol[numVert][1][1] = vertices[v - 1][1];
+				modelo.vertPol[numVert][1][2] = vertices[v - 1][2];
+				modelo.normalPol[numVert][1][0] = normal[vn - 1][0];
+				modelo.normalPol[numVert][1][1] = normal[vn - 1][1];
+				modelo.normalPol[numVert][1][2] = normal[vn - 1][2];*/
+				pVert.setPunto(1, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				pNorm.setPunto(1, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				//glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				//glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
 
 				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				/*modelo.vertPol[numVert][2][0] = vertices[v - 1][0];
+				modelo.vertPol[numVert][2][1] = vertices[v - 1][1];
+				modelo.vertPol[numVert][2][2] = vertices[v - 1][2];
+				modelo.normalPol[numVert][2][0] = normal[vn - 1][0];
+				modelo.normalPol[numVert][2][1] = normal[vn - 1][1];
+				modelo.normalPol[numVert][2][2] = normal[vn - 1][2];*/
+				pVert.setPunto(2, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				pNorm.setPunto(2, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				//glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				//glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
 
 				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
-				glEnd();
+				/*modelo.vertPol[numVert][3][0] = vertices[v - 1][0];
+				modelo.vertPol[numVert][3][1] = vertices[v - 1][1];
+				modelo.vertPol[numVert][3][2] = vertices[v - 1][2];
+				modelo.normalPol[numVert][3][0] = normal[vn - 1][0];
+				modelo.normalPol[numVert][3][1] = normal[vn - 1][1];
+				modelo.normalPol[numVert][3][2] = normal[vn - 1][2];*/
+				pVert.setPunto(3, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				pNorm.setPunto(3, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+
+				modelo.vertexIndices.push_back(pVert);
+				modelo.normalIndices.push_back(pNorm);
+				//glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				//glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				//glEnd();
+				modelo.numVert++;
 			}
+			numVert;
 
-		}
+		}	
 		//glEnd();
 	}
-
+	
 	glPopMatrix();
 	glEndList();
 	fclose(fp);
 }
 
-void drawModelo()
+void drawModelo(Modelo modelo)
 {
-	glPushMatrix();
-	glTranslated(25, 0, 0);
-	if (mod != 3) {
-		if (modelo_normal) {
-			glTranslated(-20, 0, 0);
-			glScalef(0.05, 0.05, 0.05);
-		}
-		else {
-			glScalef(0.5, 0.5, 0.5);
-		}
+	std::vector<Poligono> vI = modelo.vertexIndices;
+	std::vector<Poligono> vN = modelo.normalIndices;
+	std::vector<Poligono>::iterator itNor = vN.begin();
+	for (std::vector<Poligono>::iterator itVec = vI.begin(); itVec != vI.end(); ++itVec) {
+		
+		glBegin(GL_POLYGON);
+		Poligono pV = *itVec;
+		Poligono pN = *itNor;
+ 		glNormal3f(pN.puntos[0][0], pN.puntos[0][1], pN.puntos[0][2]);
+		glVertex3f(pV.puntos[0][0], pV.puntos[0][1], pV.puntos[0][2]);
 
-		glRotatef(-90, 1, 0, 0);
-		glRotatef(-90, 0, 0, 1);
+		glNormal3f(pN.puntos[1][0], pN.puntos[1][1], pN.puntos[1][2]);
+		glVertex3f(pV.puntos[1][0], pV.puntos[1][1], pV.puntos[1][2]);
+
+		glNormal3f(pN.puntos[2][0], pN.puntos[2][1], pN.puntos[2][2]);
+		glVertex3f(pV.puntos[2][0], pV.puntos[2][1], pV.puntos[2][2]);
+
+		glNormal3f(pN.puntos[3][0], pN.puntos[3][1], pN.puntos[3][2]);
+		glVertex3f(pV.puntos[3][0], pV.puntos[3][1], pV.puntos[3][2]);
+
+		itNor++;
+		glEnd();
 	}
-	else {
-		if (modelo_normal) {
-			glTranslated(-20, 0, 0);
-		}
-		glRotatef(-90, 0, 1, 0);
-		//glScalef(0.1, 0.1, 0.1);
-	}
-	glColor3f(1.0, 0.23, 0.27);
-
-
-	glCallList(elephant);
-
-	glPopMatrix();
 }
 
 //END of cargar modelos
@@ -202,10 +266,11 @@ void preparaCamara() {
 
 void mueveCamara() {
 	float incAngulo = pi / 60;
+	float speed = 0.2;
 	if (teclas[0]) {
 		if (modo == LIBRE) {
-			float cZ = 0.1 * -cos(anguloX);
-			float cX = 0.1 * sin(anguloX);
+			float cZ = speed * -cos(anguloX);
+			float cX = speed * sin(anguloX);
 
 			camZ += cZ;
 			posZ += cZ;
@@ -218,8 +283,8 @@ void mueveCamara() {
 	}
 	if (teclas[1]) {
 		if (modo == LIBRE) {
-			float cZ = 0.1 * -cos(anguloX - pi / 2);
-			float cX = 0.1 * sin(anguloX - pi / 2);
+			float cZ = speed * -cos(anguloX - pi / 2);
+			float cX = speed * sin(anguloX - pi / 2);
 
 			camZ += cZ;
 			posZ += cZ;
@@ -232,8 +297,8 @@ void mueveCamara() {
 	}
 	if (teclas[2]) {
 		if (modo == LIBRE) {
-			float cZ = -0.1 * -cos(anguloX);
-			float cX = -0.1 * sin(anguloX);
+			float cZ = -speed * -cos(anguloX);
+			float cX = -speed * sin(anguloX);
 
 			camZ += cZ;
 			posZ += cZ;
@@ -246,8 +311,8 @@ void mueveCamara() {
 	}
 	if (teclas[3]) {
 		if (modo == LIBRE) {
-			float cZ = -0.1 * -cos(anguloX - pi / 2);
-			float cX = -0.1 * sin(anguloX - pi / 2);
+			float cZ = -speed * -cos(anguloX - pi / 2);
+			float cX = -speed * sin(anguloX - pi / 2);
 
 			camZ += cZ;
 			posZ += cZ;
@@ -260,7 +325,7 @@ void mueveCamara() {
 	}
 	if (teclas[4]) {
 		if (modo == LIBRE) {
-			float cY = -0.1;
+			float cY = -speed;
 
 			camY += cY;
 			posY += cY;
@@ -268,7 +333,7 @@ void mueveCamara() {
 	}
 	if (teclas[5]) {
 		if (modo == LIBRE) {
-			float cY = 0.1;
+			float cY = speed;
 			camY += cY;
 			posY += cY;
 		}
@@ -486,13 +551,13 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 		}
 		switch (mod) {
 		case 1:
-			loadObj((char*)"modelos/pato.obj");
+			//loadObj((char*)"modelos/pato.obj");
 			break;
 		case 2:
-			loadObj((char*)"modelos/cat.obj");
+			//loadObj((char*)"modelos/cat.obj");
 			break;
 		case 3:
-			loadObj((char*)"modelos/honk.obj");
+			//loadObj((char*)"modelos/honk.obj");
 			break;
 		}
 		break;
@@ -642,9 +707,6 @@ void Display(void)
 		glutWireSphere(0.05, 10, 10);
 		glPopMatrix();
 	}
-	/*glEnable(GL_LIGHT1);
-	glEnable(GL_LIGHT2);*/
-
 
 	//Ejes de cordenadas
 	if (muestraReferencias) {
@@ -744,25 +806,22 @@ void Display(void)
 		glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 		glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
 		//dibuja el modelo cargado
-		drawModelo();
 	}
 
 	//Modelos de la escena
 	//Mesa
-	loadObj((char*)"models/old_wooden_table/old_wooden_table.obj");
+
+	drawModelo(honk);
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
 	glTranslatef( -25, 0, 0);
-	drawModelo();
 	glPopMatrix();
 	//silla
-	loadObj((char*)"models/chair/Chair.obj");
-	glPushMatrix();
+	/*glPushMatrix();
 	glScalef( 0.17, 0.17, 0.17);
-	glRotatef(90, 0, 0.1, 1); //"levantada y un poco torcida, para que no quede paralela a la mesa
+	glRotatef(90, 0, 0, 1); 
 	glTranslatef(-10.1, -150, 0);
-	drawModelo();
-	glPopMatrix();
+	glPopMatrix();*/
 	//plato (nope, este modelo es gigante o algo, laggea que flipas)
 	/*loadObj((char*)"models/Plate/plate.obj");
 	glPushMatrix();
@@ -789,15 +848,19 @@ void Display(void)
 	drawModelo();
 	glPopMatrix();*/
 
-	//tassó
-	loadObj((char*)"models/Glass/Glass.obj");
-	glPushMatrix();
-	glScalef(1, 1, 1);
-	glRotatef(90, 0, 0.1, 1);
-	glTranslatef(-10.1, 0, 0);
-	drawModelo();
-	glPopMatrix();
+	//tassó (no funcona?)
+	/*glPushMatrix();
+	glScalef(10, 10, 10);
+	glRotatef(0, 0, 0, 0);
+	glTranslatef(0, 0, 0);
+	glPopMatrix();*/
 
+	//cuchillo
+	/*glPushMatrix();
+	glScalef(0.01, 0.01, 0.01);
+	glRotatef(0, 0, 0, 0);
+	glTranslatef(0, 0, 0);
+	glPopMatrix();*/
 
 	glPopMatrix();
 	glutSwapBuffers();
@@ -860,6 +923,7 @@ int main(int argc, char** argv)
 	//SUBSTITUIR EL FICHERO PARA CARGAR DIFERENTES MODELOS
 	//loadObj((char*)"modelos/pato.obj");
 
+	loadObj(honk);
 	// Comienza la ejecuci�n del core de GLUT
 	glutMainLoop();
 	return 0;
