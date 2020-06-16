@@ -726,90 +726,7 @@ void Display(void)
 
 
 
-	//Teapot
-	glPushMatrix();
-
-	glTranslatef(-0.5, 0.0, -0.8);
-
-	glRotatef(fAngulo * 5, 0.0f, 1.0f, 0.0f);
-
-	glTranslatef(-0.40, 0.7, 0);
-	glRotatef(30, 0.0f, 0.0f, 1.0f);
-	//glTranslatef(1, 0, 1);
-
-	glColor3f(0.5, 0.5, 0.5);
-	glutSolidTeapot(0.4);
-	//glColor3f(0, 0, 0);
-	//glutWireTeapot(0.4);
-
-
-	glPopMatrix();
-
-	//theCube
-	glPushMatrix();
-
-	rotacionCubo();
-
-	glColor3f(0.5, 0.5, 0.5);
-
-	glutSolidCube(0.5);
-
-	//glColor3f(0, 0, 0);
-	//glutWireCube(0.5);
-
-	glPopMatrix();
-
-	//Torus
-	glPushMatrix();
-
-	destruirDonut();
-
-	//glTranslatef(0.7, 0.15, -0.7);
-
-
-	glColor3f(0.5, 0.5, 0.5);
-	glutSolidTorus(0.15, 0.3, 50, 50);
-
-	//glColor3f(0, 0, 0);
-	//glutWireTorus(0.15, 0.3, 50, 50);
-
-	glPopMatrix();
-
-	//Cone
-	glPushMatrix();
-	glTranslatef(0.5, 0, 0.5);
-	glRotatef(-90, 1, 0, 0);
-
-	looongCone();
-
-	glColor3f(0.5, 0.5, 0.5);
-	glutSolidCone(0.2, 1, 50, 50);
-
-	//glColor3f(0, 0, 0);
-	//glutWireCone(0.2, 1, 50, 50);
-
-	glPopMatrix();
-	/*
-	glBegin(GL_POLYGON);
-	glColor3f(0.5f, 0.5f, 1.0f);
-	if (normal) {
-		glNormal3f(0, 1, 0);
-	}
-	glVertex3f(-2, 1.01, -2);
-	if (normal) {
-		glNormal3f(0, 1, 0);
-	}
-	glVertex3f(2, 1.01, -2);
-	if (normal) {
-		glNormal3f(0, 1, 0);
-	}
-	glVertex3f(2, 1.01, 2);
-	if (normal) {
-		glNormal3f(0, 1, 0);
-		std::cout << "normal: "<< normal <<"\n";
-	}
-	glVertex3f(-2, 1.01, 2);
-	glEnd();*/
+	
 
 	//Dibujamos el "suelo" que es trans
 	if (muestraReferencias) {
@@ -922,7 +839,7 @@ int main(int argc, char** argv)
 	preparaCamara();
 
 	//SUBSTITUIR EL FICHERO PARA CARGAR DIFERENTES MODELOS
-	loadObj((char*)"modelos/pato.obj");
+	//loadObj((char*)"modelos/pato.obj");
 
 	// Comienza la ejecuci�n del core de GLUT
 	glutMainLoop();
