@@ -1,226 +1,57 @@
-﻿  Etapa6.cpp
-<<<<<<< HEAD
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(45,24): warning C4305:  'inicializando': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(46,24): warning C4305:  'inicializando': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(83,21): warning C4129:  'H': secuencia de escape de carácter no reconocida
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(83,21): warning C4129:  'F': secuencia de escape de carácter no reconocida
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(153,43): warning C4305:  'inicializando': truncamiento de 'double' a 'GLfloat'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(203,29): warning C4305:  'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(219,27): warning C4305:  'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(262,27): warning C4305:  'inicializando': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(265,13): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(266,13): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(279,13): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(280,13): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(293,13): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(294,13): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(307,13): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(308,13): warning C4244:  'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(321,19): warning C4305:  'inicializando': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(329,18): warning C4305:  'inicializando': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(337,26): warning C4244:  'argumento': conversión de 'GLfloat' a 'GLsizei'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(337,19): warning C4244:  'argumento': conversión de 'GLfloat' a 'GLsizei'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(364,22): warning C4305:  'inicializando': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(398,21): warning C4244:  'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(399,12): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(405,15): warning C4305:  '+=': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(411,16): warning C4305:  '+=': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(421,17): warning C4305:  '+=': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(426,22): warning C4305:  '+=': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(432,22): warning C4305:  '-=': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(440,17): warning C4305:  '-=': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(446,42): warning C4305:  'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(463,20): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(463,13): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(467,27): warning C4305:  'inicializando': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(480,21): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(480,14): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(498,17): warning C4305:  '-=': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(507,17): warning C4305:  '+=': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(511,20): warning C4305:  '+=': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(514,21): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(514,14): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(546,27): warning C4305:  'inicializando': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(552,21): warning C4305:  '-=': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(555,21): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(555,14): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(675,20): warning C4305:  '+=': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(678,21): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(678,14): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(682,21): warning C4305:  '-=': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(685,21): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(685,14): warning C4244:  'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(691,28): warning C4305:  'inicializando': truncamiento de 'double' a 'float'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(698,25): warning C4244:  '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(699,24): warning C4244:  '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(736,49): warning C4305:  'inicializando': truncamiento de 'double' a 'GLfloat'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(758,51): warning C4305:  'inicializando': truncamiento de 'double' a 'GLfloat'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(759,50): warning C4305:  'inicializando': truncamiento de 'double' a 'GLfloat'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(771,50): warning C4305:  'inicializando': truncamiento de 'double' a 'GLfloat'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(882,30): warning C4305:  'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(886,28): warning C4305:  'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(974,29): warning C4305:  'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(975,28): warning C4305:  'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(976,27): warning C4305:  'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(977,28): warning C4305:  'argumento': truncamiento de 'double' a 'GLfloat'
-  SOIL.c
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1157,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1157,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1157,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glAccum'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1157,33): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1157,58): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1158,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1158,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1158,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glAlphaFunc'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1158,37): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1158,63): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1159,21): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1159,30): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1159,30): error C2146:  error de sintaxis: falta ',' delante del identificador 'glAreTexturesResident'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1159,52): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1159,109): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1160,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1160,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1160,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glArrayElement'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1160,40): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1160,48): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1161,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1161,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1161,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glBegin'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1161,33): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1161,45): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1162,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1162,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1162,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glBindTexture'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1162,39): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1162,69): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1163,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1163,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1163,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glBitmap'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1163,34): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1163,147): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1164,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1164,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1164,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glBlendFunc'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1164,37): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1164,68): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1165,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1165,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1165,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glCallList'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1165,36): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1165,48): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1166,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1166,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1166,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glCallLists'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1166,37): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1166,81): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1167,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1167,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1167,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glClear'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1167,33): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1167,49): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1168,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1168,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1168,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glClearAccum'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1168,38): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1168,94): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1169,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1169,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1169,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glClearColor'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1169,38): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1169,98): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1170,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1170,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1170,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glClearDepth'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1170,38): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1170,53): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1171,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1171,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1171,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glClearIndex'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1171,38): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1171,48): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1172,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1172,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1172,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glClearStencil'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1172,40): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1172,48): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1173,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1173,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1173,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glClipPlane'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1173,37): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1173,76): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1174,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1174,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1174,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glColor3b'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1174,35): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1174,73): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1175,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1175,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1175,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glColor3bv'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1175,36): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1175,52): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1176,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1176,25): error C2085:  'APIENTRY': no está en la lista de parámetros formales
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1176,25): error C2146:  error de sintaxis: falta ',' delante del identificador 'glColor3d'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1176,35): error C2143:  error de sintaxis: falta ';' delante de '('
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1176,79): error C2059:  error de sintaxis: ')'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1177,16): error C2054:  se esperaba '(' a continuación de 'WINGDIAPI'
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\GL\gl.h(1177,16): error C1003:  el recuento de errores supera 100; se detiene la compilación
-=======
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(43,24): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(44,24): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(145,29): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(161,27): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(204,27): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(205,19): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(222,13): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(223,13): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(250,13): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(251,13): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(280,26): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLsizei'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(280,19): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLsizei'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(307,22): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(341,21): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(342,12): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(348,15): warning C4305: '+=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(354,16): warning C4305: '+=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(364,17): warning C4305: '+=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(369,22): warning C4305: '+=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(375,22): warning C4305: '-=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(383,17): warning C4305: '-=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(389,42): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(406,20): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(406,13): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(410,27): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(423,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(423,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(441,17): warning C4305: '-=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(450,17): warning C4305: '+=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(454,20): warning C4305: '+=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(457,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(457,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(489,27): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(495,21): warning C4305: '-=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(498,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(498,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(618,20): warning C4305: '+=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(621,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(621,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(625,21): warning C4305: '-=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(628,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(628,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(634,28): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(641,25): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(642,24): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(679,49): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(701,51): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(702,50): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(714,50): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(825,30): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(829,28): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(917,29): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(918,28): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(919,27): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(920,28): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-  Etapa6.vcxproj -> C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Debug\Etapa6.exe
->>>>>>> b929df0fab7a06f332561374a2a08edbad515cb4
+﻿  Using triplet "x86-windows" from "C:\Users\juanj\Desktop\Nueva carpeta\vcpkg\installed\x86-windows\"
+  Etapa6.cpp
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(45,24): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(46,24): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(229,29): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(288,27): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(289,19): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(306,13): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(307,13): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(334,13): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(335,13): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(364,26): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLsizei'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(364,19): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLsizei'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(391,22): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(425,21): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(426,12): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(432,15): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(438,16): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(448,17): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(453,22): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(459,22): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(467,17): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(473,42): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(490,20): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(490,13): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(494,27): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(507,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(507,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(525,17): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(534,17): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(538,20): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(541,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(541,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(573,27): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(579,21): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(582,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(582,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(702,20): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(705,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(705,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(709,21): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(712,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(712,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(718,28): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(725,25): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(726,24): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(763,49): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(785,51): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(786,50): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(798,50): warning C4305: 'inicializando': truncamiento de 'double' a 'GLfloat'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(909,30): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(913,28): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(1001,29): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(1002,28): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(1003,27): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(1004,28): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+  Etapa6.vcxproj -> C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Debug\Etapa6.exe

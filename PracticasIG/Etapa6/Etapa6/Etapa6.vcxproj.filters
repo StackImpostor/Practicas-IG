@@ -18,13 +18,5 @@
     <ClCompile Include="Etapa6.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Simple OpenGL Image Library\src\SOIL.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Simple OpenGL Image Library\src\SOIL.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

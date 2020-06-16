@@ -9,11 +9,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <iostream>
-<<<<<<< HEAD
-#include "Simple OpenGL Image Library/src/SOIL.h"
-=======
 #include "SOIL2/SOIL2.h"
->>>>>>> b929df0fab7a06f332561374a2a08edbad515cb4
 const int W_WIDTH = 700; // Tama�o incial de la ventana
 const int W_HEIGHT = 700;
 const double pi = 3.1415926535897;
@@ -61,6 +57,7 @@ float posZ = 0;
 bool modelos = false;
 int mod = 1;
 
+GLuint img;
 GLuint elephant;
 float elephantrot;
 char ch = '1';
@@ -69,24 +66,7 @@ bool modelo_normal = false;
 void loadObj(char* fname)
 {
 
-	GLuint tex_2d = SOIL_load_OGL_texture
-	(
-		"Honk\face.png",
-		SOIL_LOAD_AUTO,
-		SOIL_CREATE_NEW_ID,
-		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-	);
-
 	GLuint id[1] = { 1 };
-
-	glGenTextures(1, id);
-
-	glBindTexture(GL_TEXTURE_2D, id[0]);
-
-	FILE* img;
-	img = fopen((char*)"modelos\Honk\Face.png", "rb");
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 512, 512, 0, GL_RGBA, GL_UNSIGNED_BYTE, img);
 
 
 	FILE* fp;
@@ -107,94 +87,116 @@ void loadObj(char* fname)
 	glPointSize(2.0);
 	glNewList(elephant, GL_COMPILE);
 	
-		glPushMatrix();
-		//glBegin(GL_POINTS);
-		int vcount = 0;
-		int ncount = 0;
-		int tcount = 0;
-		while (!(feof(fp)))
-		{
-			//read = fscanf(fp, "%c %f %f %f", &ch, &x, &y, &z);
-			read = fscanf(fp, "%s ", &ch);
+	glPushMatrix();
 
-			if (ch[0] == 'v') {
-				read = fscanf(fp, "%f %f %f", &x, &y, &z);
-				switch (ch[1]) {
-				case '\0':
+
+
+	glBindTexture(GL_TEXTURE_2D, img);
+
+	//glBegin(GL_POINTS);
+	int vcount = 0;
+	int ncount = 0;
+	int tcount = 0;
+	while (!(feof(fp)))
+	{
+		//read = fscanf(fp, "%c %f %f %f", &ch, &x, &y, &z);
+		read = fscanf(fp, "%s ", &ch);
+
+		if (ch[0] == 'v') {
+			read = fscanf(fp, "%f %f %f", &x, &y, &z);
+			switch (ch[1]) {
+			case '\0':
 					
-					vertices[vcount][0] = x;
-					vertices[vcount][1] = y;
-					vertices[vcount][2] = z;
-					vcount++;
-					break;
-				case 'n':
-					normal[ncount][0] = x;
-					normal[ncount][1] = y;
-					normal[ncount][2] = z;
-					ncount++;
-					break;
+				vertices[vcount][0] = x;
+				vertices[vcount][1] = y;
+				vertices[vcount][2] = z;
+				vcount++;
+				break;
+			case 'n':
+				normal[ncount][0] = x;
+				normal[ncount][1] = y;
+				normal[ncount][2] = z;
+				ncount++;
+				break;
 
-				case 't':
-					textura[tcount][0] = x;
-					textura[tcount][1] = y;
-					tcount++;
-					break;
-				}
+			case 't':
+				textura[tcount][0] = x;
+				textura[tcount][1] = y;
+				tcount++;
+				break;
 			}
-
-				else if (ch[0] == 'f') {
-
-				glBindTexture(GL_TEXTURE_2D, 1);
-
-				glBegin(GL_POLYGON);
-
-			
-
-
-				float MatAmbient[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-				float MatDiffuse[] = { 0.64f, 0.64f, 0.64f, 1.0f };
-				GLfloat mat_specular[] = { 0.5, 0.5, 0.5, 0.5 };
-				GLfloat mat_shininess[] = { 96.078431 };
-
-				glMaterialfv(GL_FRONT, GL_AMBIENT, MatAmbient);
-				glMaterialfv(GL_FRONT, GL_DIFFUSE, MatDiffuse);
-				glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-				glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
-
-
-			
-				int v, vt, vn;
-				
-				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-				glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
-				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
-				
-
-				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-				glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
-				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
-
-				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-				glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
-				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
-
-				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-				glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
-				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
-				glEnd();
-			}
-
 		}
-		//glEnd();
+
+			else if (ch[0] == 'f') {
+
+			glBegin(GL_POLYGON);
+						
+			int v, vt, vn;
+				
+			read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+			glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
+			glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+			glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				
+
+			read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+			glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
+			glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+			glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+
+			read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+			glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
+			glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+			glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+
+			read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+			glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
+			glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+			glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+			glEnd();
+		}
+
+	}
+	//glEnd();
 	
 
 	glPopMatrix();
 	glEndList();
 	fclose(fp);
+}
+
+void foto() {
+	glPushMatrix();
+
+	GLuint img = SOIL_load_OGL_texture
+	(
+		"modelos\\Honk\\Face.png",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_MULTIPLY_ALPHA
+	);
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, img);
+
+	glBegin(GL_POLYGON);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(0,0,0);
+
+	glTexCoord2f(0, 1);
+	glVertex3f(0, 1, 0);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(1, 1, 0);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(1, 0, 0);
+
+
+
+	glEnd();
+
+	glPopMatrix();
 }
 
 void drawModelo()
@@ -220,8 +222,8 @@ void drawModelo()
 		glRotatef(-90, 0, 1, 0);
 		//glScalef(0.1, 0.1, 0.1);
 	}
-	glColor3f(1.0, 0.23, 0.27);
-
+	//glColor3f(1.0, 0.23, 0.27);
+	glColor3f(1.0, 1.0, 1.0);
 
 	glCallList(elephant);
 
@@ -998,11 +1000,25 @@ void Display(void)
 		drawModelo();
 	}
 
+	foto();
+
 
 	glPopMatrix();
 
 	glutSwapBuffers();
 }
+
+
+void initTex() {
+	img = SOIL_load_OGL_texture
+	(
+		"modelos\\Honk\\Face.png",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_MULTIPLY_ALPHA
+	);
+}
+
 
 // Funci�n que se ejecuta cuando el sistema no esta ocupado
 void Idle(void)
@@ -1084,7 +1100,10 @@ int main(int argc, char** argv)
 	preparaCamara();
 
 	//SUBSTITUIR EL FICHERO PARA CARGAR DIFERENTES MODELOS
+	initTex();
 	loadObj((char*)"modelos/pato.obj");
+
+	
 
 	// Comienza la ejecuci�n del core de GLUT
 	glutMainLoop();
