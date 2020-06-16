@@ -1,14 +1,15 @@
-﻿  Etapa6.cpp
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(540,17): warning C4305: '-=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(549,17): warning C4305: '+=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(553,20): warning C4305: '+=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(594,21): warning C4305: '-=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(597,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(597,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(717,20): warning C4305: '+=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(720,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(720,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(724,21): warning C4305: '-=': truncamiento de 'double' a 'float'
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(727,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(727,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-  Etapa6.vcxproj -> C:\Users\davidcan\Documents\GitHub\Practicas-IG\PracticasIG\Etapa6\Debug\Etapa6.exe
+﻿  Using triplet "x86-windows" from "C:\Users\juanj\Desktop\Nueva carpeta\vcpkg\installed\x86-windows\"
+  Etapa6.cpp
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(565,17): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(574,17): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(578,20): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(619,21): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(622,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(622,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(742,20): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(745,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(745,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(749,21): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(752,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(752,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+  Etapa6.vcxproj -> C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Debug\Etapa6.exe

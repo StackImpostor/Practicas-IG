@@ -60,7 +60,7 @@ float posZ = 0;
 bool modelos = false;
 int mod = 1;
 
-GLuint img;
+//GLuint img;
 //GLuint elephant;
 //float elephantrot;
 char ch = '1';
@@ -83,7 +83,7 @@ public:
 class Material {
 public:
 	string name;
-	string imagen;
+	GLuint imagen;
 	float Ka[3];
 	float Kd[3];
 	float Ks[3];
@@ -91,7 +91,8 @@ public:
 
 	Material(char* name, char* imagen, float Ka[3], float Kd[3], float Ks[3], float Ns, float Ni, float d) {
 		this->name = string(name);
-		this->imagen = string(imagen);
+		this->imagen = SOIL_load_OGL_texture(imagen,SOIL_LOAD_AUTO,SOIL_CREATE_NEW_ID,
+					SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_MULTIPLY_ALPHA);
 		this->Ka[0] = Ka[0]; this->Ka[1] = Ka[1]; this->Ka[2] = Ka[2];
 		this->Kd[0] = Kd[0]; this->Kd[1] = Kd[1]; this->Kd[2] = Kd[2];
 		this->Ks[0] = Ks[0]; this->Ks[1] = Ks[1]; this->Ks[2] = Ks[2];
@@ -101,11 +102,12 @@ public:
 	}
 };
 
-vector< Material > loadMaterial(char* fname) {
+vector< Material > loadMaterial(char* path, char* fname) {
 	FILE* fp;
 	int read;
 	GLfloat x, y, z;
 
+	char img[100];
 	char name[20];
 	char imagen[20];
 	float Ka[3];
@@ -113,7 +115,7 @@ vector< Material > loadMaterial(char* fname) {
 	float Ks[3];
 	float Ns = 128.0f, Ni = 1.0f, d = 1.0f;
 	char ch[100];
-	fp = fopen(((string)fname + ".mtl").c_str(), "r");
+	fp = fopen(((string)path + fname + ".mtl").c_str(), "r");
 	if (!fp)
 	{
 		printf("can't open file %s\n", fname);
@@ -161,20 +163,28 @@ vector< Material > loadMaterial(char* fname) {
 		}
 		else if (ch[0] == 'n') {
 			if (!primero) {
-				materiales.push_back(Material(name, imagen, Ka, Kd, Ks, Ns, Ni, d));
+				char img[]
+				strcat(img, path);
+				strcat(img, imagen);
+				//strcpy(img, ((string)path + imagen).c_str());
+				materiales.push_back(Material(name, img, Ka, Kd, Ks, Ns, Ni, d));
+				*img = '\0';
 			}
 			read = fscanf(fp, "%[^\n]", &name);
 			primero = false;
 		}
 		else if (ch[0] == 'm') {
 			read = fscanf(fp, "%[^\n]", &imagen);
-		}
+			
+		} 
 	}
-	materiales.push_back(Material(name, imagen, Ka, Kd, Ks, Ns, Ni, d));
+	strcpy(img, ((string)path + imagen).c_str());
+	materiales.push_back(Material(name, img , Ka, Kd, Ks, Ns, Ni, d));
 	return materiales;
 }
 
-tuple<int, vector<Poligono>, vector<Poligono>, vector<Poligono>, vector<Material> > loadObj(char* fname)
+tuple<int, vector<Poligono>, vector<Poligono>, vector<Poligono>, vector<Material>, vector < int >,vector < string > > 
+loadObj(char* path, char* fname)
 {
 
 	GLuint id[1] = { 1 };
@@ -184,35 +194,29 @@ tuple<int, vector<Poligono>, vector<Poligono>, vector<Poligono>, vector<Material
 	GLfloat x, y, z;
 
 	char ch[100];
+	char mat[100];
 	float vertices[25000][3];
 	float normal[25000][3];
 	float textura[25000][2];
 
-	//elephant = glGenLists(1);
-	//char* nose2 = (char*)".obj";
-	//char nose[40];
-	//strcat(nose, fname);
-	//strcat(nose, ".obj");
-	//string nose ((string)fname + ".obj");
-	fp = fopen(((string)fname + ".obj").c_str(), "r");
+	fp = fopen(((string)path + fname + ".obj").c_str(), "r");
 	if (!fp)
 	{
 		printf("can't open file %s\n", fname);
 		exit(1);
 	}
-	//glNewList(elephant, GL_COMPILE);
 
-	glBindTexture(GL_TEXTURE_2D, img);
 
 	int vcount = 0;
 	int ncount = 0;
 	int tcount = 0;
-	int numVert = 0;
+	int numPol = 0;
 	vector<Poligono> vertexIndices, normalIndices, texIndices;
-	vector<Material> materiales = loadMaterial(fname);
+	vector<Material> materiales = loadMaterial(path, fname);
+	vector < int > iPoligonos;
+	vector < string > nMateriales;
 	while (!(feof(fp)))
 	{
-		//read = fscanf(fp, "%c %f %f %f", &ch, &x, &y, &z);
 		read = fscanf(fp, "%s ", &ch);
 
 		if (ch[0] == 'v') {
@@ -239,10 +243,8 @@ tuple<int, vector<Poligono>, vector<Poligono>, vector<Poligono>, vector<Material
 				break;
 			}
 		} else if (ch[0] == 'f') {
-			//glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
 				
 			int v, vt, vn;
-			//glBegin(GL_POLYGON);
 			Poligono pVert, pNorm, pTex;
 			read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
 
@@ -272,29 +274,35 @@ tuple<int, vector<Poligono>, vector<Poligono>, vector<Poligono>, vector<Material
 			normalIndices.push_back(pNorm);
 			texIndices.push_back(pTex);
 
-			numVert++;
+			numPol++;
+		}
+		else if (ch[0] == 'u') {
+			read = fscanf(fp, "%[^\n]", &mat);
+			iPoligonos.push_back(numPol);
+			nMateriales.push_back(mat);
 		}
 
 	}
 	
-	//glEndList();
 	fclose(fp);
-	return make_tuple(numVert, vertexIndices, texIndices, normalIndices,materiales);
+	return make_tuple(numPol, vertexIndices, texIndices, normalIndices,materiales, iPoligonos, nMateriales);
 }
 
 class Modelo {
 public:
-	int numVert = 0;
+	int numPol = 0;
 	char* fname;
 	vector< Poligono > vertexIndices, texIndices, normalIndices;
 	vector< Material > materiales;
-	Modelo(char* filename) {
+	vector< int > iPoligonos;
+	vector< string > nMateriales;
+	Modelo(char* path, char* filename) {
 		fname = filename;
-		tie(numVert, vertexIndices, texIndices, normalIndices, materiales) = loadObj(fname);
+		tie(numPol, vertexIndices, texIndices, normalIndices, materiales, iPoligonos, nMateriales) = loadObj(path, fname);
 	}
 };
 
-Modelo HONK((char*)"modelos/honk/Honoka Kosaka (No Brand Girls)");
+Modelo HONK((char*)"modelos/honk/", (char*)"Honoka Kosaka (No Brand Girls)");
 
 void foto() {
 	glPushMatrix();
@@ -334,15 +342,31 @@ void drawModelo(Modelo modelo)
 {
 	glPushMatrix();
 	glColor3f(1.0f,1.0f,1.0f);
-	glBindTexture(GL_TEXTURE_2D, img);
-
+	//glBindTexture(GL_TEXTURE_2D, img);
+	int pol = 0;
 	vector<Poligono> vI = modelo.vertexIndices;
 	vector<Poligono> vN = modelo.normalIndices;
 	vector<Poligono> vT = modelo.texIndices;
 	vector<Poligono>::iterator itNor = vN.begin();
-	std::vector<Poligono>::iterator itTex = vT.begin();
-	for (std::vector<Poligono>::iterator itVec = vI.begin(); itVec != vI.end(); ++itVec, ++itNor, ++itTex) {
-		
+	vector<Poligono>::iterator itTex = vT.begin();
+	vector<int>::iterator itP;
+	for (vector<Poligono>::iterator itVec = vI.begin(); itVec != vI.end(); ++itVec, ++itNor, ++itTex) {
+
+		//modelo.iPoligonos.find
+		itP = find(modelo.iPoligonos.begin(), modelo.iPoligonos.end(), pol);
+		if (itP != modelo.iPoligonos.end()) {
+			int a = distance(modelo.iPoligonos.begin(), itP);
+
+			string s = modelo.nMateriales[a];
+			for (vector<Material>::iterator itMat = modelo.materiales.begin(); itMat != modelo.materiales.end(); ++itMat) {
+				Material mat = *itMat;
+				if (mat.name == s) {
+					glBindTexture(GL_TEXTURE_2D,mat.imagen);
+					break;
+				}
+			}
+		}
+
 		glBegin(GL_POLYGON);
 		Poligono pV = *itVec;
 		Poligono pN = *itNor;
@@ -366,6 +390,8 @@ void drawModelo(Modelo modelo)
 		glVertex3f(pV.puntos[3][0], pV.puntos[3][1], pV.puntos[3][2]);
 
 		glEnd();
+
+		pol++;
 	}
 
 	glPopMatrix();
@@ -1007,15 +1033,6 @@ void Display(void)
 }
 
 
-void initTex() {
-	img = SOIL_load_OGL_texture
-	(
-		"modelos/Honk/Hair.png",
-		SOIL_LOAD_AUTO,
-		SOIL_CREATE_NEW_ID,
-		SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_MULTIPLY_ALPHA
-	);
-}
 
 
 // Funci�n que se ejecuta cuando el sistema no esta ocupado
@@ -1090,7 +1107,7 @@ int main(int argc, char** argv)
 	preparaCamara();
 
 	//SUBSTITUIR EL FICHERO PARA CARGAR DIFERENTES MODELOS
-	initTex();
+	
 	//loadObj((char*)"modelos/pato.obj");
 
 	
