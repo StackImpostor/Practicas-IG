@@ -61,8 +61,8 @@ bool modelos = false;
 int mod = 1;
 
 GLuint img;
-GLuint elephant;
-float elephantrot;
+//GLuint elephant;
+//float elephantrot;
 char ch = '1';
 bool modelo_normal = false;
 
@@ -80,8 +80,101 @@ public:
 };
 
 
+class Material {
+public:
+	string name;
+	string imagen;
+	float Ka[3];
+	float Kd[3];
+	float Ks[3];
+	float Ns, Ni, d;
 
-tuple<int, vector<Poligono>, vector<Poligono>, vector<Poligono> > loadObj(char* fname)
+	Material(char* name, char* imagen, float Ka[3], float Kd[3], float Ks[3], float Ns, float Ni, float d) {
+		this->name = string(name);
+		this->imagen = string(imagen);
+		this->Ka[0] = Ka[0]; this->Ka[1] = Ka[1]; this->Ka[2] = Ka[2];
+		this->Kd[0] = Kd[0]; this->Kd[1] = Kd[1]; this->Kd[2] = Kd[2];
+		this->Ks[0] = Ks[0]; this->Ks[1] = Ks[1]; this->Ks[2] = Ks[2];
+		this->Ns = Ns;
+		this->Ni = Ni;
+		this->d = d;
+	}
+};
+
+vector< Material > loadMaterial(char* fname) {
+	FILE* fp;
+	int read;
+	GLfloat x, y, z;
+
+	char name[20];
+	char imagen[20];
+	float Ka[3];
+	float Kd[3];
+	float Ks[3];
+	float Ns = 128.0f, Ni = 1.0f, d = 1.0f;
+	char ch[100];
+	fp = fopen(((string)fname + ".mtl").c_str(), "r");
+	if (!fp)
+	{
+		printf("can't open file %s\n", fname);
+		exit(1);
+	}
+	bool primero = true;
+
+	vector< Material > materiales;
+
+	while (!(feof(fp)))
+	{
+		read = fscanf(fp, "%s ", &ch);
+
+		if (ch[0] == 'K') {
+			read = fscanf(fp, "%f %f %f", &x, &y, &z);
+			switch (ch[1]) {
+			case 'a':
+				Ka[0] = x;
+				Ka[1] = y;
+				Ka[2] = z;
+				break;
+			case 'd':
+				Kd[0] = x;
+				Kd[1] = y;
+				Kd[2] = z;
+				break;
+			case 's':
+				Ks[0] = x;
+				Ks[1] = y;
+				Ks[2] = z;
+				break;
+			}
+		}
+		else if (ch[0] == 'N') {
+			read = fscanf(fp, "%f", &x);
+			if (ch[1] == 's') {
+				Ns = x;
+			}
+			else {
+				Ni = x;
+			}
+		}
+		else if (ch[0] == 'd') {
+			read = fscanf(fp, "%f", &d);
+		}
+		else if (ch[0] == 'n') {
+			if (!primero) {
+				materiales.push_back(Material(name, imagen, Ka, Kd, Ks, Ns, Ni, d));
+			}
+			read = fscanf(fp, "%[^\n]", &name);
+			primero = false;
+		}
+		else if (ch[0] == 'm') {
+			read = fscanf(fp, "%[^\n]", &imagen);
+		}
+	}
+	materiales.push_back(Material(name, imagen, Ka, Kd, Ks, Ns, Ni, d));
+	return materiales;
+}
+
+tuple<int, vector<Poligono>, vector<Poligono>, vector<Poligono>, vector<Material> > loadObj(char* fname)
 {
 
 	GLuint id[1] = { 1 };
@@ -95,28 +188,28 @@ tuple<int, vector<Poligono>, vector<Poligono>, vector<Poligono> > loadObj(char* 
 	float normal[25000][3];
 	float textura[25000][2];
 
-	elephant = glGenLists(1);
-	fp = fopen(fname, "r");
+	//elephant = glGenLists(1);
+	//char* nose2 = (char*)".obj";
+	//char nose[40];
+	//strcat(nose, fname);
+	//strcat(nose, ".obj");
+	//string nose ((string)fname + ".obj");
+	fp = fopen(((string)fname + ".obj").c_str(), "r");
 	if (!fp)
 	{
 		printf("can't open file %s\n", fname);
 		exit(1);
 	}
-	glPointSize(2.0);
-	glNewList(elephant, GL_COMPILE);
-	
-	glPushMatrix();
-
-
+	//glNewList(elephant, GL_COMPILE);
 
 	glBindTexture(GL_TEXTURE_2D, img);
 
-	//glBegin(GL_POINTS);
 	int vcount = 0;
 	int ncount = 0;
 	int tcount = 0;
 	int numVert = 0;
 	vector<Poligono> vertexIndices, normalIndices, texIndices;
+	vector<Material> materiales = loadMaterial(fname);
 	while (!(feof(fp)))
 	{
 		//read = fscanf(fp, "%c %f %f %f", &ch, &x, &y, &z);
@@ -145,53 +238,48 @@ tuple<int, vector<Poligono>, vector<Poligono>, vector<Poligono> > loadObj(char* 
 				tcount++;
 				break;
 			}
+		} else if (ch[0] == 'f') {
+			//glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
+				
+			int v, vt, vn;
+			//glBegin(GL_POLYGON);
+			Poligono pVert, pNorm, pTex;
+			read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+
+			pVert.setPunto(0, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+			pNorm.setPunto(0, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+			pTex.setPunto(0, textura[vt - 1][0], textura[vt - 1][1],0);
+
+			read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+
+			pVert.setPunto(1, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+			pNorm.setPunto(1, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+			pTex.setPunto(1, textura[vt - 1][0], textura[vt - 1][1],0);
+
+			read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+
+			pVert.setPunto(2, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+			pNorm.setPunto(2, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+			pTex.setPunto(2, textura[vt - 1][0], textura[vt - 1][1],0);
+
+			read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+
+			pVert.setPunto(3, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+			pNorm.setPunto(3, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+			pTex.setPunto(3, textura[vt - 1][0], textura[vt - 1][1],0);
+
+			vertexIndices.push_back(pVert);
+			normalIndices.push_back(pNorm);
+			texIndices.push_back(pTex);
+
+			numVert++;
 		}
 
-			else if (ch[0] == 'f') {
-				//glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
-				
-				int v, vt, vn;
-				//glBegin(GL_POLYGON);
-				Poligono pVert, pNorm, pTex;
-				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-
-				pVert.setPunto(0, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
-				pNorm.setPunto(0, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-				pTex.setPunto(0, textura[vt - 1][0], textura[vt - 1][1],0);
-
-				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-
-				pVert.setPunto(1, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
-				pNorm.setPunto(1, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-				pTex.setPunto(1, textura[vt - 1][0], textura[vt - 1][1],0);
-
-				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-
-				pVert.setPunto(2, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
-				pNorm.setPunto(2, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-				pTex.setPunto(2, textura[vt - 1][0], textura[vt - 1][1],0);
-
-				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-
-				pVert.setPunto(3, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
-				pNorm.setPunto(3, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-				pTex.setPunto(3, textura[vt - 1][0], textura[vt - 1][1],0);
-
-				vertexIndices.push_back(pVert);
-				normalIndices.push_back(pNorm);
-				texIndices.push_back(pTex);
-
-				numVert++;
-			}
-
-			
-		//glEnd();
 	}
 	
-	glPopMatrix();
-	glEndList();
+	//glEndList();
 	fclose(fp);
-	return make_tuple(numVert, vertexIndices, texIndices, normalIndices );
+	return make_tuple(numVert, vertexIndices, texIndices, normalIndices,materiales);
 }
 
 class Modelo {
@@ -199,13 +287,14 @@ public:
 	int numVert = 0;
 	char* fname;
 	vector< Poligono > vertexIndices, texIndices, normalIndices;
+	vector< Material > materiales;
 	Modelo(char* filename) {
 		fname = filename;
-		tie(numVert, vertexIndices, texIndices, normalIndices) = loadObj(fname);
+		tie(numVert, vertexIndices, texIndices, normalIndices, materiales) = loadObj(fname);
 	}
 };
 
-Modelo HONK((char*)"modelos/honk.obj");
+Modelo HONK((char*)"modelos/honk/Honoka Kosaka (No Brand Girls)");
 
 void foto() {
 	glPushMatrix();
@@ -921,7 +1010,7 @@ void Display(void)
 void initTex() {
 	img = SOIL_load_OGL_texture
 	(
-		"modelos/Honk/Face.png",
+		"modelos/Honk/Hair.png",
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_MULTIPLY_ALPHA
