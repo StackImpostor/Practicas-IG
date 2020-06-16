@@ -4,10 +4,12 @@
 //David Cantero
 //Joan Jorquera
 ////////////////////////////////////////////////////
+#include <Windows.h>
 #include <GL/glut.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <iostream>
+#include "Simple OpenGL Image Library/src/SOIL.h"
 const int W_WIDTH = 700; // Tama�o incial de la ventana
 const int W_HEIGHT = 700;
 const double pi = 3.1415926535897;
@@ -62,12 +64,34 @@ bool modelo_normal = false;
 
 void loadObj(char* fname)
 {
+
+	GLuint tex_2d = SOIL_load_OGL_texture
+	(
+		"Honk\face.png",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+	);
+
+	GLuint id[1] = { 1 };
+
+	glGenTextures(1, id);
+
+	glBindTexture(GL_TEXTURE_2D, id[0]);
+
+	FILE* img;
+	img = fopen((char*)"modelos\Honk\Face.png", "rb");
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 512, 512, 0, GL_RGBA, GL_UNSIGNED_BYTE, img);
+
+
 	FILE* fp;
 	int read;
 	GLfloat x, y, z;
 	char ch[80];
-	float vertices[40000][3];
-	float normal[40000][3];
+	float vertices[25000][3];
+	float normal[25000][3];
+	float textura[25000][2];
 
 	elephant = glGenLists(1);
 	fp = fopen(fname, "r");
@@ -78,11 +102,12 @@ void loadObj(char* fname)
 	}
 	glPointSize(2.0);
 	glNewList(elephant, GL_COMPILE);
-	{
+	
 		glPushMatrix();
 		//glBegin(GL_POINTS);
 		int vcount = 0;
 		int ncount = 0;
+		int tcount = 0;
 		while (!(feof(fp)))
 		{
 			//read = fscanf(fp, "%c %f %f %f", &ch, &x, &y, &z);
@@ -92,6 +117,7 @@ void loadObj(char* fname)
 				read = fscanf(fp, "%f %f %f", &x, &y, &z);
 				switch (ch[1]) {
 				case '\0':
+					
 					vertices[vcount][0] = x;
 					vertices[vcount][1] = y;
 					vertices[vcount][2] = z;
@@ -103,24 +129,56 @@ void loadObj(char* fname)
 					normal[ncount][2] = z;
 					ncount++;
 					break;
+
+				case 't':
+					textura[tcount][0] = x;
+					textura[tcount][1] = y;
+					tcount++;
+					break;
 				}
 			}
-			else if (ch[0] == 'f') {
-				int v, vt, vn;
+
+				else if (ch[0] == 'f') {
+
+				glBindTexture(GL_TEXTURE_2D, 1);
+
 				glBegin(GL_POLYGON);
+
+			
+
+
+				float MatAmbient[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+				float MatDiffuse[] = { 0.64f, 0.64f, 0.64f, 1.0f };
+				GLfloat mat_specular[] = { 0.5, 0.5, 0.5, 0.5 };
+				GLfloat mat_shininess[] = { 96.078431 };
+
+				glMaterialfv(GL_FRONT, GL_AMBIENT, MatAmbient);
+				glMaterialfv(GL_FRONT, GL_DIFFUSE, MatDiffuse);
+				glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+				glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+
+
+			
+				int v, vt, vn;
+				
 				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+				glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
+				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				
+
+				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+				glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
 				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
 				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
 
 				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+				glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
 				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
 				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
 
 				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
-
-				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+				glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
 				glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
 				glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
 				glEnd();
@@ -128,7 +186,7 @@ void loadObj(char* fname)
 
 		}
 		//glEnd();
-	}
+	
 
 	glPopMatrix();
 	glEndList();
@@ -594,7 +652,7 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 			loadObj((char*)"modelos/pato.obj");
 			break;
 		case 2:
-			loadObj((char*)"modelos/cat.obj");
+			//loadObj((char*)"modelos/cat.obj");
 			break;
 		case 3:
 			loadObj((char*)"modelos/honk.obj");
@@ -973,6 +1031,8 @@ int main(int argc, char** argv)
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(W_WIDTH, W_HEIGHT);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE);
 
 	//Codigo copiado para las luces
 	/*GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };

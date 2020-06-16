@@ -151,6 +151,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Etapa6.cpp" />
+    <ClCompile Include="Simple OpenGL Image Library\src\SOIL.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Simple OpenGL Image Library\src\SOIL.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
