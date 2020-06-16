@@ -202,10 +202,11 @@ void preparaCamara() {
 
 void mueveCamara() {
 	float incAngulo = pi / 60;
+	float speed = 0.2;
 	if (teclas[0]) {
 		if (modo == LIBRE) {
-			float cZ = 0.1 * -cos(anguloX);
-			float cX = 0.1 * sin(anguloX);
+			float cZ = speed * -cos(anguloX);
+			float cX = speed * sin(anguloX);
 
 			camZ += cZ;
 			posZ += cZ;
@@ -218,8 +219,8 @@ void mueveCamara() {
 	}
 	if (teclas[1]) {
 		if (modo == LIBRE) {
-			float cZ = 0.1 * -cos(anguloX - pi / 2);
-			float cX = 0.1 * sin(anguloX - pi / 2);
+			float cZ = speed * -cos(anguloX - pi / 2);
+			float cX = speed * sin(anguloX - pi / 2);
 
 			camZ += cZ;
 			posZ += cZ;
@@ -232,8 +233,8 @@ void mueveCamara() {
 	}
 	if (teclas[2]) {
 		if (modo == LIBRE) {
-			float cZ = -0.1 * -cos(anguloX);
-			float cX = -0.1 * sin(anguloX);
+			float cZ = -speed * -cos(anguloX);
+			float cX = -speed * sin(anguloX);
 
 			camZ += cZ;
 			posZ += cZ;
@@ -246,8 +247,8 @@ void mueveCamara() {
 	}
 	if (teclas[3]) {
 		if (modo == LIBRE) {
-			float cZ = -0.1 * -cos(anguloX - pi / 2);
-			float cX = -0.1 * sin(anguloX - pi / 2);
+			float cZ = -speed * -cos(anguloX - pi / 2);
+			float cX = -speed * sin(anguloX - pi / 2);
 
 			camZ += cZ;
 			posZ += cZ;
@@ -260,7 +261,7 @@ void mueveCamara() {
 	}
 	if (teclas[4]) {
 		if (modo == LIBRE) {
-			float cY = -0.1;
+			float cY = -speed;
 
 			camY += cY;
 			posY += cY;
@@ -268,7 +269,7 @@ void mueveCamara() {
 	}
 	if (teclas[5]) {
 		if (modo == LIBRE) {
-			float cY = 0.1;
+			float cY = speed;
 			camY += cY;
 			posY += cY;
 		}
