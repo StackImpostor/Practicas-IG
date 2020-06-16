@@ -9,6 +9,8 @@
 #include <GL/glu.h>
 #include <iostream>
 #include <vector>
+#include "SOIL2/SOIL2.h"
+
 const int W_WIDTH = 700; // Tama�o incial de la ventana
 const int W_HEIGHT = 700;
 const double pi = 3.1415926535897;
