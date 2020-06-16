@@ -9,7 +9,10 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <iostream>
+#include <vector>
+#include <tuple>
 #include "SOIL2/SOIL2.h"
+
 const int W_WIDTH = 700; // Tama�o incial de la ventana
 const int W_HEIGHT = 700;
 const double pi = 3.1415926535897;
@@ -63,16 +66,31 @@ float elephantrot;
 char ch = '1';
 bool modelo_normal = false;
 
-void loadObj(char* fname)
+using namespace std;
+
+
+class Poligono {
+public:
+	float puntos[4][3];
+	void setPunto(int p, float x, float y, float z) {
+		puntos[p][0] = x;
+		puntos[p][1] = y;
+		puntos[p][2] = z;
+	}
+};
+
+
+
+tuple<int, vector<Poligono>, vector<Poligono>, vector<Poligono> > loadObj(char* fname)
 {
 
 	GLuint id[1] = { 1 };
 
-
 	FILE* fp;
 	int read;
 	GLfloat x, y, z;
-	char ch[80];
+
+	char ch[100];
 	float vertices[25000][3];
 	float normal[25000][3];
 	float textura[25000][2];
@@ -97,6 +115,8 @@ void loadObj(char* fname)
 	int vcount = 0;
 	int ncount = 0;
 	int tcount = 0;
+	int numVert = 0;
+	vector<Poligono> vertexIndices, normalIndices, texIndices;
 	while (!(feof(fp)))
 	{
 		//read = fscanf(fp, "%c %f %f %f", &ch, &x, &y, &z);
@@ -128,42 +148,63 @@ void loadObj(char* fname)
 		}
 
 			else if (ch[0] == 'f') {
-
-			glBegin(GL_POLYGON);
-						
-			int v, vt, vn;
+				//glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
 				
-			read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-			glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
-			glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-			glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
-				
+				int v, vt, vn;
+				//glBegin(GL_POLYGON);
+				Poligono pVert;
+				Poligono pNorm;
+				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
 
-			read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-			glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
-			glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-			glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				pVert.setPunto(0, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				pNorm.setPunto(0, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
 
-			read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-			glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
-			glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-			glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
 
-			read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
-			glTexCoord2f(textura[vt - 1][0], textura[vt - 1][1]);
-			glNormal3f(normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
-			glVertex3f(vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
-			glEnd();
-		}
+				pVert.setPunto(1, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				pNorm.setPunto(1, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
 
+				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+
+				pVert.setPunto(2, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				pNorm.setPunto(2, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+
+				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
+
+				pVert.setPunto(3, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
+				pNorm.setPunto(3, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+
+				vertexIndices.push_back(pVert);
+				normalIndices.push_back(pNorm);
+
+				numVert++;
+			}
+
+			
+		//glEnd();
 	}
-	//glEnd();
 	
-
 	glPopMatrix();
 	glEndList();
 	fclose(fp);
+	return make_tuple(numVert, vertexIndices, texIndices, normalIndices );
 }
+
+class Modelo {
+public:
+	int numVert = 0;
+	char* fname;
+	vector< Poligono > vertexIndices, texIndices, normalIndices;
+	Modelo(char* filename) {
+		fname = filename;
+		tie(numVert, vertexIndices, texIndices, normalIndices) = loadObj(fname);
+	}
+	/*float vertPol[1][4][3];
+	float normalPol[1][4][3];
+	float texturePol[1][4][3];*/
+};
+
+Modelo HONK((char*)"modelos/honk.obj");
 
 void foto() {
 	glPushMatrix();
@@ -199,33 +240,34 @@ void foto() {
 	glPopMatrix();
 }
 
-void drawModelo()
+void drawModelo(Modelo modelo)
 {
 	glPushMatrix();
-	glTranslated(25, 0, 0);
-	if (mod != 3) {
-		if (modelo_normal) {
-			glTranslated(-20, 0, 0);
-			glScalef(0.05, 0.05, 0.05);
-		}
-		else {
-			glScalef(0.5, 0.5, 0.5);
-		}
 
-		glRotatef(-90, 1, 0, 0);
-		glRotatef(-90, 0, 0, 1);
-	}
-	else {
-		if (modelo_normal) {
-			glTranslated(-20, 0, 0);
-		}
-		glRotatef(-90, 0, 1, 0);
-		//glScalef(0.1, 0.1, 0.1);
-	}
-	//glColor3f(1.0, 0.23, 0.27);
-	glColor3f(1.0, 1.0, 1.0);
+	std::vector<Poligono> vI = modelo.vertexIndices;
+	std::vector<Poligono> vN = modelo.normalIndices;
+	std::vector<Poligono>::iterator itNor = vN.begin();
+	for (std::vector<Poligono>::iterator itVec = vI.begin(); itVec != vI.end(); ++itVec, ++itNor) {
+		
+		glBegin(GL_POLYGON);
+		Poligono pV = *itVec;
+		Poligono pN = *itNor;
 
-	glCallList(elephant);
+ 		glNormal3f(pN.puntos[0][0], pN.puntos[0][1], pN.puntos[0][2]);
+		glVertex3f(pV.puntos[0][0], pV.puntos[0][1], pV.puntos[0][2]);
+
+
+		glNormal3f(pN.puntos[1][0], pN.puntos[1][1], pN.puntos[1][2]);
+		glVertex3f(pV.puntos[1][0], pV.puntos[1][1], pV.puntos[1][2]);
+
+		glNormal3f(pN.puntos[2][0], pN.puntos[2][1], pN.puntos[2][2]);
+		glVertex3f(pV.puntos[2][0], pV.puntos[2][1], pV.puntos[2][2]);
+
+		glNormal3f(pN.puntos[3][0], pN.puntos[3][1], pN.puntos[3][2]);
+		glVertex3f(pV.puntos[3][0], pV.puntos[3][1], pV.puntos[3][2]);
+
+		glEnd();
+	}
 
 	glPopMatrix();
 }
@@ -357,111 +399,6 @@ void InitWindow(GLfloat Width, GLfloat Height) {
 	}
 	glMatrixMode(GL_MODELVIEW);
 }
-
-//Movimiento objetos
-int cubo = 1;
-bool incremento = true;
-int i = 1;
-
-float cone = 1;
-bool loong = true;
-
-float torus = 0;
-bool trans = true;
-float distancia = 0.7;
-bool gusanete = true;
-
-//Transformaciones de los objetos
-void rotacionCubo() {
-
-	if (incremento) {
-		if (cubo == 90) {
-			if (i == 5) {
-				incremento = false;
-			}
-			else {
-				i++;
-				cubo = 0;
-			}
-		}
-		else {
-			cubo += 1;
-		}
-	}
-	else {
-		if (cubo == 0) {
-			if (i == 1) {
-				incremento = true;
-			}
-			else {
-				i--;
-				cubo = 90;
-			}
-		}
-		else {
-			cubo += -1;
-		}
-	}
-	glTranslatef(-0.25 - (i * 0.5), 0, 0.5);
-	glRotatef(cubo, 0, 0, 1);
-	glTranslatef(0.25, 0.25, 0);
-}
-
-void looongCone() {
-	if (loong) {
-		cone += 0.01;
-		if (cone >= 3) {
-			loong = false;
-		}
-	}
-	else {
-		cone += -0.01;
-		if (cone <= 0.5) {
-			loong = true;
-		}
-	}
-	glScalef(1, 1, cone);
-}
-
-void destruirDonut() {
-	if (trans) {
-		torus += 0.008;
-		if (torus >= 0.0) {
-			trans = false;
-		}
-		if (gusanete) {
-			distancia += 0.005;
-			if (distancia >= 2.9) {
-				gusanete = false;
-			}
-		}
-		else {
-			distancia -= 0.005;
-			if (distancia <= 0.7) {
-				gusanete = true;
-			}
-		}
-
-	}
-	else {
-		torus -= 0.008;
-		if (torus <= -0.75) {
-			trans = true;
-		}
-	}
-
-	glTranslatef(distancia, 0.15, -distancia);
-	glRotatef(90, 1.0f, 0, 0);
-	float shear[] = {
-   1, torus, 0, 0,
-   torus, 1, 0, 0,
-	0, 0, 1, 0,
-	0, 0, 0, 1 };
-	glMultMatrixf(shear);
-
-
-}
-
 
 
 void myResize(int width, int height) {
@@ -656,13 +593,13 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 		}
 		switch (mod) {
 		case 1:
-			loadObj((char*)"modelos/pato.obj");
+			//loadObj((char*)"modelos/pato.obj");
 			break;
 		case 2:
 			//loadObj((char*)"modelos/cat.obj");
 			break;
 		case 3:
-			loadObj((char*)"modelos/honk.obj");
+			//loadObj((char*)"modelos/honk.obj");
 			break;
 		}
 		break;
@@ -812,9 +749,6 @@ void Display(void)
 		glutWireSphere(0.05, 10, 10);
 		glPopMatrix();
 	}
-	/*glEnable(GL_LIGHT1);
-	glEnable(GL_LIGHT2);*/
-
 
 	//Ejes de cordenadas
 	if (muestraReferencias) {
@@ -822,23 +756,23 @@ void Display(void)
 
 		glBegin(GL_LINES);
 		glColor3f(1.0f, 0, 0);
-		glVertex3f(-20, 0, 0);
-		glVertex3f(20, 0, 0);
+		glVertex3f(-100, 0, 0);
+		glVertex3f(100, 0, 0);
 		glEnd();
 
 		glBegin(GL_LINES);
 		glColor3f(0, 1.0f, 0);
-		glVertex3f(0, -20, 0);
-		glVertex3f(0, 20, 0);
+		glVertex3f(0, -100, 0);
+		glVertex3f(0, 100, 0);
 		glEnd();
 
 		glBegin(GL_LINES);
 		glColor3f(0, 0, 1.0f);
-		glVertex3f(0, 0, -20);
-		glVertex3f(0, 0, 20);
+		glVertex3f(0, 0, -100);
+		glVertex3f(0, 0, 100);
 		glEnd();
 
-		for (float i = -20; i <= 20; i += 0.25) {
+		for (float i = -100; i <= 100; i++) {
 			if (i != 0) {
 				if (i - (int)i == 0) {
 					glLineWidth(2);
@@ -849,13 +783,13 @@ void Display(void)
 
 				glBegin(GL_LINES);
 				glColor3f(0, 0, 0);
-				glVertex3f(i, 0.0, -20);
-				glVertex3f(i, 0.0, 20);
+				glVertex3f(i, 0.0, -100);
+				glVertex3f(i, 0.0, 100);
 				glEnd();
 				glBegin(GL_LINES);
 				glColor3f(0, 0, 0);
-				glVertex3f(-20, 0.0, i);
-				glVertex3f(20, 0.0, i);
+				glVertex3f(-100, 0.0, i);
+				glVertex3f(100, 0.0, i);
 				glEnd();
 			}
 		}
@@ -883,90 +817,7 @@ void Display(void)
 
 
 
-	//Teapot
-	glPushMatrix();
-
-	glTranslatef(-0.5, 0.0, -0.8);
-
-	glRotatef(fAngulo * 5, 0.0f, 1.0f, 0.0f);
-
-	glTranslatef(-0.40, 0.7, 0);
-	glRotatef(30, 0.0f, 0.0f, 1.0f);
-	//glTranslatef(1, 0, 1);
-
-	glColor3f(0.5, 0.5, 0.5);
-	glutSolidTeapot(0.4);
-	//glColor3f(0, 0, 0);
-	//glutWireTeapot(0.4);
-
-
-	glPopMatrix();
-
-	//theCube
-	glPushMatrix();
-
-	rotacionCubo();
-
-	glColor3f(0.5, 0.5, 0.5);
-
-	glutSolidCube(0.5);
-
-	//glColor3f(0, 0, 0);
-	//glutWireCube(0.5);
-
-	glPopMatrix();
-
-	//Torus
-	glPushMatrix();
-
-	destruirDonut();
-
-	//glTranslatef(0.7, 0.15, -0.7);
-
-
-	glColor3f(0.5, 0.5, 0.5);
-	glutSolidTorus(0.15, 0.3, 50, 50);
-
-	//glColor3f(0, 0, 0);
-	//glutWireTorus(0.15, 0.3, 50, 50);
-
-	glPopMatrix();
-
-	//Cone
-	glPushMatrix();
-	glTranslatef(0.5, 0, 0.5);
-	glRotatef(-90, 1, 0, 0);
-
-	looongCone();
-
-	glColor3f(0.5, 0.5, 0.5);
-	glutSolidCone(0.2, 1, 50, 50);
-
-	//glColor3f(0, 0, 0);
-	//glutWireCone(0.2, 1, 50, 50);
-
-	glPopMatrix();
-	/*
-	glBegin(GL_POLYGON);
-	glColor3f(0.5f, 0.5f, 1.0f);
-	if (normal) {
-		glNormal3f(0, 1, 0);
-	}
-	glVertex3f(-2, 1.01, -2);
-	if (normal) {
-		glNormal3f(0, 1, 0);
-	}
-	glVertex3f(2, 1.01, -2);
-	if (normal) {
-		glNormal3f(0, 1, 0);
-	}
-	glVertex3f(2, 1.01, 2);
-	if (normal) {
-		glNormal3f(0, 1, 0);
-		std::cout << "normal: "<< normal <<"\n";
-	}
-	glVertex3f(-2, 1.01, 2);
-	glEnd();*/
+	
 
 	//Dibujamos el "suelo" que es trans
 	if (muestraReferencias) {
@@ -978,15 +829,15 @@ void Display(void)
 		glBegin(GL_POLYGON);
 		glColor4f(0.5f, 0.5f, 2.0f, 0.5f);
 		//glColor3f(0.5f, 0.5f, 1.0f);
-		glVertex3f(-20, -0.01, -20);
-		glVertex3f(20, -0.01, -20);
-		glVertex3f(20, -0.01, 20);
-		glVertex3f(-20, -0.01, 20);
+		glVertex3f(-100, -0.01, -100);
+		glVertex3f(100, -0.01, -100);
+		glVertex3f(100, -0.01, 100);
+		glVertex3f(-100, -0.01, 100);
 		glNormal3d(0, 1, 0);
 		glEnd();
 	}
 
-	if (modelos) {
+	if (false) {
 		float MatAmbient[] = { 1.1f, 1.1f, 1.1f, 0.0f };
 		float MatDiffuse[] = { 0.0f, 0.0f, 0.0f, 0.0f };
 		GLfloat mat_specular[] = { 0.0, 0.0, 0.0, 0.0 };
@@ -997,14 +848,63 @@ void Display(void)
 		glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 		glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
 		//dibuja el modelo cargado
-		drawModelo();
 	}
 
 	foto();
 
+	//Modelos de la escena
+	//Mesa
+
+	drawModelo(HONK);
+
+
+	//silla
+	/*glPushMatrix();
+	glScalef( 0.17, 0.17, 0.17);
+	glRotatef(90, 0, 0, 1); 
+	glTranslatef(-10.1, -150, 0);
+	glPopMatrix();*/
+	//plato (nope, este modelo es gigante o algo, laggea que flipas)
+	/*loadObj((char*)"models/Plate/plate.obj");
+	glPushMatrix();
+	glScalef(0.005, 0.005, 0.005);
+	glRotatef(90, 0, 0, 1);
+	glTranslatef(0, 0, 0);
+	drawModelo();
+	glPopMatrix();*/
+	//botella (tambien da problemas a la hora de cargar)
+	/*loadObj((char*)"models/bottle/bottle_mid.obj");
+	glPushMatrix();
+	glScalef(0.17, 0.17, 0.17);
+	glRotatef(90, 0, 0.1, 1); //"levantada y un poco torcida, para que no quede paralela a la mesa
+	glTranslatef(-10.1, -150, 0);
+	drawModelo();
+	glPopMatrix();*/
+
+	//fork
+	/*loadObj((char*)"models/Fork/Fork.obj");
+	glPushMatrix();
+	glScalef(1,1,1);
+	glRotatef(90, 0, 0.1, 1);
+	glTranslatef(-10.1, -150, 0);
+	drawModelo();
+	glPopMatrix();*/
+
+	//tassó (no funcona?)
+	/*glPushMatrix();
+	glScalef(10, 10, 10);
+	glRotatef(0, 0, 0, 0);
+	glTranslatef(0, 0, 0);
+	glPopMatrix();*/
+
+	//cuchillo
+	/*glPushMatrix();
+	glScalef(0.01, 0.01, 0.01);
+	glRotatef(0, 0, 0, 0);
+	glTranslatef(0, 0, 0);
+	glPopMatrix();*/
 
 	glPopMatrix();
-
 	glutSwapBuffers();
 }
 
@@ -1085,26 +985,17 @@ int main(int argc, char** argv)
 
 
 	// El color de fondo ser� el negro (RGBA, RGB + Alpha channel)
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	glClearColor(0, 0, 0, 0);
 	//glOrtho(-1.0, 1.0f, -1.0, 1.0f, -100.0, 100.0f);
 
-
-	/*glMatrixMode(GL_PROJECTION);
-	//gluLookAt(0.5, 0.5, 0, 0, 0, 0, 0, 1, 0);
-	glLoadIdentity();
-	gluPerspective(30, p_width/p_height, 0.1, 100);
-	//glFrustum(-0.05, 0.05, -0.05, 0.05, 0.2, 100);
-
-	glMatrixMode(GL_MODELVIEW);*/
 	InitWindow(W_WIDTH, W_HEIGHT);
 	preparaCamara();
 
 	//SUBSTITUIR EL FICHERO PARA CARGAR DIFERENTES MODELOS
 	initTex();
-	loadObj((char*)"modelos/pato.obj");
+	//loadObj((char*)"modelos/pato.obj");
 
 	
-
 	// Comienza la ejecuci�n del core de GLUT
 	glutMainLoop();
 	return 0;
