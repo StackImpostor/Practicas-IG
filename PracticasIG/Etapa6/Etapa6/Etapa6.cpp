@@ -152,30 +152,34 @@ tuple<int, vector<Poligono>, vector<Poligono>, vector<Poligono> > loadObj(char* 
 				
 				int v, vt, vn;
 				//glBegin(GL_POLYGON);
-				Poligono pVert;
-				Poligono pNorm;
+				Poligono pVert, pNorm, pTex;
 				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
 
 				pVert.setPunto(0, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
 				pNorm.setPunto(0, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				pTex.setPunto(0, textura[vt - 1][0], textura[vt - 1][1],0);
 
 				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
 
 				pVert.setPunto(1, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
 				pNorm.setPunto(1, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				pTex.setPunto(1, textura[vt - 1][0], textura[vt - 1][1],0);
 
 				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
 
 				pVert.setPunto(2, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
 				pNorm.setPunto(2, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				pTex.setPunto(2, textura[vt - 1][0], textura[vt - 1][1],0);
 
 				read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
 
 				pVert.setPunto(3, vertices[v - 1][0], vertices[v - 1][1], vertices[v - 1][2]);
 				pNorm.setPunto(3, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
+				pTex.setPunto(3, textura[vt - 1][0], textura[vt - 1][1],0);
 
 				vertexIndices.push_back(pVert);
 				normalIndices.push_back(pNorm);
+				texIndices.push_back(pTex);
 
 				numVert++;
 			}
@@ -199,9 +203,6 @@ public:
 		fname = filename;
 		tie(numVert, vertexIndices, texIndices, normalIndices) = loadObj(fname);
 	}
-	/*float vertPol[1][4][3];
-	float normalPol[1][4][3];
-	float texturePol[1][4][3];*/
 };
 
 Modelo HONK((char*)"modelos/honk.obj");
@@ -243,26 +244,35 @@ void foto() {
 void drawModelo(Modelo modelo)
 {
 	glPushMatrix();
+	glColor3f(1.0f,1.0f,1.0f);
+	glBindTexture(GL_TEXTURE_2D, img);
 
-	std::vector<Poligono> vI = modelo.vertexIndices;
-	std::vector<Poligono> vN = modelo.normalIndices;
-	std::vector<Poligono>::iterator itNor = vN.begin();
-	for (std::vector<Poligono>::iterator itVec = vI.begin(); itVec != vI.end(); ++itVec, ++itNor) {
+	vector<Poligono> vI = modelo.vertexIndices;
+	vector<Poligono> vN = modelo.normalIndices;
+	vector<Poligono> vT = modelo.texIndices;
+	vector<Poligono>::iterator itNor = vN.begin();
+	std::vector<Poligono>::iterator itTex = vT.begin();
+	for (std::vector<Poligono>::iterator itVec = vI.begin(); itVec != vI.end(); ++itVec, ++itNor, ++itTex) {
 		
 		glBegin(GL_POLYGON);
 		Poligono pV = *itVec;
 		Poligono pN = *itNor;
+		Poligono pT = *itTex;
 
+
+		glTexCoord2f(pT.puntos[0][0], pT.puntos[0][1]);
  		glNormal3f(pN.puntos[0][0], pN.puntos[0][1], pN.puntos[0][2]);
 		glVertex3f(pV.puntos[0][0], pV.puntos[0][1], pV.puntos[0][2]);
 
-
+		glTexCoord2f(pT.puntos[1][0], pT.puntos[1][1]);
 		glNormal3f(pN.puntos[1][0], pN.puntos[1][1], pN.puntos[1][2]);
 		glVertex3f(pV.puntos[1][0], pV.puntos[1][1], pV.puntos[1][2]);
 
+		glTexCoord2f(pT.puntos[2][0], pT.puntos[2][1]);
 		glNormal3f(pN.puntos[2][0], pN.puntos[2][1], pN.puntos[2][2]);
 		glVertex3f(pV.puntos[2][0], pV.puntos[2][1], pV.puntos[2][2]);
 
+		glTexCoord2f(pT.puntos[3][0], pT.puntos[3][1]);
 		glNormal3f(pN.puntos[3][0], pN.puntos[3][1], pN.puntos[3][2]);
 		glVertex3f(pV.puntos[3][0], pV.puntos[3][1], pV.puntos[3][2]);
 
@@ -399,7 +409,6 @@ void InitWindow(GLfloat Width, GLfloat Height) {
 	}
 	glMatrixMode(GL_MODELVIEW);
 }
-
 
 void myResize(int width, int height) {
 	if (height == 0) height = 1; //Para no dividir por 0
@@ -912,7 +921,7 @@ void Display(void)
 void initTex() {
 	img = SOIL_load_OGL_texture
 	(
-		"modelos\\Honk\\Face.png",
+		"modelos/Honk/Face.png",
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_MULTIPLY_ALPHA
