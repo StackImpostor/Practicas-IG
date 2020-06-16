@@ -15,7 +15,7 @@
 
 const int W_WIDTH = 700; // Tama�o incial de la ventana
 const int W_HEIGHT = 700;
-const double pi = 3.1415926535897;
+const float pi = 3.141592f;
 GLfloat fAngulo; // Variable que indica el �ngulo de rotaci�n de los ejes. 
 float p_width = W_WIDTH, p_height = W_HEIGHT;
 float fcount = 0;
@@ -294,7 +294,7 @@ void preparaCamara() {
 		gluLookAt(-4, 0, 0, 0, 0, 0, 0, 1, 0);
 		break;
 	case CIRCULO:
-		gluLookAt(sin(fcount) * radius, 3, cos(fcount) * radius, 0, 0, 0, 0, 1, 0);
+		gluLookAt((double)sin(fcount) * radius, 3, (double)cos(fcount) * radius, 0, 0, 0, 0, 1, 0);
 		fcount += 0.005f;
 		break;
 	case ESFERICO:
@@ -308,7 +308,7 @@ void preparaCamara() {
 
 void mueveCamara() {
 	float incAngulo = pi / 60;
-	float speed = 0.2;
+	float speed = 0.2f;
 	if (teclas[0]) {
 		if (modo == LIBRE) {
 			float cZ = speed * -cos(anguloX);
@@ -383,7 +383,7 @@ void mueveCamara() {
 }
 
 void InitWindow(GLfloat Width, GLfloat Height) {
-	glViewport(0, 0, Width, Height);
+	glViewport(0, 0, (GLsizei)Width, (GLsizei)Height);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	switch (modo) {
@@ -404,7 +404,7 @@ void InitWindow(GLfloat Width, GLfloat Height) {
 void myResize(int width, int height) {
 	if (height == 0) height = 1; //Para no dividir por 0
 	if (width == 0) width = 1;
-	InitWindow(width, height);
+	InitWindow((GLfloat)width, (GLfloat)height);
 }
 
 void ControlesEspeciales(int key, int x, int y) {
@@ -421,7 +421,7 @@ void ControlesEspeciales(int key, int x, int y) {
 		modo = key;
 		width = glutGet(GLUT_WINDOW_WIDTH);
 		height = glutGet(GLUT_WINDOW_HEIGHT);
-		InitWindow(width, height);
+		InitWindow((GLfloat)width, (GLfloat)height);
 		break;
 	case GLUT_KEY_INSERT:
 		if (modo == LIBRE) {
@@ -455,7 +455,7 @@ void ControlesEspeciales(int key, int x, int y) {
 		zoomFactor += 0.1;
 		width = glutGet(GLUT_WINDOW_WIDTH);
 		height = glutGet(GLUT_WINDOW_HEIGHT);
-		InitWindow(width, height);
+		InitWindow((GLfloat)width, (GLfloat)height);
 		std::cout << zoomFactor << "\n";
 		break;
 	}
@@ -632,15 +632,15 @@ void controlesRueda(int button, int state, int x, int y) {
 
 void controlesRaton(int x, int y) {
 	if (modo == LIBRE) {
-		float incAngulo = pi / 60;
+		float incAngulo = (float)(pi / 60);
 		int dx, dy;
 		float incX, incY;
 		dx = cx - x;
 		dy = cy - y;
 		cx = x;
 		cy = y;
-		incX = -0.1 * dx * pi / 60;
-		incY = 0.1 * dy * pi / 60;
+		incX = -0.1f * dx * incAngulo;
+		incY = 0.1f * dy * incAngulo;
 		anguloX += incX;
 		if (anguloY + incY >= -pi / 2 && anguloY + incY <= pi / 2) {
 			anguloY += incY;
@@ -675,10 +675,10 @@ void Display(void)
 
 	//Light 0
 	//GLfloat light_direction[] = {3.0, 3 ,3 };
-	GLfloat ambient[] = { 0.5, 0.5, 0.5, 1.00 };
-	GLfloat light_specular[] = { 10, 10, 10, 1.0 };
-	GLfloat light_diffuse[] = { 1.9, 1.9, 1.9, 1.0 };
-	GLfloat light_atenuation[] = { 1, 1, 1 };
+	GLfloat ambient[] =				{ 0.5f , 0.5f , 0.5f , 1.0f };
+	GLfloat light_specular[] =		{ 10.0f, 10.0f, 10.0f, 1.0f };
+	GLfloat light_diffuse[] =		{ 1.9f , 1.9f , 1.9f , 1.0f };
+	GLfloat light_atenuation[] =	{ 1.0f , 1.0f , 1.0f };
 	glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
 	//glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, light_direction);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
@@ -687,21 +687,21 @@ void Display(void)
 	glLightfv(GL_LIGHT0, GL_LINEAR_ATTENUATION, light_atenuation);
 
 	//Light 1
-	GLfloat light_position1[] = { 3, 3, 3, 1 };
-	GLfloat light_specular1[] = { 1.5, 1, 1, 1.0 };
-	GLfloat light_diffuse1[] = { 10, 1, 1, 1.0 };
-	GLfloat light_atenuation1[] = { 0.5, 0.5, 0.5 };
+	GLfloat light_position1[] =		{ 3.0f , 3.0f, 3.0f, 1.0f };
+	GLfloat light_specular1[] =		{ 1.5f , 1.0f, 1.0f, 1.0f };
+	GLfloat light_diffuse1[] =		{ 10.0f, 1.0f, 1.0f, 1.0f };
+	GLfloat light_atenuation1[] =	{ 0.5f , 0.5f, 0.5f };
 	glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular1);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse1);
 	glLightfv(GL_LIGHT1, GL_LINEAR_ATTENUATION, light_atenuation1);
 
 	//Light 2
-	GLfloat light_position2[] = { 0, 0.5, 1, 1 };
-	GLfloat ambient2[] = { 0.0, 1, 0.0, 1.00 };
-	GLfloat light_specular2[] = { 0.1, 0.5, 0.1, 1.0 };
-	GLfloat light_diffuse2[] = { 0.1, 0.1, 0.1, 1.0 };
-	GLfloat light_atenuation2[] = { 1, 1, 1 };
+	GLfloat light_position2[] =		{ 0.0f, 0.5f, 1.0f, 1.0f };
+	GLfloat ambient2[] =			{ 0.0f, 1.0f, 0.0f, 1.0f };
+	GLfloat light_specular2[] =		{ 0.1f, 0.5f, 0.1f, 1.0f };
+	GLfloat light_diffuse2[] =		{ 0.1f, 0.1f, 0.1f, 1.0f };
+	GLfloat light_atenuation2[] =	{ 1.0f, 1.0f, 1.0f };
 	glLightfv(GL_LIGHT2, GL_POSITION, light_position2);
 	glLightfv(GL_LIGHT2, GL_AMBIENT, ambient2);
 	glLightfv(GL_LIGHT2, GL_SPECULAR, light_specular2);
@@ -709,11 +709,11 @@ void Display(void)
 	glLightfv(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, light_atenuation2);
 
 	//Light 3
-	GLfloat light_position3[] = { -3, 0.5, 0, 1 };
-	GLfloat ambient3[] = { 0.0, 0.0, 0.0, 1.00 };
-	GLfloat light_specular3[] = { 0.5, 0.5, 1.5, 1.0 };
-	GLfloat light_diffuse3[] = { 0.1, 0.1, 0.5, 1.0 };
-	GLfloat light_atenuation3[] = { 1, 1, 1 };
+	GLfloat light_position3[] =		{ -3.0f, 0.5f, 0.0f, 1.0f };
+	GLfloat ambient3[] =			{ 0.0f , 0.0f, 0.0f, 1.0f };
+	GLfloat light_specular3[] =		{ 0.5f , 0.5f, 1.5f, 1.0f };
+	GLfloat light_diffuse3[] =		{ 0.1f , 0.1f, 0.5f, 1.0f };
+	GLfloat light_atenuation3[] =	{ 1.0f , 1.0f, 1.0f };
 	glLightfv(GL_LIGHT3, GL_POSITION, light_position3);
 	glLightfv(GL_LIGHT3, GL_AMBIENT, ambient3);
 	glLightfv(GL_LIGHT3, GL_SPECULAR, light_specular3);
@@ -724,28 +724,28 @@ void Display(void)
 		glEnable(GL_LIGHT0);
 		glPushMatrix();
 		glTranslatef(light0_position[0], light0_position[1], light0_position[2]);
-		glColor3f(1, 1, 1.0f);
+		glColor3f(1.0f, 1.0f, 1.0f);
 		glutWireSphere(0.05, 10, 10);
 		glPopMatrix();
 	}
 	if (light1) {
 		glPushMatrix();
 		glTranslatef(light_position1[0], light_position1[1], light_position1[2]);
-		glColor3f(1, 0, 0);
+		glColor3f(1.0f, 0.0f, 0.0f);
 		glutWireSphere(0.05, 10, 10);
 		glPopMatrix();
 	}
 	if (light2) {
 		glPushMatrix();
 		glTranslatef(light_position2[0], light_position2[1], light_position2[2]);
-		glColor3f(0, 1, 0);
+		glColor3f(0.0f, 1.0f, 0.0f);
 		glutWireSphere(0.05, 10, 10);
 		glPopMatrix();
 	}
 	if (light3) {
 		glPushMatrix();
 		glTranslatef(light_position3[0], light_position3[1], light_position3[2]);
-		glColor3f(0, 0, 1);
+		glColor3f(0.0f, 0.0f, 1.0f);
 		glutWireSphere(0.05, 10, 10);
 		glPopMatrix();
 	}
@@ -755,21 +755,21 @@ void Display(void)
 		glLineWidth(3);
 
 		glBegin(GL_LINES);
-		glColor3f(1.0f, 0, 0);
-		glVertex3f(-100, 0, 0);
-		glVertex3f(100, 0, 0);
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glVertex3f(-100.0f, 0.0f, 0.0f);
+		glVertex3f(100.0f, 0.0f, 0.0f);
 		glEnd();
 
 		glBegin(GL_LINES);
-		glColor3f(0, 1.0f, 0);
-		glVertex3f(0, -100, 0);
-		glVertex3f(0, 100, 0);
+		glColor3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(0.0f, -100.0f, 0.0f);
+		glVertex3f(0.0f, 100.0f, 0.0f);
 		glEnd();
 
 		glBegin(GL_LINES);
-		glColor3f(0, 0, 1.0f);
-		glVertex3f(0, 0, -100);
-		glVertex3f(0, 0, 100);
+		glColor3f(0.0f, 0.0f, 1.0f);
+		glVertex3f(0.0f, 0.0f, -100.0f);
+		glVertex3f(0.0f, 0.0f, 100.0f);
 		glEnd();
 
 		for (float i = -100; i <= 100; i++) {
@@ -782,9 +782,9 @@ void Display(void)
 				}
 
 				glBegin(GL_LINES);
-				glColor3f(0, 0, 0);
-				glVertex3f(i, 0.0, -100);
-				glVertex3f(i, 0.0, 100);
+				glColor3f(0.0f, 0.0f, 0.0f);
+				glVertex3f(i, 0.0f, -100.0f);
+				glVertex3f(i, 0.0f, 100.0f);
 				glEnd();
 				glBegin(GL_LINES);
 				glColor3f(0, 0, 0);
@@ -805,8 +805,8 @@ void Display(void)
 
 	float MatAmbient[] = { 2.1f, 2.1f, 2.1f, 1.0f };
 	float MatDiffuse[] = { 5.0f, 5.0f, 5.0f, 1.0f };
-	GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat mat_shininess[] = { 128.0 };
+	GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	GLfloat mat_shininess[] = { 128.0f };
 
 	//glClearColor(0.0, 0.0, 0.0, 0.0);
 
@@ -829,10 +829,10 @@ void Display(void)
 		glBegin(GL_POLYGON);
 		glColor4f(0.5f, 0.5f, 2.0f, 0.5f);
 		//glColor3f(0.5f, 0.5f, 1.0f);
-		glVertex3f(-100, -0.01, -100);
-		glVertex3f(100, -0.01, -100);
-		glVertex3f(100, -0.01, 100);
-		glVertex3f(-100, -0.01, 100);
+		glVertex3f(-100.0f, -0.01f, -100.0f);
+		glVertex3f(100.0f, -0.01f, -100.0f);
+		glVertex3f(100.0f, -0.01f, 100.0f);
+		glVertex3f(-100.0f, -0.01f, 100.0f);
 		glNormal3d(0, 1, 0);
 		glEnd();
 	}
@@ -840,8 +840,8 @@ void Display(void)
 	if (false) {
 		float MatAmbient[] = { 1.1f, 1.1f, 1.1f, 0.0f };
 		float MatDiffuse[] = { 0.0f, 0.0f, 0.0f, 0.0f };
-		GLfloat mat_specular[] = { 0.0, 0.0, 0.0, 0.0 };
-		GLfloat mat_shininess[] = { 1.0 };
+		GLfloat mat_specular[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+		GLfloat mat_shininess[] = { 1.0f };
 
 		glMaterialfv(GL_FRONT, GL_AMBIENT, MatAmbient);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, MatDiffuse);
