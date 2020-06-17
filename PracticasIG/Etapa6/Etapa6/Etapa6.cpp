@@ -58,7 +58,7 @@ bool normal = false;
 
 //FOG
 const GLfloat fogColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-const GLfloat fogDensity = 0.3f;
+const GLfloat fogDensity = 0.02f;
 
 //Variables para los controles de la camara
 const int ALZADO = 1;
@@ -377,7 +377,7 @@ public:
 Modelo* HONK;
 
 Modelo* botella;
-//Modelo* mesa;
+Modelo* mesa;
 //Modelo* silla;
 //Modelo* tenedor;
 //Modelo* cuchillo;
@@ -393,7 +393,7 @@ Modelo* puerta;
 void foto() {
 	glPushMatrix();
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, texturas[0]);
+	glBindTexture(GL_TEXTURE_2D, texturas[5]);
 
 	glBegin(GL_POLYGON);
 
@@ -716,7 +716,7 @@ void ControlesEspeciales(int key, int x, int y) {
 		width = glutGet(GLUT_WINDOW_WIDTH);
 		height = glutGet(GLUT_WINDOW_HEIGHT);
 		InitWindow((GLfloat)width, (GLfloat)height);
-		std::cout << zoomFactor << "\n";
+		//std::cout << zoomFactor << "\n";
 		break;
 	}
 
@@ -750,8 +750,6 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 	float incAngulo = pi / 60;
 	int width;
 	int height;
-	std::cout << "hola";
-	std::cout << "hola";
 
 	switch (key) {
 	case 127:
@@ -760,7 +758,7 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 		width = glutGet(GLUT_WINDOW_WIDTH);
 		height = glutGet(GLUT_WINDOW_HEIGHT);
 		InitWindow(width, height);
-		std::cout << zoomFactor << "\n";
+		//std::cout << zoomFactor << "\n";
 		break;
 	case 27:
 		muestraReferencias = !muestraReferencias;
@@ -869,7 +867,7 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 	}
 
 
-	std::cout << "key: " << (int)key << "\n";
+	//std::cout << "key: " << (int)key << "\n";
 }
 
 void controlesRueda(int button, int state, int x, int y) {
@@ -1122,7 +1120,7 @@ void Display(void)
 	glColor3f(1.0, 0.3f, 0.3f);
 	glPushMatrix();
 	glScalef(0.1f, 0.1f, 0.1f);
-	//drawModelo(*mesa);
+	drawModelo(*mesa);
 	glPopMatrix();
 	//silla
 	glColor3f(0.3, 1.0f, 0.3f);
@@ -1350,35 +1348,47 @@ void Display(void)
 	//wall
 	glBegin(GL_POLYGON);
 	glColor4f(0.0f, 0.2f, 0.7f, 1.0f);
-	glVertex3f(-25, 0, -25);
-	glVertex3f(25, 0, -25);
-	glVertex3f(25, 25, -25);
-	glVertex3f(-25, 25, -25);
 	glNormal3f(0, 0, 1);
-	glEnd();
-	glBegin(GL_POLYGON);
-	glColor4f(0.0f, 0.2f, 0.7f, 1.0f);
-	glVertex3f(-25, 0, 25);
-	glVertex3f(25, 0, 25);
-	glVertex3f(25, 25, 25);
-	glVertex3f(-25, 25, 25);
-	glNormal3f(0, 0, -1);
-	glEnd();
-	glBegin(GL_POLYGON);
-	glColor4f(0.0f, 0.2f, 0.7f, 1.0f);
 	glVertex3f(-25, 0, -25);
-	glVertex3f(-25, 0, 25);
-	glVertex3f(-25, 25, 25);
+	glNormal3f(0, 0, 1);
+	glVertex3f(25, 0, -25);
+	glNormal3f(0, 0, 1);
+	glVertex3f(25, 25, -25);
+	glNormal3f(0, 0, 1);
 	glVertex3f(-25, 25, -25);
-	glNormal3f(1, 0, 0);
 	glEnd();
 	glBegin(GL_POLYGON);
 	glColor4f(0.0f, 0.2f, 0.7f, 1.0f);
-	glVertex3f(25, 0, -25);
+	glNormal3f(0, 0, -1);
+	glVertex3f(-25, 0, 25);
+	glNormal3f(0, 0, -1);
 	glVertex3f(25, 0, 25);
+	glNormal3f(0, 0, -1);
 	glVertex3f(25, 25, 25);
-	glVertex3f(25, 25, -25);
+	glNormal3f(0, 0, -1);
+	glVertex3f(-25, 25, 25);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glColor4f(0.0f, 0.2f, 0.7f, 1.0f);
+	glNormal3f(1, 0, 0);
+	glVertex3f(-25, 0, -25);
+	glNormal3f(1, 0, 0);
+	glVertex3f(-25, 0, 25);
+	glNormal3f(1, 0, 0);
+	glVertex3f(-25, 25, 25);
+	glNormal3f(1, 0, 0);
+	glVertex3f(-25, 25, -25);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glColor4f(0.0f, 0.2f, 0.7f, 1.0f);
 	glNormal3f(-1, 0, 0);
+	glVertex3f(25, 0, -25);
+	glNormal3f(-1, 0, 0);
+	glVertex3f(25, 0, 25);
+	glNormal3f(-1, 0, 0);
+	glVertex3f(25, 25, 25);
+	glNormal3f(-1, 0, 0);
+	glVertex3f(25, 25, -25);
 	glEnd();
 
 	//NURBS (opcional y funciona y todo)
@@ -1454,7 +1464,8 @@ int main(int argc, char** argv)
 	glutKeyboardUpFunc(liberaTeclas);
 	glutMouseFunc(controlesRueda);
 	glutMotionFunc(controlesRaton);
-
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
 
 	// El color de fondo ser� el negro (RGBA, RGB + Alpha channel)
 	glClearColor(0, 0, 0, 1);
@@ -1470,7 +1481,7 @@ int main(int argc, char** argv)
 	HONK = &honkmal;
 
 	Modelo abotella((char*)"models/bottle/",(char*)"bottle");
-	//Modelo amesa((char*)"models/old_wooden_table/", (char*)"old_wooden_table");
+	Modelo amesa((char*)"models/old_wooden_table/", (char*)"old_wooden_table");
 	//Modelo asilla((char*)"models/chair/", (char*)"Chair");
 	//Modelo atenedor((char*)"models/fork/", (char*)"fork");
 	//Modelo acuchillo((char*)"models/Knife/", (char*)"knife");
@@ -1482,7 +1493,7 @@ int main(int argc, char** argv)
 	Modelo apuerta((char*)"models/wooden_door/", (char*)"wooden_door");
 
 	botella = &abotella;
-	//mesa = &amesa;
+	mesa = &amesa;
 	//silla = &asilla;
 	//tenedor = &atenedor;
 	//cuchillo = &acuchillo;
@@ -1506,7 +1517,7 @@ int main(int argc, char** argv)
 	glMapGrid2f(20, 0.0, 1.0, 20, 0.0, 1.0);*/
 
 	//Fog
-	/*glEnable(GL_FOG);
+	glEnable(GL_FOG);
 	{
 		glFogi(GL_FOG_MODE, GL_EXP);
 		glFogfv(GL_FOG_COLOR, fogColor);
@@ -1514,7 +1525,7 @@ int main(int argc, char** argv)
 		glHint(GL_FOG_HINT, GL_DONT_CARE);
 		glFogf(GL_FOG_START, 1.0f);
 		glFogf(GL_FOG_END, 5.0f);
-	}*/
+	}
 	
 	// Comienza la ejecuci�n del core de GLUT
 	glutMainLoop();
