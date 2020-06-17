@@ -12,7 +12,7 @@
 #include <vector>
 #include <tuple>
 #include "SOIL2/SOIL2.h"
-
+using namespace std;
 const int W_WIDTH = 700; // Tama�o incial de la ventana
 const int W_HEIGHT = 700;
 const float pi = 3.141592f;
@@ -60,13 +60,15 @@ float posZ = 0;
 bool modelos = false;
 int mod = 1;
 
-//GLuint img;
+//GLuint texture;
+vector<GLuint> texturas;
+int numTexturas;
 //GLuint elephant;
 //float elephantrot;
 char ch = '1';
 bool modelo_normal = false;
 
-using namespace std;
+
 
 
 class Poligono {
@@ -79,6 +81,12 @@ public:
 	}
 };
 
+GLuint initTex(string img) {
+	glEnable(GL_TEXTURE_2D);
+	return SOIL_load_OGL_texture(img.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_MULTIPLY_ALPHA);
+	
+}
 
 class Material {
 public:
@@ -87,12 +95,11 @@ public:
 	float Ka[3];
 	float Kd[3];
 	float Ks[3];
-	float Ns, Ni, d;
+	GLfloat Ns, Ni, d;
 
-	Material(char* name, char* imagen, float Ka[3], float Kd[3], float Ks[3], float Ns, float Ni, float d) {
+	Material(char* name, string imagen, float Ka[3], float Kd[3], float Ks[3], float Ns, float Ni, float d) {
 		this->name = string(name);
-		this->imagen = SOIL_load_OGL_texture(imagen,SOIL_LOAD_AUTO,SOIL_CREATE_NEW_ID,
-					SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_MULTIPLY_ALPHA);
+		this->imagen = initTex(imagen);
 		this->Ka[0] = Ka[0]; this->Ka[1] = Ka[1]; this->Ka[2] = Ka[2];
 		this->Kd[0] = Kd[0]; this->Kd[1] = Kd[1]; this->Kd[2] = Kd[2];
 		this->Ks[0] = Ks[0]; this->Ks[1] = Ks[1]; this->Ks[2] = Ks[2];
@@ -107,9 +114,8 @@ vector< Material > loadMaterial(char* path, char* fname) {
 	int read;
 	GLfloat x, y, z;
 
-	char img[100];
-	char name[20];
-	char imagen[20];
+	char name[2000];
+	char imagen[2000];
 	float Ka[3];
 	float Kd[3];
 	float Ks[3];
@@ -163,12 +169,10 @@ vector< Material > loadMaterial(char* path, char* fname) {
 		}
 		else if (ch[0] == 'n') {
 			if (!primero) {
-				char img[]
-				strcat(img, path);
-				strcat(img, imagen);
-				//strcpy(img, ((string)path + imagen).c_str());
+				string img = ((string)path + imagen);
+				//int a = initTex(img);
 				materiales.push_back(Material(name, img, Ka, Kd, Ks, Ns, Ni, d));
-				*img = '\0';
+				
 			}
 			read = fscanf(fp, "%[^\n]", &name);
 			primero = false;
@@ -178,8 +182,9 @@ vector< Material > loadMaterial(char* path, char* fname) {
 			
 		} 
 	}
-	strcpy(img, ((string)path + imagen).c_str());
-	materiales.push_back(Material(name, img , Ka, Kd, Ks, Ns, Ni, d));
+	string img = ((string)path + imagen);
+	//int a = initTex(img);
+	materiales.push_back(Material(name, img, Ka, Kd, Ks, Ns, Ni, d));
 	return materiales;
 }
 
@@ -188,16 +193,17 @@ loadObj(char* path, char* fname)
 {
 
 	GLuint id[1] = { 1 };
-
+	float* aux;
 	FILE* fp;
 	int read;
 	GLfloat x, y, z;
 
 	char ch[100];
 	char mat[100];
-	float vertices[25000][3];
-	float normal[25000][3];
-	float textura[25000][2];
+	vector <float*> vertices;
+	vector <float*> normal;
+	vector <float*> textura;
+
 
 	fp = fopen(((string)path + fname + ".obj").c_str(), "r");
 	if (!fp)
@@ -223,22 +229,27 @@ loadObj(char* path, char* fname)
 			read = fscanf(fp, "%f %f %f", &x, &y, &z);
 			switch (ch[1]) {
 			case '\0':
-					
-				vertices[vcount][0] = x;
-				vertices[vcount][1] = y;
-				vertices[vcount][2] = z;
+				aux = (float*) malloc(3*sizeof(float));
+				aux[0] = x;
+				aux[1] = y;
+				aux[2] = z;
+				vertices.push_back(aux);
 				vcount++;
 				break;
 			case 'n':
-				normal[ncount][0] = x;
-				normal[ncount][1] = y;
-				normal[ncount][2] = z;
+				aux = (float*)malloc(3 * sizeof(float));
+				aux[0] = x;
+				aux[1] = y;
+				aux[2] = z;
+				normal.push_back(aux);
 				ncount++;
 				break;
 
 			case 't':
-				textura[tcount][0] = x;
-				textura[tcount][1] = y;
+				aux = (float*)malloc(2 * sizeof(float));
+				aux[0] = x;
+				aux[1] = y;
+				textura.push_back(aux);
 				tcount++;
 				break;
 			}
@@ -297,25 +308,18 @@ public:
 	vector< int > iPoligonos;
 	vector< string > nMateriales;
 	Modelo(char* path, char* filename) {
+		glEnable(GL_TEXTURE_2D);
 		fname = filename;
 		tie(numPol, vertexIndices, texIndices, normalIndices, materiales, iPoligonos, nMateriales) = loadObj(path, fname);
 	}
 };
 
-Modelo HONK((char*)"modelos/honk/", (char*)"Honoka Kosaka (No Brand Girls)");
+Modelo* HONK;
 
 void foto() {
 	glPushMatrix();
-
-	GLuint img = SOIL_load_OGL_texture
-	(
-		"modelos\\Honk\\Face.png",
-		SOIL_LOAD_AUTO,
-		SOIL_CREATE_NEW_ID,
-		SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_MULTIPLY_ALPHA
-	);
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, img);
+	glBindTexture(GL_TEXTURE_2D, texturas[0]);
 
 	glBegin(GL_POLYGON);
 
@@ -335,8 +339,51 @@ void foto() {
 
 	glEnd();
 
+
+	
+	glBindTexture(GL_TEXTURE_2D, texturas[1]);
+
+	glBegin(GL_POLYGON);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(0, 0, 0);
+
+	glTexCoord2f(0, 1);
+	glVertex3f(0, 1, 0);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(-1, 1, 0);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(-1, 0, 0);
+
+
+
+	glEnd();
+
+	glBindTexture(GL_TEXTURE_2D, texturas[0]);
+
+	glBegin(GL_POLYGON);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(0, 0, 0);
+
+	glTexCoord2f(0, 1);
+	glVertex3f(0, 0, 1);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(1, 0, 1);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(1, 0, 0);
+
+
+
+	glEnd();
+
 	glPopMatrix();
 }
+
 
 void drawModelo(Modelo modelo)
 {
@@ -344,6 +391,11 @@ void drawModelo(Modelo modelo)
 	glColor3f(1.0f,1.0f,1.0f);
 	//glBindTexture(GL_TEXTURE_2D, img);
 	int pol = 0;
+	float KKs[] = { 0.0f, 0.0f, 0.0f };
+	float* Ka = NULL;
+	float* Kd = NULL;
+	float* Ks = NULL;
+	GLfloat Ns = 0.0f;
 	vector<Poligono> vI = modelo.vertexIndices;
 	vector<Poligono> vN = modelo.normalIndices;
 	vector<Poligono> vT = modelo.texIndices;
@@ -351,7 +403,7 @@ void drawModelo(Modelo modelo)
 	vector<Poligono>::iterator itTex = vT.begin();
 	vector<int>::iterator itP;
 	for (vector<Poligono>::iterator itVec = vI.begin(); itVec != vI.end(); ++itVec, ++itNor, ++itTex) {
-
+		
 		//modelo.iPoligonos.find
 		itP = find(modelo.iPoligonos.begin(), modelo.iPoligonos.end(), pol);
 		if (itP != modelo.iPoligonos.end()) {
@@ -361,13 +413,25 @@ void drawModelo(Modelo modelo)
 			for (vector<Material>::iterator itMat = modelo.materiales.begin(); itMat != modelo.materiales.end(); ++itMat) {
 				Material mat = *itMat;
 				if (mat.name == s) {
+					//initTex(mat.imagen);
 					glBindTexture(GL_TEXTURE_2D,mat.imagen);
+					glEnable(GL_TEXTURE_2D);
+					Ns = mat.Ns;
+					Ka = mat.Ka;
+					Kd = mat.Kd;
+					Ks = mat.Ks;
 					break;
 				}
 			}
 		}
-
 		glBegin(GL_POLYGON);
+		
+
+		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, Ka);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, Kd);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, Ks);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS,&Ns);
+
 		Poligono pV = *itVec;
 		Poligono pN = *itNor;
 		Poligono pT = *itTex;
@@ -515,7 +579,7 @@ void InitWindow(GLfloat Width, GLfloat Height) {
 	case 4:
 	case LIBRE:
 	case 6:
-		gluPerspective(45.0 / zoomFactor, Width / Height, 0.1, 100.0);
+		gluPerspective(45.0 / zoomFactor, Width / Height, 0.1, 10000.0);
 		break;
 	case 1:
 	case 2:
@@ -772,6 +836,14 @@ void controlesRaton(int x, int y) {
 		std::cout << "anguloY: " << anguloY << "\n";
 	}
 }
+/*
+void ains() {
+
+	string path = "modelos\\Honk\\Face.png";
+	int img = initTex(path);
+	path = "modelos\\Honk\\Eyes.png";
+	int img2 = initTex(path);
+}*/
 
 // Funci�n que visualiza la escena OpenGL
 void Display(void)
@@ -973,13 +1045,13 @@ void Display(void)
 		glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
 		//dibuja el modelo cargado
 	}
-
-	foto();
+	//ains();
+	//foto();
 
 	//Modelos de la escena
 	//Mesa
 
-	drawModelo(HONK);
+	drawModelo(*HONK);
 
 
 	//silla
@@ -1031,6 +1103,8 @@ void Display(void)
 	glPopMatrix();
 	glutSwapBuffers();
 }
+
+
 
 
 
@@ -1109,7 +1183,8 @@ int main(int argc, char** argv)
 	//SUBSTITUIR EL FICHERO PARA CARGAR DIFERENTES MODELOS
 	
 	//loadObj((char*)"modelos/pato.obj");
-
+	Modelo honkmal((char*)"modelos\\Honk\\", (char*)"honk");
+	HONK = &honkmal;
 	
 	// Comienza la ejecuci�n del core de GLUT
 	glutMainLoop();
