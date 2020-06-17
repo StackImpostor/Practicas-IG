@@ -1,4 +1,4 @@
 ﻿  Etapa 2 Escalado.cpp
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Etapas\EtapasIG\Etapa 2 Escalado\Etapa 2 Escalado.cpp(25,12): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Etapas\EtapasIG\Etapa 2 Escalado\Etapa 2 Escalado.cpp(26,13): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  Etapa 2 Escalado.vcxproj -> C:\Users\tomeu\Documents\UIB\Informatica Grafica\Etapas\EtapasIG\Debug\Etapa 2 Escalado.exe
+C:\Users\davidcan\Documents\GitHub\Practicas-IG\EtapasIG\Etapa 2 Escalado\Etapa 2 Escalado.cpp(25,12): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\davidcan\Documents\GitHub\Practicas-IG\EtapasIG\Etapa 2 Escalado\Etapa 2 Escalado.cpp(26,13): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+  Etapa 2 Escalado.vcxproj -> C:\Users\davidcan\Documents\GitHub\Practicas-IG\EtapasIG\Debug\Etapa 2 Escalado.exe

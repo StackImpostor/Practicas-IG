@@ -27,22 +27,22 @@ bool muestraReferencias = true;
 GLfloat light0_position[] = { 5.0, 10.0, 5.0, 1.0 };
 GLfloat ambient[] = { 0.1f, 0.1f, 0.1f, 1.00 };
 GLfloat light_specular[] = { 0.0f, 0.0f, 0.0f, 1.0 };
-GLfloat light_diffuse[] = { 0.1f, 0.1f, 0.1f, 1.0 };
+GLfloat light_diffuse[] = {30.0f, 30.0f,30.0f, 1.0 };
 GLfloat light_atenuation[] = { 1.0f, 1.0f, 1.0f };
 
 //Light 1
-GLfloat light_position1[] = { 3, 3, 3, 1 };
+GLfloat light_position1[] = { 3, 10, 3, 1 };
 GLfloat light_specular1[] = { 1.5, 1, 1, 1.0 };
 GLfloat light_diffuse1[] = { 10, 1, 1, 1.0 };
 GLfloat light_atenuation1[] = { 0.5, 0.5, 0.5 };
 //Light 2
-GLfloat light_position2[] = { 0, 0.5, 1, 1 };
+GLfloat light_position2[] = { 0, 10, 1, 1 };
 GLfloat ambient2[] = { 0.0, 1, 0.0, 1.00 };
 GLfloat light_specular2[] = { 0.1, 0.5, 0.1, 1.0 };
 GLfloat light_diffuse2[] = { 0.1, 0.1, 0.1, 1.0 };
 GLfloat light_atenuation2[] = { 1, 1, 1 };
 //Light 3
-GLfloat light_position3[] = { -3, 0.5, 0, 1 };
+GLfloat light_position3[] = { -3, 10, 0, 1 };
 GLfloat ambient3[] = { 0.0, 0.0, 0.0, 1.00 };
 GLfloat light_specular3[] = { 0.5, 0.5, 1.5, 1.0 };
 GLfloat light_diffuse3[] = { 0.1, 0.1, 0.5, 1.0 };
@@ -74,13 +74,13 @@ float radio2 = 5.0f;
 int modo = LIBRE;
 int cx, cy; //X e Y del cursor
 float zoomFactor = 1;
-float anguloX = -pi / 2;
-float anguloY = -pi / 4;
+float anguloX = 0;
+float anguloY = -pi / 8;
 float anguloX2 = 0;
 float anguloY2 = 0;
 float camX = 0;
 float camZ = 10;
-float camY = 10;
+float camY = 12;
 float posX = 0;
 float posY = 0;
 float posZ = 0;
@@ -89,7 +89,8 @@ float posZ = 0;
 bool modelos = false;
 int mod = 1;
 
-//GLuint texture;
+//Texturas;
+int pared, suelo;
 vector<GLuint> texturas;
 int numTexturas;
 //GLuint elephant;
@@ -145,7 +146,7 @@ vector< Material > loadMaterial(char* path, char* fname) {
 	GLfloat x, y, z;
 	vector< Material > materiales;
 	char name[2000];
-	char imagen[2000];
+	char imagen[2000] = "";
 	float Ka[3];
 	float Kd[3];
 	float Ks[3];
@@ -154,7 +155,7 @@ vector< Material > loadMaterial(char* path, char* fname) {
 	fp = fopen(((string)path + fname + ".mtl").c_str(), "r");
 	if (!fp)
 	{
-		printf("can't open file %s\n", fname);
+		printf("no se ha cargado el material %s\n", fname);
 		return materiales;
 
 	}
@@ -302,7 +303,12 @@ loadObj(char* path, char* fname)
 			else {
 				pNorm.setPunto(0, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
 			}
-			pTex.setPunto(0, textura[vt - 1][0], textura[vt - 1][1], 0);
+			if (vt <= 0) {
+				pTex.setPunto(0, NULL,NULL,NULL);
+			}
+			else {
+				pTex.setPunto(0, textura[vt - 1][0], textura[vt - 1][1], 0);
+			}
 
 			read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
 
@@ -313,7 +319,12 @@ loadObj(char* path, char* fname)
 			else {
 				pNorm.setPunto(1, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
 			}
-			pTex.setPunto(1, textura[vt - 1][0], textura[vt - 1][1], 0);
+			if (vt <= 0) {
+				pTex.setPunto(1, NULL, NULL, NULL);
+			}
+			else {
+				pTex.setPunto(1, textura[vt - 1][0], textura[vt - 1][1], 0);
+			}
 
 
 			read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
@@ -326,7 +337,12 @@ loadObj(char* path, char* fname)
 			else {
 				pNorm.setPunto(2, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
 			}
-			pTex.setPunto(2, textura[vt - 1][0], textura[vt - 1][1], 0);
+			if (vt <= 0) {
+				pTex.setPunto(2, NULL, NULL, NULL);
+			}
+			else {
+				pTex.setPunto(2, textura[vt - 1][0], textura[vt - 1][1], 0);
+			}
 
 
 			read = fscanf(fp, "%i/%i/%i ", &v, &vt, &vn);
@@ -339,7 +355,12 @@ loadObj(char* path, char* fname)
 				pNorm.setPunto(3, normal[vn - 1][0], normal[vn - 1][1], normal[vn - 1][2]);
 			}
 
-			pTex.setPunto(3, textura[vt - 1][0], textura[vt - 1][1], 0);
+			if (vt <= 0) {
+				pTex.setPunto(3, NULL, NULL, NULL);
+			}
+			else {
+				pTex.setPunto(3, textura[vt - 1][0], textura[vt - 1][1], 0);
+			}
 
 
 			vertexIndices.push_back(pVert);
@@ -379,14 +400,14 @@ Modelo* HONK;
 
 Modelo* botella;
 Modelo* mesa;
-//Modelo* silla;
-//Modelo* tenedor;
-//Modelo* cuchillo;
+Modelo* silla;
+Modelo* tenedor;
+Modelo* cuchillo;
 Modelo* plato;
-//Modelo* manzana;
-//Modelo* limon;
+Modelo* manzana;
+Modelo* limon;
 Modelo* naranja;
-//Modelo* tasso;
+Modelo* tasso;
 Modelo* puerta;
 
 
@@ -570,7 +591,7 @@ void preparaCamara() {
 
 void mueveCamara() {
 	float incAngulo = pi / 60;
-	float speed = 0.2f;
+	float speed = 0.5f;
 	if (teclas[0]) {
 		if (modo == LIBRE) {
 			float cZ = speed * -cos(anguloX);
@@ -907,7 +928,7 @@ void controlesRaton(int x, int y) {
 		if (anguloY + incY >= -pi / 2 && anguloY + incY <= pi / 2) {
 			anguloY += incY;
 		}
-		std::cout << "anguloY: " << anguloY << "\n";
+		//std::cout << "anguloY: " << anguloY << "\n";
 	}
 }
 
@@ -1005,51 +1026,6 @@ void Display(void)
 		glPopMatrix();
 	}
 
-	//Ejes de cordenadas
-	if (false) {
-		glLineWidth(3);
-
-		glBegin(GL_LINES);
-		glColor3f(1.0f, 0.0f, 0.0f);
-		glVertex3f(-100.0f, 0.0f, 0.0f);
-		glVertex3f(100.0f, 0.0f, 0.0f);
-		glEnd();
-
-		glBegin(GL_LINES);
-		glColor3f(0.0f, 1.0f, 0.0f);
-		glVertex3f(0.0f, -100.0f, 0.0f);
-		glVertex3f(0.0f, 100.0f, 0.0f);
-		glEnd();
-
-		glBegin(GL_LINES);
-		glColor3f(0.0f, 0.0f, 1.0f);
-		glVertex3f(0.0f, 0.0f, -100.0f);
-		glVertex3f(0.0f, 0.0f, 100.0f);
-		glEnd();
-
-		for (float i = -100; i <= 100; i++) {
-			if (i != 0) {
-				if (i - (int)i == 0) {
-					glLineWidth(2);
-				}
-				else {
-					glLineWidth(1);
-				}
-
-				glBegin(GL_LINES);
-				glColor3f(0.0f, 0.0f, 0.0f);
-				glVertex3f(i, 0.0f, -100.0f);
-				glVertex3f(i, 0.0f, 100.0f);
-				glEnd();
-				glBegin(GL_LINES);
-				glColor3f(0, 0, 0);
-				glVertex3f(-100, 0.0, i);
-				glVertex3f(100, 0.0, i);
-				glEnd();
-			}
-		}
-	}
-
 	glLineWidth(1);
 	//Objetos
 
@@ -1129,7 +1105,7 @@ void Display(void)
 	glScalef(0.02, 0.02, 0.02);
 	glRotatef(10, 0, 1, 0);
 	glTranslatef(0, 30, -250);
-	//drawModelo(*silla);
+	drawModelo(*silla);
 	glPopMatrix();
 
 	//plato
@@ -1156,7 +1132,7 @@ void Display(void)
 	glTranslatef(-14, 73.31f, -24);
 	glRotatef(90, -1, 0, 0);
 	glRotatef(130, 0, 0, 1);
-	//drawModelo(*cuchillo);
+	drawModelo(*cuchillo);
 	glPopMatrix();
 
 	//INCREIBLE ANIMACIÓN ESPECTACULAR Y APABULLANTE (la he hehco con 3fps asi que alome se vera regular)
@@ -1241,7 +1217,7 @@ void Display(void)
 	glRotatef(90, 0, 1, 0);
 	glRotatef(86 - tenedorB, -1, 0, 0);
 	glRotatef(20 + tenedorA, 0, 0, 1);
-	//drawModelo(*tenedor);
+	drawModelo(*tenedor);
 	glPopMatrix();
 
 	//manzana
@@ -1251,7 +1227,7 @@ void Display(void)
 		glTranslatef(1.5f, 7.28f + manzanaY, 1);
 		glRotatef(90, -1, 0, 0);
 		glScalef(0.005f, 0.005f, 0.005f);
-		//drawModelo(*manzana);
+		drawModelo(*manzana);
 		glPopMatrix();
 	}
 
@@ -1262,7 +1238,7 @@ void Display(void)
 		glScalef(0.035f, 0.032f, 0.035f);
 		glTranslatef(-70, 228, 30);
 		glRotatef(-90, 1, 0, 0);
-		//drawModelo(*limon);
+		drawModelo(*limon);
 		glPopMatrix();
 
 		glColor3f(1.3f, 1.3f, 0.0f);
@@ -1271,7 +1247,7 @@ void Display(void)
 		glTranslatef(-50, 228, 40);
 		glRotatef(-90, 1, 0, 0);
 		glRotatef(40, 0, 0, 1);
-		//drawModelo(*limon);
+		drawModelo(*limon);
 		glPopMatrix();
 
 		glColor3f(1.3f, 1.3f, 0.0f);
@@ -1280,7 +1256,7 @@ void Display(void)
 		glTranslatef(-70, 228, 60);
 		glRotatef(-90, 1, 0, 0);
 		glRotatef(-80, 0, 0, 1);
-		//drawModelo(*limon);
+		drawModelo(*limon);
 		glPopMatrix();
 	}
 
@@ -1322,7 +1298,7 @@ void Display(void)
 	glPushMatrix();
 	glTranslatef(-2, 7.25f, -1);
 	glScalef(0.2f, 0.2f, 0.2f);
-	//drawModelo(*tasso);
+	drawModelo(*tasso);
 	glPopMatrix();
 
 	//puerta
@@ -1334,61 +1310,123 @@ void Display(void)
 	glPopMatrix();
 
 	//suelo
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glBindTexture(GL_TEXTURE_2D, texturas[suelo]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glBegin(GL_POLYGON); 
+	glNormal3d(0, 1, 0);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0, -0.01, -0);
+	glNormal3d(0, 1, 0);
+	glTexCoord2f(0.0f, 5.0f);
+	glVertex3f(25, -0.01, -0);
+	glNormal3d(0, 1, 0);
+	glTexCoord2f(5.0f, 5.0f);
+	glVertex3f(25, -0.01, 25);
+	glNormal3d(0, 1, 0);
+	glTexCoord2f(5.0f, 0.0f);
+	glVertex3f(-0, -0.01, 25);
+	glEnd();
 	glBegin(GL_POLYGON);
-	glColor4f(0.9f, 0.6f, 0.5f, 1.0f);
-	glVertex3f(-30, -0.01, -30);
 	glNormal3d(0, 1, 0);
-	glVertex3f(30, -0.01, -30);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0, -0.01, 0);
 	glNormal3d(0, 1, 0);
-	glVertex3f(30, -0.01, 30);
+	glTexCoord2f(0.0f, 5.0f);
+	glVertex3f(-25, -0.01, 0);
 	glNormal3d(0, 1, 0);
-	glVertex3f(-30, -0.01, 30);
+	glTexCoord2f(5.0f, 5.0f);
+	glVertex3f(-25, -0.01, 25);
 	glNormal3d(0, 1, 0);
+	glTexCoord2f(5.0f, 0.0f);
+	glVertex3f(0, -0.01, 25);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glNormal3d(0, 1, 0);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0, -0.01, -0);
+	glNormal3d(0, 1, 0);
+	glTexCoord2f(0.0f, 5.0f);
+	glVertex3f(25, -0.01, -0);
+	glNormal3d(0, 1, 0);
+	glTexCoord2f(5.0f, 5.0f);
+	glVertex3f(25, -0.01, -25);
+	glNormal3d(0, 1, 0);
+	glTexCoord2f(5.0f, 0.0f);
+	glVertex3f(-0, -0.01, -25);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glNormal3d(0, 1, 0);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0, -0.01, -0);
+	glNormal3d(0, 1, 0);
+	glTexCoord2f(0.0f, 5.0f);
+	glVertex3f(-25, -0.01, -0);
+	glNormal3d(0, 1, 0);
+	glTexCoord2f(5.0f, 5.0f);
+	glVertex3f(-25, -0.01, -25);
+	glNormal3d(0, 1, 0);
+	glTexCoord2f(5.0f, 0.0f);
+	glVertex3f(-0, -0.01, -25);
 	glEnd();
 
 	//wall
+	glBindTexture(GL_TEXTURE_2D, texturas[pared]);
 	glBegin(GL_POLYGON);
-	glColor4f(0.0f, 0.2f, 0.7f, 1.0f);
 	glNormal3f(0, 0, 1);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-25, 0, -25);
 	glNormal3f(0, 0, 1);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(25, 0, -25);
 	glNormal3f(0, 0, 1);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(25, 25, -25);
 	glNormal3f(0, 0, 1);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-25, 25, -25);
 	glEnd();
 	glBegin(GL_POLYGON);
-	glColor4f(0.0f, 0.2f, 0.7f, 1.0f);
 	glNormal3f(0, 0, -1);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-25, 0, 25);
 	glNormal3f(0, 0, -1);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(25, 0, 25);
 	glNormal3f(0, 0, -1);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(25, 25, 25);
 	glNormal3f(0, 0, -1);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-25, 25, 25);
 	glEnd();
 	glBegin(GL_POLYGON);
-	glColor4f(0.0f, 0.2f, 0.7f, 1.0f);
 	glNormal3f(1, 0, 0);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-25, 0, -25);
 	glNormal3f(1, 0, 0);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-25, 0, 25);
 	glNormal3f(1, 0, 0);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-25, 25, 25);
 	glNormal3f(1, 0, 0);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-25, 25, -25);
 	glEnd();
 	glBegin(GL_POLYGON);
-	glColor4f(0.0f, 0.2f, 0.7f, 1.0f);
 	glNormal3f(-1, 0, 0);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(25, 0, -25);
 	glNormal3f(-1, 0, 0);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(25, 0, 25);
 	glNormal3f(-1, 0, 0);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(25, 25, 25);
 	glNormal3f(-1, 0, 0);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(25, 25, -25);
 	glEnd();
 
@@ -1478,32 +1516,24 @@ int main(int argc, char** argv)
 	//SUBSTITUIR EL FICHERO PARA CARGAR DIFERENTES MODELOS
 
 	//loadObj((char*)"modelos/pato.obj");
-	Modelo honkmal((char*)"modelos\\Honk\\", (char*)"honk");
-	HONK = &honkmal;
 
-	Modelo abotella((char*)"models/bottle/", (char*)"bottle");
-	Modelo amesa((char*)"models/old_wooden_table/", (char*)"old_wooden_table");
-	//Modelo asilla((char*)"models/chair/", (char*)"Chair");
-	//Modelo atenedor((char*)"models/fork/", (char*)"fork");
-	//Modelo acuchillo((char*)"models/Knife/", (char*)"knife");
-	Modelo aplato((char*)"models/plate/", (char*)"plate");
-	//Modelo amanzana((char*)"models/apples/", (char*)"apple");
-	//Modelo alimon((char*)"models/lemon/", (char*)"lemon");
-	Modelo anaranja((char*)"models/orange/", (char*)"orange");
-	//Modelo atasso((char*)"models/glass/", (char*)"glass");
-	Modelo apuerta((char*)"models/wooden_door/", (char*)"wooden_door");
+	//Cargamos suelo y paredes
+	pared = initTex("models/wall/wall.jpg");
+	suelo = initTex("models/floor/floor.jpg");
 
-	botella = &abotella;
-	mesa = &amesa;
-	//silla = &asilla;
-	//tenedor = &atenedor;
-	//cuchillo = &acuchillo;
-	plato = &aplato;
-	//manzana = &amanzana;
-	//limon = &alimon;
-	naranja = &anaranja;
-	//tasso = &atasso;
-	puerta = &apuerta;
+
+	HONK = new Modelo((char*)"models\\Honk\\", (char*)"honk");
+	botella = new Modelo((char*)"models/bottle/", (char*)"bottle");
+	mesa = new Modelo((char*)"models/old_wooden_table/", (char*)"old_wooden_table");
+	silla = new Modelo((char*)"models/chair/", (char*)"Chair");
+	tenedor = new Modelo((char*)"models/fork/", (char*)"fork");
+	cuchillo = new Modelo((char*)"models/Knife/", (char*)"knife");
+	plato = new Modelo((char*)"models/plate/", (char*)"plate");
+	manzana = new Modelo((char*)"models/apples/", (char*)"apple");
+	limon = new Modelo((char*)"models/lemon/", (char*)"lemon");
+	naranja = new Modelo((char*)"models/orange/", (char*)"orange");
+	tasso = new Modelo((char*)"models/glass/", (char*)"glass");
+	puerta = new Modelo((char*)"models/wooden_door/", (char*)"wooden_door");
 
 	//NURBS
 	/*GLfloat ctrlpoints[4][4][3] = {
@@ -1518,7 +1548,7 @@ int main(int argc, char** argv)
 	glMapGrid2f(20, 0.0, 1.0, 20, 0.0, 1.0);*/
 
 	//Fog
-	glEnable(GL_FOG);
+	/*glEnable(GL_FOG);
 	{
 		glFogi(GL_FOG_MODE, GL_EXP);
 		glFogfv(GL_FOG_COLOR, fogColor);
@@ -1526,7 +1556,7 @@ int main(int argc, char** argv)
 		glHint(GL_FOG_HINT, GL_DONT_CARE);
 		glFogf(GL_FOG_START, 1.0f);
 		glFogf(GL_FOG_END, 5.0f);
-	}
+	}*/
 
 	// Comienza la ejecuci�n del core de GLUT
 	glutMainLoop();
