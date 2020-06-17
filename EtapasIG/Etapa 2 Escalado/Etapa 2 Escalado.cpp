@@ -16,7 +16,7 @@ float p_width = 500, p_height = 500;
 void myResize(int width, int height) {
 
 	glViewport(0, 0, width, height);
-
+	if (height == 0) height = 1;
 	float nr_w = width / p_width;
 	float nr_h = height / p_height;
 

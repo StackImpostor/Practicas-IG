@@ -12,8 +12,5 @@ newmtl chair
 	Kd 1.0000 1.0000 1.0000
 	Ks 0.0900 0.0900 0.0900
 	Ke 0.0000 0.0000 0.0000
-<<<<<<< HEAD
 	map_Ka Chair.jpg
-=======
->>>>>>> 9e423b2af7172c98ec9b3f457eaf37878d456756
 	map_Kd Chair.jpg
