@@ -897,7 +897,7 @@ int main(int argc, char** argv)
 	glEnable(GL_DEPTH_TEST);*/
 
 	// Creamos la nueva ventana
-	glutCreateWindow("Mis cosas 3D");
+	glutCreateWindow("Escena 3D - etapa 3 4 y 5");
 
 	// Indicamos cuales son las funciones de redibujado e idle
 	glutDisplayFunc(Display);

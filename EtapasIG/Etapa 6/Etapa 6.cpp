@@ -58,7 +58,7 @@ bool normal = false;
 
 //FOG
 const GLfloat fogColor[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-const GLfloat fogDensity = 0.02f;
+GLfloat fogDensity = 0.0f;
 
 //Variables para los controles de la camara
 const int ALZADO = 1;
@@ -846,10 +846,12 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 		//normal = !normal;
 		break;
 	case 109: //m
-		modelos = !modelos;
+		fogDensity += 0.02f;
 		break;
 	case 110: //n
-		modelo_normal = !modelo_normal;
+		if (fogDensity > 0) {
+			fogDensity -= 0.02f;
+		}
 		break;
 	case 13: //enter
 		mod += 1;
@@ -932,13 +934,12 @@ bool rebote = false;
 bool final = false;
 bool vuelta = false;
 
-int i = 0;
 
 // Funci�n que visualiza la escena OpenGL
 void Display(void)
 {
 	
-	if (i == 0) {
+	
 		// Borramos la escena
 		glClear(GL_COLOR_BUFFER_BIT);
 
@@ -950,11 +951,10 @@ void Display(void)
 
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
-
-
-	}
 		
-		
+		//Actualizamos la fog
+		glFogf(GL_FOG_DENSITY, fogDensity);
+
 		//Colores soras y cosas divertidas
 		/*He intentado hacer cosas con las luces*/
 		glEnable(GL_LIGHTING);
@@ -1117,7 +1117,7 @@ void Display(void)
 		//Modelos de la escena
 
 		//Mesa
-		if (i == 0) {
+
 		drawModelo(*HONK);
 
 
@@ -1427,9 +1427,7 @@ void Display(void)
 
 		glPopMatrix();
 		glutSwapBuffers();
-		i++;
-		}
-
+	
 }
 
 

@@ -92,7 +92,7 @@ int main(int argc, char** argv)
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 
 	// Creamos la nueva ventana
-	glutCreateWindow("Mi primera Ventana");
+	glutCreateWindow("Etapa 2 escalado");
 
 	// Indicamos cuales son las funciones de redibujado e idle
 	glutDisplayFunc(Display);

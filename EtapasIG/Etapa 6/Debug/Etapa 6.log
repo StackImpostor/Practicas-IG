@@ -8,12 +8,12 @@ C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\E
 C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(761,21): warning C4305: '-=': truncation from 'double' to 'float'
 C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(764,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(764,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(884,20): warning C4305: '+=': truncation from 'double' to 'float'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(887,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(887,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(891,21): warning C4305: '-=': truncation from 'double' to 'float'
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(894,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(894,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(886,20): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(889,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(889,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(893,21): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(896,21): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(896,14): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
 C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(1138,28): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
 C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(1140,28): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
 C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\EtapasIG\Etapa 6\Etapa 6.cpp(1158,50): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
