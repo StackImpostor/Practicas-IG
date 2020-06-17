@@ -410,6 +410,8 @@ Modelo* naranja;
 Modelo* tasso;
 Modelo* puerta;
 
+//Modelo* marco;
+
 
 
 void foto() {
@@ -663,6 +665,7 @@ void mueveCamara() {
 			posY += cY;
 		}
 	}
+	
 }
 
 void InitWindow(GLfloat Width, GLfloat Height) {
@@ -888,7 +891,7 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 		break;
 	}
 
-
+	std::cout << "X:"<<camX<<" Y: "<<camY<<" Z: "<< camZ;
 	//std::cout << "key: " << (int)key << "\n";
 }
 
@@ -950,104 +953,198 @@ bool rebote = false;
 bool final = false;
 bool vuelta = false;
 
+int i = 0;
+
 // Funci�n que visualiza la escena OpenGL
 void Display(void)
 {
-	// Borramos la escena
-	glClear(GL_COLOR_BUFFER_BIT);
+	
+	if (i == 0) {
+		// Borramos la escena
+		glClear(GL_COLOR_BUFFER_BIT);
 
-	glPushMatrix();
-
-	//Activamos buffer de PROFUNDIAD
-	glEnable(GL_DEPTH_TEST);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-
-	//Colores soras y cosas divertidas
-	/*He intentado hacer cosas con las luces*/
-	glEnable(GL_LIGHTING);
-
-
-	//Light 0
-	glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
-	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-	glLightfv(GL_LIGHT0, GL_LINEAR_ATTENUATION, light_atenuation);
-
-	//light 1
-	glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
-	glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular1);
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse1);
-	glLightfv(GL_LIGHT1, GL_LINEAR_ATTENUATION, light_atenuation1);
-
-	//light 2
-	glLightfv(GL_LIGHT2, GL_POSITION, light_position2);
-	glLightfv(GL_LIGHT2, GL_AMBIENT, ambient2);
-	glLightfv(GL_LIGHT2, GL_SPECULAR, light_specular2);
-	glLightfv(GL_LIGHT2, GL_DIFFUSE, light_diffuse2);
-	glLightfv(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, light_atenuation2);
-	//light3
-	glLightfv(GL_LIGHT3, GL_POSITION, light_position3);
-	glLightfv(GL_LIGHT3, GL_AMBIENT, ambient3);
-	glLightfv(GL_LIGHT3, GL_SPECULAR, light_specular3);
-	glLightfv(GL_LIGHT3, GL_DIFFUSE, light_diffuse3);
-	glLightfv(GL_LIGHT3, GL_CONSTANT_ATTENUATION, light_atenuation3);
-
-	if (light0) {
-		glEnable(GL_LIGHT0);
 		glPushMatrix();
-		glTranslatef(light0_position[0], light0_position[1], light0_position[2]);
-		glColor3f(1.0f, 1.0f, 1.0f);
-		glutWireSphere(0.05, 10, 10);
-		glPopMatrix();
+
+		glLineWidth(1);
+		//Objetos
+		//Activamos buffer de PROFUNDIAD
+		glEnable(GL_DEPTH_TEST);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+
+
 	}
-	if (light1) {
-		glPushMatrix();
-		glTranslatef(light_position1[0], light_position1[1], light_position1[2]);
-		glColor3f(1.0f, 0.0f, 0.0f);
-		glutWireSphere(0.05, 10, 10);
-		glPopMatrix();
-	}
-	if (light2) {
-		glPushMatrix();
-		glTranslatef(light_position2[0], light_position2[1], light_position2[2]);
-		glColor3f(0.0f, 1.0f, 0.0f);
-		glutWireSphere(0.05, 10, 10);
-		glPopMatrix();
-	}
-	if (light3) {
-		glPushMatrix();
-		glTranslatef(light_position3[0], light_position3[1], light_position3[2]);
-		glColor3f(0.0f, 0.0f, 1.0f);
-		glutWireSphere(0.05, 10, 10);
-		glPopMatrix();
-	}
-
-	glLineWidth(1);
-	//Objetos
-
-	//Materiales
-	glEnable(GL_COLOR_MATERIAL);
-	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-
-	float MatAmbient[] = { 2.1f, 2.1f, 2.1f, 1.0f };
-	float MatDiffuse[] = { 5.0f, 5.0f, 5.0f, 1.0f };
-	GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	GLfloat mat_shininess[] = { 128.0f };
-
-	//glClearColor(0.0, 0.0, 0.0, 0.0);
-
-	/*glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, MatAmbient);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MatDiffuse);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);*/
+		
+		
+		//Colores soras y cosas divertidas
+		/*He intentado hacer cosas con las luces*/
+		glEnable(GL_LIGHTING);
 
 
-	//Dibujamos el "suelo" que es trans
-	if (false) {
+		//Light 0
+		glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
+		glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+		glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+		glLightfv(GL_LIGHT0, GL_LINEAR_ATTENUATION, light_atenuation);
+
+		//light 1
+		glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
+		glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular1);
+		glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse1);
+		glLightfv(GL_LIGHT1, GL_LINEAR_ATTENUATION, light_atenuation1);
+
+		//light 2
+		glLightfv(GL_LIGHT2, GL_POSITION, light_position2);
+		glLightfv(GL_LIGHT2, GL_AMBIENT, ambient2);
+		glLightfv(GL_LIGHT2, GL_SPECULAR, light_specular2);
+		glLightfv(GL_LIGHT2, GL_DIFFUSE, light_diffuse2);
+		glLightfv(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, light_atenuation2);
+		//light3
+		glLightfv(GL_LIGHT3, GL_POSITION, light_position3);
+		glLightfv(GL_LIGHT3, GL_AMBIENT, ambient3);
+		glLightfv(GL_LIGHT3, GL_SPECULAR, light_specular3);
+		glLightfv(GL_LIGHT3, GL_DIFFUSE, light_diffuse3);
+		glLightfv(GL_LIGHT3, GL_CONSTANT_ATTENUATION, light_atenuation3);
+
+		if (light0) {
+			glEnable(GL_LIGHT0);
+			glPushMatrix();
+			glTranslatef(light0_position[0], light0_position[1], light0_position[2]);
+			glColor3f(1.0f, 1.0f, 1.0f);
+			glutWireSphere(0.05, 10, 10);
+			glPopMatrix();
+		}
+		if (light1) {
+			glPushMatrix();
+			glTranslatef(light_position1[0], light_position1[1], light_position1[2]);
+			glColor3f(1.0f, 0.0f, 0.0f);
+			glutWireSphere(0.05, 10, 10);
+			glPopMatrix();
+		}
+		if (light2) {
+			glPushMatrix();
+			glTranslatef(light_position2[0], light_position2[1], light_position2[2]);
+			glColor3f(0.0f, 1.0f, 0.0f);
+			glutWireSphere(0.05, 10, 10);
+			glPopMatrix();
+		}
+		if (light3) {
+			glPushMatrix();
+			glTranslatef(light_position3[0], light_position3[1], light_position3[2]);
+			glColor3f(0.0f, 0.0f, 1.0f);
+			glutWireSphere(0.05, 10, 10);
+			glPopMatrix();
+		}
+
+		//Ejes de cordenadas
+		if (false) {
+			glLineWidth(3);
+
+			glBegin(GL_LINES);
+			glColor3f(1.0f, 0.0f, 0.0f);
+			glVertex3f(-100.0f, 0.0f, 0.0f);
+			glVertex3f(100.0f, 0.0f, 0.0f);
+			glEnd();
+
+			glBegin(GL_LINES);
+			glColor3f(0.0f, 1.0f, 0.0f);
+			glVertex3f(0.0f, -100.0f, 0.0f);
+			glVertex3f(0.0f, 100.0f, 0.0f);
+			glEnd();
+
+			glBegin(GL_LINES);
+			glColor3f(0.0f, 0.0f, 1.0f);
+			glVertex3f(0.0f, 0.0f, -100.0f);
+			glVertex3f(0.0f, 0.0f, 100.0f);
+			glEnd();
+
+			for (float i = -100; i <= 100; i++) {
+				if (i != 0) {
+					if (i - (int)i == 0) {
+						glLineWidth(2);
+					}
+					else {
+						glLineWidth(1);
+					}
+
+					glBegin(GL_LINES);
+					glColor3f(0.0f, 0.0f, 0.0f);
+					glVertex3f(i, 0.0f, -100.0f);
+					glVertex3f(i, 0.0f, 100.0f);
+					glEnd();
+					glBegin(GL_LINES);
+					glColor3f(0, 0, 0);
+					glVertex3f(-100, 0.0, i);
+					glVertex3f(100, 0.0, i);
+					glEnd();
+				}
+			}
+		}
+
+		glLineWidth(1);
+		//Objetos
+
+		//Materiales
+		glEnable(GL_COLOR_MATERIAL);
+		glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+
+		float MatAmbient[] = { 2.1f, 2.1f, 2.1f, 1.0f };
+		float MatDiffuse[] = { 5.0f, 5.0f, 5.0f, 1.0f };
+		GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+		GLfloat mat_shininess[] = { 128.0f };
+
+		//glClearColor(0.0, 0.0, 0.0, 0.0);
+
+		/*glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, MatAmbient);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MatDiffuse);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
+		glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);*/
+
+
+		//Dibujamos el "suelo" que es trans
+		if (false) {
+			/*glPushMatrix();
+			glTranslatef(0, -5, 0);
+			//glRectf();
+			glColor4f(0.5f, 0.5f, 1.0f, 0.5f);
+			glutSolidCube(1);*/
+			glBegin(GL_POLYGON);
+			glColor4f(0.5f, 0.5f, 2.0f, 0.5f);
+			//glColor3f(0.5f, 0.5f, 1.0f);
+			glVertex3f(-100.0f, -0.01f, -100.0f);
+			glVertex3f(100.0f, -0.01f, -100.0f);
+			glVertex3f(100.0f, -0.01f, 100.0f);
+			glVertex3f(-100.0f, -0.01f, 100.0f);
+			glNormal3d(0, 1, 0);
+			glEnd();
+		}
+
+		if (false) {
+			float MatAmbient[] = { 1.1f, 1.1f, 1.1f, 0.0f };
+			float MatDiffuse[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+			GLfloat mat_specular[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+			GLfloat mat_shininess[] = { 1.0f };
+
+			glMaterialfv(GL_FRONT, GL_AMBIENT, MatAmbient);
+			glMaterialfv(GL_FRONT, GL_DIFFUSE, MatDiffuse);
+			glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+			glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+			//dibuja el modelo cargado
+		}
+		//ains();
+		//foto();
+
+		//Modelos de la escena
+
+		//Mesa
+		if (i == 0) {
+		drawModelo(*HONK);
+
+
+		//silla
 		/*glPushMatrix();
 		glTranslatef(0, -5, 0);
 		//glRectf();
@@ -1108,22 +1205,22 @@ void Display(void)
 	drawModelo(*silla);
 	glPopMatrix();
 
-	//plato
-	glPushMatrix();
-	glTranslatef(0, 7.301f, -2.0f);
-	glScalef(9.0f, 5.0f, 9.0f);
-	drawModelo(*plato);
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(0, 7.301f, -2.0f);
-	glScalef(0.6f, 0, 0.6f);
-	glBegin(GL_POLYGON); //ESTO ES NECESARIO BECAUSE REASONS
-	for (int i = 0; i < 20; ++i)
-	{
-		glVertex3f(cos(2 * 3.14159 * i / 20.0), 0, sin(2 * 3.14159 * i / 20.0));
-	}
-	glEnd();
-	glPopMatrix();
+		//plato
+		glPushMatrix();
+		glTranslatef(0, 7.301f, -2.0f);
+		glScalef(9.0f, 5.0f, 9.0f);
+		drawModelo(*plato);
+		glPopMatrix();
+		glPushMatrix();
+		glTranslatef(0, 7.301f, -2.0f);
+		glScalef(0.6f, 0, 0.6f);
+		glBegin(GL_POLYGON); //ESTO ES NECESARIO BECAUSE REASONS
+		for (int i = 0; i < 20; ++i)
+		{
+			glVertex3f(cos(2 * 3.14159 * i / 20.0), 0, sin(2 * 3.14159 * i / 20.0));
+		}
+		glEnd();
+		glPopMatrix();
 
 	//cuchillo
 	glColor3f(0.3f, 0.3f, 1.0f);
@@ -1135,73 +1232,74 @@ void Display(void)
 	drawModelo(*cuchillo);
 	glPopMatrix();
 
-	//INCREIBLE ANIMACIÓN ESPECTACULAR Y APABULLANTE (la he hehco con 3fps asi que alome se vera regular)
-	if (wait <= 0) {
-		if (levantar) {
-			//tenedorX += 0;
-			tenedorY += 0.05f;
-			//tenedorZ += 0;
-			tenedorA += 2;
-			if (tenedorY >= 1.5) {
-				levantar = false;
-				avanzar = true;
+		//INCREIBLE ANIMACIÓN ESPECTACULAR Y APABULLANTE (la he hehco con 3fps asi que alome se vera regular)
+		if (wait <= 0) {
+			if (levantar) {
+				//tenedorX += 0;
+				tenedorY += 0.05f;
+				//tenedorZ += 0;
+				tenedorA += 2;
+				if (tenedorY >= 1.5) {
+					levantar = false;
+					avanzar = true;
+				}
 			}
-		}
-		else if (avanzar) {
-			tenedorX -= 0.004f;
-			tenedorY -= 0.04;
-			tenedorZ += 0.1f;
-			tenedorB += 7;
-			if (tenedorZ >= 2.3f) {
-				avanzar = false;
-				recoger = true;
-				wait = 7;
+			else if (avanzar) {
+				tenedorX -= 0.004f;
+				tenedorY -= 0.04;
+				tenedorZ += 0.1f;
+				tenedorB += 7;
+				if (tenedorZ >= 2.3f) {
+					avanzar = false;
+					recoger = true;
+					wait = 7;
+				}
 			}
-		}
-		else if (recoger) {
-			manzanaY += 0.05;
-			tenedorY += 0.05;
-			if (tenedorY >= 2) {
-				recoger = false;
-				caida = true;
+			else if (recoger) {
+				manzanaY += 0.05;
+				tenedorY += 0.05;
+				if (tenedorY >= 2) {
+					recoger = false;
+					caida = true;
+				}
 			}
-		}
-		else if (caida) {
-			manzanaY -= 0.5;
-			if (manzanaY <= 0) {
-				caida = false;
-				rebote = true;
+			else if (caida) {
+				manzanaY -= 0.5;
+				if (manzanaY <= 0) {
+					caida = false;
+					rebote = true;
+				}
 			}
-		}
-		else if (rebote) {
-			manzanaY += 0.1;
-			if (manzanaY >= 0.2) {
-				rebote = false;
-				final = true;
+			else if (rebote) {
+				manzanaY += 0.1;
+				if (manzanaY >= 0.2) {
+					rebote = false;
+					final = true;
+				}
 			}
-		}
-		else if (final) {
-			manzanaY -= 0.05;
-			if (manzanaY <= 0) {
-				final = false;
-				vuelta = true;
+			else if (final) {
+				manzanaY -= 0.05;
+				if (manzanaY <= 0) {
+					final = false;
+					vuelta = true;
+				}
 			}
-		}
-		else if (vuelta) {
-			if (tenedorX > 0) {
-				tenedorX += 0.1;
-			}
-			if (tenedorY > 0) {
-				tenedorY -= 0.05;
-			}
-			if (tenedorZ > 0) {
-				tenedorZ -= 0.1;
-			}
-			if (tenedorA > 0) {
-				tenedorA -= 2;
-			}
-			if (tenedorB > 0) {
-				tenedorB -= 7;
+			else if (vuelta) {
+				if (tenedorX > 0) {
+					tenedorX += 0.1;
+				}
+				if (tenedorY > 0) {
+					tenedorY -= 0.05;
+				}
+				if (tenedorZ > 0) {
+					tenedorZ -= 0.1;
+				}
+				if (tenedorA > 0) {
+					tenedorA -= 2;
+				}
+				if (tenedorB > 0) {
+					tenedorB -= 7;
+				}
 			}
 		}
 	}
@@ -1220,16 +1318,14 @@ void Display(void)
 	drawModelo(*tenedor);
 	glPopMatrix();
 
-	//manzana
-	{
-		glColor3f(1.3f, 0.3f, 0.0f);
+		//tenedor
+		glColor3f(0.3f, 0.3f, 0.3f);
 		glPushMatrix();
 		glTranslatef(1.5f, 7.28f + manzanaY, 1);
 		glRotatef(90, -1, 0, 0);
 		glScalef(0.005f, 0.005f, 0.005f);
 		drawModelo(*manzana);
 		glPopMatrix();
-	}
 
 	//limon
 	{
@@ -1250,7 +1346,34 @@ void Display(void)
 		drawModelo(*limon);
 		glPopMatrix();
 
-		glColor3f(1.3f, 1.3f, 0.0f);
+		//naranja
+		{
+			glColor3f(1.3f, 0.7f, 0.0f);
+			glPushMatrix();
+			glTranslatef(5, 7.3f, -2);
+			glScalef(0.1f, 0.1f, 0.1f);
+			glRotatef(-90, 1, 0, 0);
+			drawModelo(*naranja);
+			glPopMatrix();
+			glColor3f(1.3f, 0.7f, 0.0f);
+			glPushMatrix();
+			glTranslatef(3.5f, 7.3f, -0.45);
+			glScalef(0.1f, 0.1f, 0.1f);
+			glRotatef(-90, 1, 0, 0);
+			drawModelo(*naranja);
+			glPopMatrix();
+			glPopMatrix();
+			glColor3f(1.3f, 0.7f, 0.0f);
+			glPushMatrix();
+			glTranslatef(4.0f, 7.5f, 0);
+			glScalef(0.1f, 0.1f, 0.1f);
+			glRotatef(-40, 1, 0, 0);
+			glRotatef(90, 0, 0, 1);
+			drawModelo(*naranja);
+			glPopMatrix();
+		}
+
+		//bottle
 		glPushMatrix();
 		glScalef(0.035f, 0.032f, 0.035f);
 		glTranslatef(-70, 228, 60);
@@ -1258,32 +1381,25 @@ void Display(void)
 		glRotatef(-80, 0, 0, 1);
 		drawModelo(*limon);
 		glPopMatrix();
-	}
 
-	//naranja
-	{
-		glColor3f(1.3f, 0.7f, 0.0f);
+		//glass
 		glPushMatrix();
-		glTranslatef(5, 7.3f, -2);
-		glScalef(0.1f, 0.1f, 0.1f);
-		glRotatef(-90, 1, 0, 0);
-		drawModelo(*naranja);
+		glTranslatef(-2, 7.25f, -1);
+		glScalef(0.2f, 0.2f, 0.2f);
+		//drawModelo(*tasso);
 		glPopMatrix();
-		glColor3f(1.3f, 0.7f, 0.0f);
+
+		//puerta
 		glPushMatrix();
-		glTranslatef(3.5f, 7.3f, -0.45);
+		glTranslatef(10, 0, -25);
+		glRotatef(90, -1, 0, 0);
 		glScalef(0.1f, 0.1f, 0.1f);
-		glRotatef(-90, 1, 0, 0);
-		drawModelo(*naranja);
+		drawModelo(*puerta);
 		glPopMatrix();
-		glPopMatrix();
-		glColor3f(1.3f, 0.7f, 0.0f);
+
+		//marco
 		glPushMatrix();
-		glTranslatef(4.0f, 7.5f, 0);
-		glScalef(0.1f, 0.1f, 0.1f);
-		glRotatef(-40, 1, 0, 0);
-		glRotatef(90, 0, 0, 1);
-		drawModelo(*naranja);
+		//drawModelo(*marco);
 		glPopMatrix();
 	}
 
@@ -1430,25 +1546,74 @@ void Display(void)
 	glVertex3f(25, 25, -25);
 	glEnd();
 
-	//NURBS (opcional y funciona y todo)
-	/*float i, j;
-	glPushMatrix();
-	glRotatef(25.0, 1.0, 1.0, 1.0);
-	for (j = 0; j <= 8; j+=0.01) {
-		glBegin(GL_LINE_STRIP);
-		for (i = 0; i <= 30; i+=0.01)
-			glEvalCoord2f((GLfloat)i / 30.0, (GLfloat)j / 8.0);
+		//wall
+		glBegin(GL_POLYGON);
+		glColor4f(0.0f, 0.2f, 0.7f, 1.0f);
+		glNormal3f(0, 0, 1);
+		glVertex3f(-25, 0, -25);
+		glNormal3f(0, 0, 1);
+		glVertex3f(25, 0, -25);
+		glNormal3f(0, 0, 1);
+		glVertex3f(25, 25, -25);
+		glNormal3f(0, 0, 1);
+		glVertex3f(-25, 25, -25);
 		glEnd();
-		glBegin(GL_LINE_STRIP);
-		for (i = 0; i <= 30; i+=0.01)
-			glEvalCoord2f((GLfloat)j / 8.0, (GLfloat)i / 30.0);
+		glBegin(GL_POLYGON);
+		glColor4f(0.0f, 0.2f, 0.7f, 1.0f);
+		glNormal3f(0, 0, -1);
+		glVertex3f(-25, 0, 25);
+		glNormal3f(0, 0, -1);
+		glVertex3f(25, 0, 25);
+		glNormal3f(0, 0, -1);
+		glVertex3f(25, 25, 25);
+		glNormal3f(0, 0, -1);
+		glVertex3f(-25, 25, 25);
 		glEnd();
-	}
-	glPopMatrix();*/
+		glBegin(GL_POLYGON);
+		glColor4f(0.0f, 0.2f, 0.7f, 1.0f);
+		glNormal3f(1, 0, 0);
+		glVertex3f(-25, 0, -25);
+		glNormal3f(1, 0, 0);
+		glVertex3f(-25, 0, 25);
+		glNormal3f(1, 0, 0);
+		glVertex3f(-25, 25, 25);
+		glNormal3f(1, 0, 0);
+		glVertex3f(-25, 25, -25);
+		glEnd();
+		glBegin(GL_POLYGON);
+		glColor4f(0.0f, 0.2f, 0.7f, 1.0f);
+		glNormal3f(-1, 0, 0);
+		glVertex3f(25, 0, -25);
+		glNormal3f(-1, 0, 0);
+		glVertex3f(25, 0, 25);
+		glNormal3f(-1, 0, 0);
+		glVertex3f(25, 25, 25);
+		glNormal3f(-1, 0, 0);
+		glVertex3f(25, 25, -25);
+		glEnd();
+
+		//NURBS (opcional y funciona y todo)
+		/*float i, j;
+		glPushMatrix();
+		glRotatef(25.0, 1.0, 1.0, 1.0);
+		for (j = 0; j <= 8; j+=0.01) {
+			glBegin(GL_LINE_STRIP);
+			for (i = 0; i <= 30; i+=0.01)
+				glEvalCoord2f((GLfloat)i / 30.0, (GLfloat)j / 8.0);
+			glEnd();
+			glBegin(GL_LINE_STRIP);
+			for (i = 0; i <= 30; i+=0.01)
+				glEvalCoord2f((GLfloat)j / 8.0, (GLfloat)i / 30.0);
+			glEnd();
+		}
+		glPopMatrix();*/
 
 
-	glPopMatrix();
-	glutSwapBuffers();
+		glPopMatrix();
+		glutSwapBuffers();
+		i++;
+		}
+
 }
 
 
@@ -1535,6 +1700,8 @@ int main(int argc, char** argv)
 	tasso = new Modelo((char*)"models/glass/", (char*)"glass");
 	puerta = new Modelo((char*)"models/wooden_door/", (char*)"wooden_door");
 
+	//marco = &amarco;
+
 	//NURBS
 	/*GLfloat ctrlpoints[4][4][3] = {
 		 {{-1.5, 1.0, -1.5}, {-0.5, 1.0,-1.5 }, {0.5, 1.0, -1.5 }, {1.5, 1.0,-1.5}},
@@ -1548,7 +1715,7 @@ int main(int argc, char** argv)
 	glMapGrid2f(20, 0.0, 1.0, 20, 0.0, 1.0);*/
 
 	//Fog
-	/*glEnable(GL_FOG);
+	glEnable(GL_FOG);
 	{
 		glFogi(GL_FOG_MODE, GL_EXP);
 		glFogfv(GL_FOG_COLOR, fogColor);
@@ -1556,7 +1723,7 @@ int main(int argc, char** argv)
 		glHint(GL_FOG_HINT, GL_DONT_CARE);
 		glFogf(GL_FOG_START, 1.0f);
 		glFogf(GL_FOG_END, 5.0f);
-	}*/
+	}
 
 	// Comienza la ejecuci�n del core de GLUT
 	glutMainLoop();
