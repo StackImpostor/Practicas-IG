@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  Etapa6.cpp
 C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(42,50): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
 C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(43,49): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
@@ -60,3 +61,20 @@ soil2-debug.lib(image_helper.obj) : warning LNK4099: PDB 'soil2-debug.pdb' was n
 soil2-debug.lib(SOIL2.obj) : warning LNK4099: PDB 'soil2-debug.pdb' was not found with 'soil2-debug.lib(SOIL2.obj)' or at 'C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa6\Debug\soil2-debug.pdb'; linking object as if no debug info
 soil2-debug.lib(wfETC.obj) : warning LNK4099: PDB 'soil2-debug.pdb' was not found with 'soil2-debug.lib(wfETC.obj)' or at 'C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa6\Debug\soil2-debug.pdb'; linking object as if no debug info
   Etapa6.vcxproj -> C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa6\Debug\Etapa6.exe
+=======
+﻿  Using triplet "x86-windows" from "C:\Users\juanj\Desktop\Nueva carpeta\vcpkg\installed\x86-windows\"
+  Etapa6.cpp
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(565,17): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(574,17): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(578,20): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(619,21): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(622,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(622,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(742,20): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(745,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(745,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(749,21): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(752,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Etapa6\Etapa6.cpp(752,14): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+  Etapa6.vcxproj -> C:\Users\juanj\source\repos\Practicas-IG\Practicas-IG\PracticasIG\Etapa6\Debug\Etapa6.exe
+>>>>>>> 2a56b94bcc2d6eec4be54425aef41b78c458699b
