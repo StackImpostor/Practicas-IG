@@ -512,7 +512,7 @@ void preparaCamara() {
 
 void mueveCamara() {
 	float incAngulo = pi / 60;
-	float speed = 0.25f;
+	float speed = 0.5f;
 	if (teclas[0]) {
 		if (modo == LIBRE) {
 			float cZ = speed * -cos(anguloX);
