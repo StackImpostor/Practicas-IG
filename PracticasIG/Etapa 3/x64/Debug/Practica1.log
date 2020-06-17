@@ -1,2 +1,0 @@
-﻿  escena_3d.cpp
-C:\Users\tomeu\Documents\UIB\Informatica Grafica\Practicas-IG\PracticasIG\Etapa 3\escena_3d.cpp(7,10): fatal error C1083: Cannot open include file: 'GL/glut.h': No such file or directory
