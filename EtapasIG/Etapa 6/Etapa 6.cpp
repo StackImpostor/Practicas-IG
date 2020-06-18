@@ -724,7 +724,7 @@ void ControlesTeclado(unsigned char key, int x, int y) {
 		fogDensity += 0.02f;
 		break;
 	case 110: //n
-		if (fogDensity > 0) {
+		if (fogDensity >= 0) {
 			fogDensity -= 0.02f;
 		}
 		break;
@@ -941,6 +941,12 @@ void Display(void)
 				vuelta = false;
 				levantar = true;
 				wait = 30;
+				tenedorX = 0;
+				tenedorY = 0;
+				tenedorZ = 0;
+				tenedorA = 0;
+				tenedorB = 0;
+				manzanaY = 0;
 			}
 		}
 	}
