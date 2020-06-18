@@ -400,12 +400,12 @@ Modelo* silla;
 Modelo* tenedor;
 Modelo* cuchillo;
 Modelo* plato;
-Modelo* manzana;
 Modelo* limon;
 Modelo* naranja;
 Modelo* puerta;
 Modelo* copa;
 Modelo* marco;
+Modelo* melocoton;
 
 
 void drawModelo(Modelo modelo)
@@ -779,7 +779,7 @@ float tenedorY = 0;
 float tenedorZ = 0;
 float tenedorA = 0;
 float tenedorB = 0;
-float manzanaY = 0;
+float naranjaY = 0;
 
 int wait = 30;
 
@@ -893,7 +893,7 @@ void Display(void)
 			}
 		}
 		else if (recoger) {
-			manzanaY += 0.05;
+			naranjaY += 0.05;
 			tenedorY += 0.05;
 			if (tenedorY >= 2) {
 				recoger = false;
@@ -901,22 +901,22 @@ void Display(void)
 			}
 		}
 		else if (caida) {
-			manzanaY -= 0.5;
-			if (manzanaY <= 0) {
+			naranjaY -= 0.5;
+			if (naranjaY <= 0) {
 				caida = false;
 				rebote = true;
 			}
 		}
 		else if (rebote) {
-			manzanaY += 0.1;
-			if (manzanaY >= 0.2) {
+			naranjaY += 0.1;
+			if (naranjaY >= 0.2) {
 				rebote = false;
 				final = true;
 			}
 		}
 		else if (final) {
-			manzanaY -= 0.05;
-			if (manzanaY <= 0) {
+			naranjaY -= 0.05;
+			if (naranjaY <= 0) {
 				final = false;
 				vuelta = true;
 			}
@@ -946,7 +946,7 @@ void Display(void)
 				tenedorZ = 0;
 				tenedorA = 0;
 				tenedorB = 0;
-				manzanaY = 0;
+				naranjaY = 0;
 			}
 		}
 	}
@@ -1016,13 +1016,13 @@ void Display(void)
 	drawModelo(*tenedor);
 	glPopMatrix();
 
-	//Manzana
+	//naranja
 	glColor3f(0.3f, 0.3f, 0.3f);
 	glPushMatrix();
-	glTranslatef(1.5f, 7.28f + manzanaY, 1);
-	glRotatef(90, -1, 0, 0);
-	glScalef(0.005f, 0.005f, 0.005f);
-	drawModelo(*manzana);
+	glTranslatef(1.5f, 7.3f + naranjaY, 1);
+	glScalef(0.09f, 0.09f, 0.09f);
+	glRotatef(-90, 1, 0, 0);
+	drawModelo(*naranja);
 	glPopMatrix();
 
 	//limon
@@ -1063,17 +1063,17 @@ void Display(void)
 
 	glPushMatrix();
 	glTranslatef(3.5f, 7.3f, -0.45);
-	glScalef(0.1f, 0.1f, 0.1f);
+	glScalef(0.15f, 0.15f, 0.15f);
 	glRotatef(-90, 1, 0, 0);
-	drawModelo(*naranja);
+	drawModelo(*melocoton);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(4.0f, 7.5f, 0);
-	glScalef(0.1f, 0.1f, 0.1f);
+	glScalef(0.15f, 0.15f, 0.15f);
 	glRotatef(-40, 1, 0, 0);
 	glRotatef(90, 0, 0, 1);
-	drawModelo(*naranja);
+	drawModelo(*melocoton);
 	glPopMatrix();
 
 	//puerta
@@ -1321,11 +1321,11 @@ int main(int argc, char** argv)
 	tenedor = new Modelo((char*)"models/fork/", (char*)"fork");
 	cuchillo = new Modelo((char*)"models/Knife/", (char*)"knife");
 	plato = new Modelo((char*)"models/plate/", (char*)"plate");
-	manzana = new Modelo((char*)"models/apples/", (char*)"apple");
 	limon = new Modelo((char*)"models/lemon/", (char*)"lemon");
 	naranja = new Modelo((char*)"models/orange/", (char*)"orange");
 	puerta = new Modelo((char*)"models/wooden_door/", (char*)"wooden_door");
 	marco = new Modelo((char*)"models/frame/", (char*)"album");
+	melocoton = new Modelo((char*)"models/peach/", (char*)"peach");
 
 	//NURBS
 	GLfloat ctrlpoints[4][4][3] = {
